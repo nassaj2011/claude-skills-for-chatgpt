@@ -40,6 +40,12 @@ jobs:
         run: python scripts/evaluate_skills.py --cases evals/benchmarks/v04-db-criteria.json --baseline evals/runs/v04-db-baseline.json --candidate evals/runs/v04-db-candidate.json --require-real
       - name: Verify genuine model output integrity for security scenario
         run: python scripts/evaluate_skills.py --cases evals/benchmarks/v04-security-criteria.json --baseline evals/runs/v04-security-baseline.json --candidate evals/runs/v04-security-candidate.json --require-real
+      - name: Verify data-governance field inventory and privacy boundaries
+        run: python -m unittest discover -s examples/privacy-inventory -p "test_*.py" -v
+      - name: Verify isolated bounded HTTP load and percentile checks
+        run: python -m unittest discover -s examples/bounded-load -p "test_*.py" -v
+      - name: Verify authored SVG, contrast and rights boundaries
+        run: python -m unittest discover -s examples/visual-asset -p "test_*.py" -v
       - uses: actions/setup-node@v4
         with:
           node-version: "22"

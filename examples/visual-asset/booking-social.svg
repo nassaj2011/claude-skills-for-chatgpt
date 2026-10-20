@@ -1,0 +1,15 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1200" height="630" viewBox="0 0 1200 630" role="img" aria-labelledby="asset-title asset-desc">
+  <title id="asset-title">پوستر نمونهٔ رزرو زمین تنیس</title>
+  <desc id="asset-desc">زمینهٔ سبز تیره با خطوط سادهٔ زمین تنیس و عنوان فارسی سفید؛ نمونه‌ای برداری برای آزمایش تحویل گرافیکی</desc>
+  <rect width="1200" height="630" fill="#102a21"/>
+  <rect x="60" y="60" width="1080" height="510" rx="36" fill="none" stroke="#97d7b1" stroke-width="6"/>
+  <g fill="none" stroke="#97d7b1" stroke-width="8" opacity=".85">
+    <rect x="720" y="142" width="304" height="330" rx="4"/>
+    <path d="M872 142v330 M720 307h304 M720 196h304 M720 414h304"/>
+  </g>
+  <circle cx="900" cy="260" r="42" fill="#f5de8c"/>
+  <path d="M865 243q34 22 70 36M869 282q35-18 64-36" fill="none" stroke="#102a21" stroke-width="5"/>
+  <text x="650" y="240" text-anchor="end" direction="rtl" font-family="Tahoma, sans-serif" font-size="68" font-weight="700" fill="#ffffff">رزرو زمین تنیس</text>
+  <text x="650" y="326" text-anchor="end" direction="rtl" font-family="Tahoma, sans-serif" font-size="33" fill="#ffffff">یک بازی خوب، از یک رزرو خوب</text>
+  <text x="650" y="424" text-anchor="end" direction="rtl" font-family="Tahoma, sans-serif" font-size="25" fill="#c8f3da">طرح تمرینی — بدون لوگوی تجاری</text>
+</svg>

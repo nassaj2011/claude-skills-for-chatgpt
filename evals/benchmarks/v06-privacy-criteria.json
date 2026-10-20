@@ -1,0 +1,35 @@
+{
+  "cases": [
+    {
+      "id": "v06-privacy",
+      "skill": "privacy-data-governance",
+      "criteria": [
+        {
+          "id": "flow",
+          "weight": 3,
+          "description": "Maps all named data flow categories; explicitly catches raw phone/booking identifiers in analytics and over-disclosure to messaging vendor."
+        },
+        {
+          "id": "retention",
+          "weight": 3,
+          "description": "Addresses support CSV export, retention/deletion, propagation, backups, and unknown policy without fictitious deadlines."
+        },
+        {
+          "id": "legal",
+          "weight": 2,
+          "description": "Treats jurisdiction, legal basis and compliance claims as unverified decisions needing qualified review."
+        },
+        {
+          "id": "controls",
+          "weight": 2,
+          "description": "Includes concrete security/vendor access restrictions and actionable negative acceptance tests."
+        },
+        {
+          "id": "decision",
+          "weight": 2,
+          "description": "Provides a prioritized risk register or explicit block/release disposition tied to verification evidence."
+        }
+      ]
+    }
+  ]
+}

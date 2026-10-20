@@ -1,17 +1,34 @@
 ---
 name: load-resilience-testing
-description: Plan and conduct authorized, bounded load, soak, concurrency and fault-tolerance testing against isolated environments with measurable SLO criteria.
+description: Design and interpret authorized bounded load, concurrency, soak and resilience tests with explicit target isolation, abort thresholds, achieved metrics and recovery checks.
 ---
 
-# Load and resilience testing
+# Load, concurrency and resilience — controlled test protocol
 
-1. Confirm **explicit authorization**, environment, owner, test windows, resource limits and stop conditions; default to isolated staging/local, never public production.
-2. Define workload model: arrival pattern, concurrent users, sessions, hotspots, request mixture, representative data and baseline SLOs. Identify costly external integrations.
-3. Keep test data synthetic, disable real monetary side effects and coordinate database quotas, email/SMS and vendor rate limits.
-4. Use bounded gradual ramp-up: smoke -> realistic steady -> short peak -> recovery; reserve saturation or fault injection for a specifically approved environment.
-5. Measure response distribution p50/p95/p99, error rates, queue/backlog, CPU/memory, database locks/connections and invariant breaches such as duplicate bookings.
-6. Correlate server metrics and traces; investigate bottlenecks before tuning. Record actual generated load rather than only configured targets.
-7. Define abort triggers and verify cooldown/recovery; report safe operating envelope with caveats. Do not automatically retry loads on failure.
+## Trigger and scope
+Use for capacity, p95/p99 latency, error budgets, burst behavior, queues, failover, idempotency under load and saturation investigations. Do **not** invoke to fire traffic at an unapproved public host or for a routine, low-risk unit test.
 
-Output: signed-off test boundary, script/tool versions, scenario, achieved throughput, latency/error metrics, failure evidence, suggested mitigations and NOT TESTED items.
-This skill provides a protocol, **not permission to stress any live endpoint**.
+## Before any traffic: hard authorization gate
+1. Record owner/approval, exact target address/environment, test window, max duration, request ceiling, concurrency cap, rate cap, contact/abort channel and whether test accounts or costs are isolated.
+2. **Default is DESIGN ONLY.** Without explicit approval and environment boundaries, output a script/plan without running it. Never infer authorization from having a URL, session token or repository access. Do not load test third-party services or shared production endpoints.
+3. Prevent money transfers, customer notifications, irreversible writes, data exports, external API costs and tenant interference. Arrange synthetic fixtures, safe credentials, cleanup permission and downstream mocks before runs.
+
+## Workload design
+4. State workload: arrival rate versus closed-loop concurrency, endpoint mix, session think time, tenant/slot hotspots, representative payloads, warmup/steady/burst/recovery, ramp steps, maximum traffic **actually generated**, retries and timeout budgets.
+5. Separate latency percentiles, achieved throughput, successes/errors, 429s, server saturation, DB connection/lock waits, queue depth, duplicates/data invariants and dependency rate limits. Sampling interval and monotonic clocks must be disclosed.
+6. Use bounded phases: smoke -> realistic steady -> short peak -> recovery. Stop immediately for agreed overload signals, data invariant violations, unauthorized target change or spending thresholds. Never automatically retry destructive load phases.
+7. Measure recovery, backlog drain and post-load integrity. Report confidence limits (sample size, cache effects, client bottleneck, mock dependencies, skew, observed vs configured throughput).
+
+## Required deliverable
+- **Authorization and limits table:** environment | approval/evidence | rps | concurrency | duration | total requests | abort triggers.
+- **Workload plan:** exact phases, commands or pseudocode, synthetic data, rollback and monitoring ownership.
+- **Metrics evidence:** achieved requests/sec, count, errors/429/timeout, p50/p95/p99, queue/DB/invariant checks and traces where available.
+- **Results matrix:** each threshold PASS/FAIL/NOT RUN, baseline comparison, bottleneck hypotheses and prioritized mitigation.
+- **Recovery and next experiment:** clear guardrails; no invented capacity or percentage improvements.
+
+## Executable example and browser-only mode
+examples/bounded-load/ is a local-only standard-library Python example that measures an intentionally tiny synthetic service using explicit loopback and hard request caps; this is **not evidence of real application capacity**.
+In ChatGPT web without a load runner, generate only the approval request, bounded workload configuration, instrumented metrics plan and acceptance criteria. Mark all execution NOT RUN.
+
+## Safety and reliability
+Do not bypass rate limits, run stealth traffic, perform denial-of-service experiments against external targets or erase evidence. Never use public production endpoints without named explicit permission. If authorization is missing, the correct answer is an actionable **unexecuted** test plan.
