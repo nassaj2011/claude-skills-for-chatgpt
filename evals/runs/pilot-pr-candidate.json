@@ -4,6 +4,11 @@
     "synthetic": false,
     "scenario_fictional": true,
     "model": "gpt-5.6-terra",
+    "session_id": "01a15afb-9222-7291-9c9f-6c6164abdb9e",
+    "artifact": {
+      "path": "evals/runs/pilot-pr-candidate.txt",
+      "sha256": "bb5402d5692692b27978e70e71d44c4cf660387a5f2659e7857249f97d3cf59b"
+    },
     "agent": "codex-cli 0.147.0",
     "environment": "Windows; read-only; --ephemeral; --ignore-user-config; local repository; code-mode host unavailable",
     "prompt_variant": "same base task with the exact code-review-pr/SKILL.md content prepended in stdin; not native skill auto-trigger",

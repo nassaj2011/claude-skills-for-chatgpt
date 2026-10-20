@@ -16,3 +16,7 @@ Use for backup policies, release/migration protection, ransomware resilience or 
 7. Record drill failures, missing backups, responsible follow-ups and a rollback/emergency communication runbook.
 
 Output: RPO/RTO, protection map, restore runbook, actual drill evidence versus planned checks, consistency risks and status. Never call a backup proven until an authorized restore test has passed.
+
+## Execution dependency
+
+The optional checksum utility `scripts/backup_manifest.py` is provided in the source repository. A standalone installed SKILL.md has no bundled backup binary and does not create real database backups. Use only authorized local tooling and never claim RPO/RTO or restore readiness from a hash check.

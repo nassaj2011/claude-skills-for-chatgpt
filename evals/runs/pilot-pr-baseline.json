@@ -4,6 +4,11 @@
     "synthetic": false,
     "scenario_fictional": true,
     "model": "gpt-5.6-terra",
+    "session_id": "01a15afa-2cd0-7491-aa7e-1fffba88feb3",
+    "artifact": {
+      "path": "evals/runs/pilot-pr-baseline.txt",
+      "sha256": "4068e6f98d86ebaca48294f8ae9d24b4e2a08d11ee434be5369e472d5b863924"
+    },
     "agent": "codex-cli 0.147.0",
     "environment": "Windows; read-only; --ephemeral; --ignore-user-config; local repository; code-mode host unavailable",
     "prompt_variant": "base prompt only",
