@@ -86,7 +86,7 @@ Each `skills/<name>/SKILL.md` needs a frontmatter `name` and useful `description
 
 Original material in **this** repository is available under the [MIT License](LICENSE). No Anthropic skill source files are redistributed. Existing upstream skill names and concepts are referenced descriptively with links in [docs/ANTHROPIC_COMPARISON.md](docs/ANTHROPIC_COMPARISON.md). Third-party skills may have **different per-skill licenses**; check before copying or modifying any upstream content. “Claude”, “ChatGPT” and “Codex” are trademarks of their respective owners.
 
-**Status: v0.3 community hardening release.** Manifest checks, heuristic pre-install security scanning, fixture-based evaluator tests and CI are automated. End-to-end benchmark gains, production deployments and security certification are *not* claimed.
+**Status: v0.3.1 community hardening release.** Manifest checks, heuristic pre-install security scanning, fixture-based evaluator tests and CI are automated. End-to-end benchmark gains, production deployments and security certification are *not* claimed.
 
 ### v0.2: safety tooling and measured pilot
 

@@ -7,9 +7,9 @@ This is an independent community skill kit, not an Anthropic or OpenAI product.
 - Project: **Claude Skills for ChatGPT — Idea → Production**
 - Canonical source: https://github.com/nassaj2011/claude-skills-for-chatgpt
 - Publisher account: **nassaj2011** (repository maintainer, **not** the identity of any user)
-- Release: **v0.3.0**
+- Release: **v0.3.1**
 - License: MIT (original contents only; upstream marks belong to their owners)
-- Machine-readable per-skill file hashes: [CATALOG.json](../CATALOG.json)
+- Machine-readable per-skill file hashes: [CATALOG.json](../CATALOG.json) (textual CRLF line endings normalized to LF before hashing for Windows/Linux portability)
 
 These details establish where this public distribution claims to come from. **A plain SHA-256 catalog is not an identity signature**: someone who modifies the catalog and skill files together can still produce matching checksums. To establish provenance, compare against a trusted Git commit/tag and, where available, signed release verification. Never treat a filename or unverified metadata as proof.
 
