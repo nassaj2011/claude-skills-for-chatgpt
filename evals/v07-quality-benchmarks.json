@@ -1,0 +1,218 @@
+{
+  "schema": 1,
+  "title": "v0.7 six-domain A/B criteria",
+  "status": "RAW_RUNS_COMPLETED_NOT_GRADED",
+  "method": "For each case, run independent baseline and updated-skill prompts on matched model and tools, save raw output and hashes. Blind human grading recommended; no results here.",
+  "cases": [
+    {
+      "id": "v07-llm",
+      "skill": "llm-api-integration",
+      "prompt": "A fictional sports booking assistant uses a provider response string directly as a JSON object and executes its tool name. The provider can return malformed JSON, refusal, prompt-injection content, calls to write tools, 429 rate limits and timeouts. Design a secure and affordable provider-neutral adapter with typed validation, auth boundaries, finite retry and budget behavior and an offline test matrix. No API key or actual provider exists. Do not run any tools or infer price.",
+      "criteria": [
+        {
+          "id": "typed-output",
+          "weight": 3,
+          "description": "Validate output schema, reject unexpected keys, malformed/truncated model output and unsupported tool names."
+        },
+        {
+          "id": "tool-auth",
+          "weight": 3,
+          "description": "Make external tool operations conditional on verified user authorization and confirmation rather than trusting model text."
+        },
+        {
+          "id": "failure-budget",
+          "weight": 2,
+          "description": "Bound timeout, retry/backoff, 429 response and money/token budget; separate safe reads from irreversible writes."
+        },
+        {
+          "id": "trust-privacy",
+          "weight": 2,
+          "description": "Treat retrieved text as untrusted and avoid transmitting secrets or unnecessary personal data."
+        },
+        {
+          "id": "evidence",
+          "weight": 2,
+          "description": "Provide realistic offline fixture tests and label unperformed real provider evaluation/cost measurement NOT RUN."
+        }
+      ],
+      "baseline": "COMPLETED_UNSCORED",
+      "candidate": "COMPLETED_UNSCORED",
+      "score": null
+    },
+    {
+      "id": "v07-mcp",
+      "skill": "mcp-integration-builder",
+      "prompt": "A fictional MCP-like integration exposes venue reservations; current proposed tools list bookings for arbitrary venue_id and set slot state without actor verification, user consent or replay protection. Provide a minimal tool contract design, error taxonomy, permission matrix and negative tests; no live service API, account or MCP protocol implementation is available. No external access.",
+      "criteria": [
+        {
+          "id": "typed",
+          "weight": 3,
+          "description": "Specify bounded typed inputs, unknown field and unknown tool rejection and explicit read/write separation."
+        },
+        {
+          "id": "scope",
+          "weight": 3,
+          "description": "Enforce authenticated actor and tenant or venue scoping; reject horizontal object access."
+        },
+        {
+          "id": "writes",
+          "weight": 2,
+          "description": "Require approval for writes and stable idempotency/replay behavior."
+        },
+        {
+          "id": "untrusted",
+          "weight": 2,
+          "description": "Treat returned tool content as untrusted and minimize PII, credentials and log exposure."
+        },
+        {
+          "id": "limits",
+          "weight": 2,
+          "description": "Distinguish mock dispatcher from real MCP client/server interoperability and mark live access NOT RUN."
+        }
+      ],
+      "baseline": "COMPLETED_UNSCORED",
+      "candidate": "COMPLETED_UNSCORED",
+      "score": null
+    },
+    {
+      "id": "v07-devops",
+      "skill": "devops-ci-cd",
+      "prompt": "A fictional CI pipeline reports build SUCCESS, but an authorization test is SKIPPED, a database UNIQUE migration may fail with historical duplicates and no staging smoke or backup restore drill has been proven. Production job currently has a broad token; project manager asks for immediate deploy. Propose a fail-closed pipeline and release decision with exact evidence gates, permissions and rollback, without editing real workflows.",
+      "criteria": [
+        {
+          "id": "gate",
+          "weight": 3,
+          "description": "Reject premature release and distinguish missing/skipped required tests from PASS."
+        },
+        {
+          "id": "permissions",
+          "weight": 2,
+          "description": "Define least privilege, protected environments, secrets boundaries and pinned third-party action strategy."
+        },
+        {
+          "id": "migration",
+          "weight": 3,
+          "description": "Include preflight duplicate inspection, expand/backfill/contract compatibility and rollback constraints."
+        },
+        {
+          "id": "trace",
+          "weight": 2,
+          "description": "Tie evidence to SHA, artifact provenance, environment, actual CI links and monitoring."
+        },
+        {
+          "id": "consent",
+          "weight": 2,
+          "description": "Require explicit production deployment approval and do not assert execution."
+        }
+      ],
+      "baseline": "COMPLETED_UNSCORED",
+      "candidate": "COMPLETED_UNSCORED",
+      "score": null
+    },
+    {
+      "id": "v07-supply",
+      "skill": "dependency-supply-chain-auditor",
+      "prompt": "A fictional dependency list has package demo-widget on version ^2, one dependency from an unverified Git URL, an install-time script and an unknown transitive license; CI uses an unpinned third-party action. No real manifest, vulnerability database or network is available. Explain how to audit and gate this supply chain and triage risk without inventing current CVEs or silently updating packages.",
+      "criteria": [
+        {
+          "id": "inventory",
+          "weight": 3,
+          "description": "Inventory actual package sources, pinned versions, direct/transitive scope and immutable artifacts when evidence exists."
+        },
+        {
+          "id": "risks",
+          "weight": 3,
+          "description": "Flag floating ranges, unsupported sources, install-time scripts and unpinned CI actions."
+        },
+        {
+          "id": "license",
+          "weight": 2,
+          "description": "Identify missing license obligations and verification questions without unsupported legal conclusions."
+        },
+        {
+          "id": "reachability",
+          "weight": 2,
+          "description": "Separate real advisory/reachability validation from speculative CVSS or fabricated CVEs."
+        },
+        {
+          "id": "remediation",
+          "weight": 2,
+          "description": "Give conservative read-only audit and minimal change/test/rollback plan, no live install."
+        }
+      ],
+      "baseline": "COMPLETED_UNSCORED",
+      "candidate": "COMPLETED_UNSCORED",
+      "score": null
+    },
+    {
+      "id": "v07-backup",
+      "skill": "backup-disaster-recovery",
+      "prompt": "A fictional booking platform's nightly backup dashboard is green; no restore has ever been tested, database transaction consistency is unknown, payment callbacks can replay and RPO/RTO are not agreed. Propose backup and isolated restore evidence gates, including corrupt backup, missing logs and key access failure. No real customer dataset or production access exists.",
+      "criteria": [
+        {
+          "id": "rpo-rto",
+          "weight": 3,
+          "description": "State explicit RTO/RPO acceptance needs without inventing service objectives."
+        },
+        {
+          "id": "coverage",
+          "weight": 2,
+          "description": "Inventory transactional DB, objects, WAL/PITR, keys and payment/queue state dependencies."
+        },
+        {
+          "id": "restore",
+          "weight": 3,
+          "description": "Specify safe isolated restore and application consistency/invariant tests, not hash checks alone."
+        },
+        {
+          "id": "negative",
+          "weight": 2,
+          "description": "Include realistic corrupted/missing backup, key/WAL/deletion replay failure modes."
+        },
+        {
+          "id": "decision",
+          "weight": 2,
+          "description": "Treat green backup dashboard without restore evidence as NOT VERIFIED, no production restore."
+        }
+      ],
+      "baseline": "COMPLETED_UNSCORED",
+      "candidate": "COMPLETED_UNSCORED",
+      "score": null
+    },
+    {
+      "id": "v07-perf",
+      "skill": "performance-accessibility",
+      "prompt": "A fictional Persian RTL booking app looks fine on desktop but overflows at 320px, modal keyboard focus gets lost on close, support reports slow mobile interactions, and the release notes cite an invented Lighthouse 99 score. Provide a prioritized evidence-led test and remediation plan. You have no browser, traces, production data or source files in this task; do not make up measurements.",
+      "criteria": [
+        {
+          "id": "measured",
+          "weight": 3,
+          "description": "Reject unsupported Lighthouse score and distinguish real baseline from intended performance budgets."
+        },
+        {
+          "id": "rtl",
+          "weight": 2,
+          "description": "Include lang/dir semantics, mobile 320px overflow and localization testing."
+        },
+        {
+          "id": "a11y",
+          "weight": 3,
+          "description": "Include keyboard focus recovery, semantic naming/errors, screen-reader and reduced-motion manual checks."
+        },
+        {
+          "id": "perf",
+          "weight": 2,
+          "description": "Name relevant field/lab metrics with device/network and before/after testing method."
+        },
+        {
+          "id": "limits",
+          "weight": 2,
+          "description": "Specify observable acceptance gates, avoid declaring WCAG compliance from automation and state NOT RUN."
+        }
+      ],
+      "baseline": "COMPLETED_UNSCORED",
+      "candidate": "COMPLETED_UNSCORED",
+      "score": null
+    }
+  ]
+}

@@ -1,0 +1,26 @@
+All gates below are **NOT RUN**. The green dashboard is not evidence of recoverability.
+
+| Gate | Required evidence | Pass condition |
+|---|---|---|
+| Backup integrity | Backup inventory, checksum/manifest verification, retention report | A recent backup is present, complete, decryptable, and matches its manifest |
+| Isolated restore | Restore into a disposable, access-restricted environment using synthetic data only | Database and required files restore successfully without production connectivity |
+| Data consistency | Post-restore reconciliation: booking/payment counts, foreign keys, ledger balances, transaction invariants | Reconciliations match the defined recovery point; no broken invariants |
+| Point-in-time recovery | Restore base backup plus transaction/WAL/bin logs to a chosen timestamp | Recovery reaches the stated RPO with ordered, complete logs |
+| Application recovery | Start application against restored dependencies and execute synthetic smoke journeys | Read/write booking flows work; no production secrets or endpoints are used |
+| Payment replay safety | Replay synthetic duplicate callback events against the restored system | Idempotency prevents duplicate charges, bookings, or ledger entries |
+| Key access | Restore with the approved recovery identity and key-management path | Required keys are available under least privilege and recovery succeeds |
+| RPO/RTO agreement | Signed operational decision naming data-loss and recovery-time limits | Owners explicitly accept measurable RPO, RTO, scope, and escalation path |
+
+Required negative-path exercises:
+
+| Scenario | Expected evidence | Pass condition |
+|---|---|---|
+| Corrupt backup | Deliberately damaged synthetic backup, validation and restore logs | Validation detects corruption; restore is blocked or fails clearly; fallback backup succeeds |
+| Missing transaction logs | Omit a required log segment in a synthetic PITR exercise | Recovery detects the gap, reports the attainable timestamp, and triggers escalation |
+| Key access failure | Deny/revoke the recovery key in the isolated exercise | Restore fails safely with actionable diagnostics; documented break-glass recovery is tested separately |
+| Callback replay | Deliver the same signed synthetic callback repeatedly and out of order | Exactly-once business effect; audit trail records duplicate handling |
+| Inconsistent transaction state | Inject/intercept a synthetic mid-transaction failure | Atomicity/rollback and reconciliation controls preserve booking-payment consistency |
+
+Minimum evidence package per exercise: timestamped runbook version, environment isolation proof, backup/log/key identifiers (not secret material), commands or automation logs, elapsed restore time, reconciliation results, failure handling, named approver, and remediation ticket for every gap.
+
+Current status: **NOT RUN** for backup verification, restores, consistency checks, replay testing, corruption handling, log-gap recovery, key-failure recovery, and RPO/RTO approval. No production or customer data should be used; use synthetic datasets and an isolated recovery environment only.

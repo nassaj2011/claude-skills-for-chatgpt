@@ -1,0 +1,36 @@
+No measurements are available. The cited Lighthouse 99 is **unverified and must not be used as release evidence**. All execution checks below are **NOT RUN**.
+
+| Priority | User impact / likely issue | Evidence status | Remediation | Acceptance gate |
+|---|---|---|---|---|
+| P0 | 320px RTL overflow hides booking controls or forces horizontal scrolling | NOT RUN | Inspect fixed widths, `min-width`, positioned modal content, tables, long Persian labels, and mixed-direction numbers. Use responsive layout primitives; constrain media with `max-width: 100%`; avoid viewport-wide fixed elements. | At 320×568 and 200% zoom, no unintended horizontal scroll; booking journey remains usable in RTL. |
+| P0 | Modal close loses keyboard focus, leaving keyboard/screen-reader users disoriented | NOT RUN | Store the opening trigger; on close, return focus to it (or a logical surviving control). Trap focus only while modal is open; support Escape; use native dialog semantics where practical; prevent background focus. | Keyboard-only: trigger → modal → close/Escape → focus visibly returns to trigger. Screen-reader review remains required. |
+| P1 | Slow mobile interaction affects search, date selection, guest counts, and booking submission | NOT RUN | Capture a real-device trace first. Determine whether delay is render/state work, oversized JS, images, network waterfall, third-party scripts, or backend latency before optimizing. Prioritize deferred noncritical JS, bounded rendering, image sizing/compression, and eliminating unnecessary synchronous work. | Same device/browser/network profile: p75 INP ≤200 ms, no interaction long task >200 ms on critical actions; report sample count and variability. |
+| P1 | Persian / mixed-direction UI may have incorrect visual or input order | NOT RUN | Set `lang="fa"` and RTL direction at the document level; isolate Latin IDs, prices, dates, phone numbers, and card numbers using semantic bidi handling; ensure localized validation/status messages and non-truncated Persian labels. | Manual RTL review on 320px and desktop: visual order, tab order, numeric entry, errors, and truncation are correct. |
+| P1 | Accessibility regressions beyond modal behavior | NOT RUN | Verify real labels, error associations, accessible names, visible focus, contrast, live status updates, zoom/reflow, and reduced motion. Prefer semantic HTML over ARIA-only patches. | Automated scan may support findings, but keyboard and screen-reader checks must be manually recorded; no WCAG conformance claim from automation alone. |
+| P2 | Release reporting lacks auditable performance evidence | NOT RUN | Remove/qualify the Lighthouse 99 statement; add reproducible lab and field evidence to release notes. | Release note names route, build, device/browser/viewport/network, run count, p75/sample window for field data, trace links, and PASS/FAIL/NOT RUN status. |
+
+Recommended critical journeys:
+
+1. Open search → select dates → change guest count → view availability.
+2. Open booking details modal → keyboard navigation → close with button and Escape → verify focus return.
+3. Complete booking form with invalid Persian input → verify error announcement and correction.
+4. Repeat on a 320px viewport, 200% zoom, and a representative mid-tier Android device/network profile.
+
+Proposed measurement plan—not results:
+
+| Journey | Baseline | Revised | Method | Status |
+|---|---:|---:|---|---|
+| 320px RTL no-overflow and booking completion | NOT RUN | NOT RUN | Real Edge/Chrome mobile emulation plus physical-device validation | NOT RUN |
+| Modal focus lifecycle | NOT RUN | NOT RUN | Keyboard tab sequence and screen-reader review | NOT RUN |
+| Search/date/guest interaction latency | NOT RUN | NOT RUN | Performance trace on target mobile device; record INP and long tasks | NOT RUN |
+| LCP / CLS / transferred bytes / request count | NOT RUN | NOT RUN | Same route, cache state, viewport, network, and build across runs | NOT RUN |
+
+Suggested release gates:
+
+- **Responsive:** no unintended horizontal overflow at 320px; usable at 200% zoom.
+- **Interaction:** p75 INP ≤200 ms on the selected critical routes, measured with a stated sample size and environment.
+- **Visual stability:** CLS ≤0.1 at p75 where field data exists.
+- **Loading:** set route-specific LCP and transfer/request budgets only after capturing a baseline; do not invent thresholds as achieved values.
+- **Accessibility:** modal focus-return test passes; manual keyboard and screen-reader findings are documented; unresolved high-severity issues block release.
+
+This sequence fixes the highest-risk functional accessibility defect first, establishes the actual source of mobile lag before altering code, and replaces an unsupported score with reproducible evidence.

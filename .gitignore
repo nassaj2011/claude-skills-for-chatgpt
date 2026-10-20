@@ -14,3 +14,6 @@ Thumbs.db
 
 # Local distribution bundles (uploaded as release assets, not committed)
 dist/
+
+# One-off Codex connectivity probe; not part of matched A/B evidence
+evals/runs/v07-probe-*.txt

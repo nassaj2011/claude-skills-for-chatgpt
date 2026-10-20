@@ -11,17 +11,28 @@ Check permissions, user intent and safety before destructive/external actions.
 
 ## Specialist workflow
 
-# Software supply-chain auditing
+# Dependency and supply-chain audit — provenance before scores
 
-1. Read ecosystem manifests and lockfiles (npm/pnpm/yarn, pip/uv/poetry, containers, infrastructure) from the current commit; avoid hallucinating dependency versions.
-2. Create a dependency inventory by direct/transitive path, runtime vs development scope, update cadence and source provenance.
-3. Run available **read-only** vulnerability/license/SBOM tools against approved manifests; capture exact commands, scanner DB timestamp and warnings about false positives.
-4. For relevant advisories assess reachability, exposure, exploit preconditions and available patched ranges. Do not rate severity from CVSS alone.
-5. Review install scripts, CI actions, third-party binaries, GitHub token permissions, pinned artifacts and provenance/signature verification where warranted.
-6. Propose the smallest compatible remediation; model lockfile churn, API breakage, rollback and regression suite. Never auto-upgrade or install dependencies without scope approval.
-7. Track accepted risk, ownership and retest date; do not present a scanner pass as an exhaustive security guarantee.
+## Appropriate use
+Apply to package upgrades, dependency threats, license approval, SBOM, registry trust, container base images, CI marketplace actions and lockfile integrity. Not a general code style check.
 
-Output: inventory, evidence-backed vulnerabilities and licenses, prioritized upgrade plan, supply-chain controls, CI gate and unassessed components.
+## Steps
+1. Record exact source SHA and **actual** ecosystem manifests/lockfiles, package manager, runtime platform and environment. Do not guess dependency versions or introduce packages without permission.
+2. Build direct/transitive inventory: package | pinned version/source | dependency path | runtime/dev | integrity/provenance | license/SPDX | repo evidence.
+3. Identify registry substitution/typosquatting, dynamic dependency ranges, install/postinstall scripts, git-sourced tarballs, compromised CI actions, unverified binary downloads and overbroad workflow tokens. Use pinned trusted references where possible.
+4. If authorized tools and databases are available, run read-only SBOM, vulnerability and license scanners; capture scanner/advisory database timestamps, severities, fixed ranges, false positives and coverage. Never fabricate live CVEs or current advisory conclusions.
+5. Assess each potential finding for reachability, configuration, exposure, vulnerable call path and exploit prerequisites. CVSS alone is not deploy impact. Maintain separate VERIFIED / SUSPECTED / UNKNOWN.
+6. Propose minimal upgrades with compatibility test matrix, safe lockfile regeneration plan, rollback and provenance checks; do not update installed dependencies automatically or alter public registry contents.
+7. Gate critical issues on ownership, exact manifest change, actual rerun evidence and approval or documented exception with an expiry. A clean static lint check cannot certify the entire supply chain.
+
+## Required output
+Inventory + SBOM plan | suspicious source and script checks | evidence-linked risk table | fixed-range plan | license obligations | CI permissions recommendations | residual blind spots.
+
+## Runnable reference
+`examples/supply-chain/` implements a **toy lockfile policy linter** against synthetic dependency metadata. It flags floating ranges, non-registry sources and lifecycle script concerns but is NOT an npm/pip parser or live vulnerability feed. In ChatGPT Web without repository access, ask for redacted manifest excerpts and write commands to execute later, marked NOT RUN.
+
+## Limitations
+No unauthorized installs, silent upgrades, fabricated CVE matches, covert telemetry or unsupported license/legal conclusions.
 
 ## Your task
 

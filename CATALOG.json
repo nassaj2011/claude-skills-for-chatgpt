@@ -2,7 +2,7 @@
   "schema": 1,
   "project": "Claude Skills for ChatGPT",
   "source": "https://github.com/nassaj2011/claude-skills-for-chatgpt",
-  "version": "v0.6.0",
+  "version": "v0.7.0",
   "hash_normalization": "CRLF-to-LF",
   "tracking": false,
   "contains_user_identity": false,
@@ -25,7 +25,7 @@
     {
       "name": "backup-disaster-recovery",
       "path": "skills/backup-disaster-recovery/SKILL.md",
-      "sha256": "1fdd00ef76ede4f19e0e5723a98475ab972568fb76539e0d0b492b7f41366d37"
+      "sha256": "501309311128597d1a1f2cdadcb304bd8df0aa936ee24f8f9590c1a4ac93147e"
     },
     {
       "name": "code-review-pr",
@@ -40,12 +40,12 @@
     {
       "name": "dependency-supply-chain-auditor",
       "path": "skills/dependency-supply-chain-auditor/SKILL.md",
-      "sha256": "27010e42d1c365fdb169f0f518a7ae49637d012fe95fb22d139824a4040256f5"
+      "sha256": "55a0efb9af360d6c5d5f187da994eed8d86dd57e1ffde90658497d5b09dbb504"
     },
     {
       "name": "devops-ci-cd",
       "path": "skills/devops-ci-cd/SKILL.md",
-      "sha256": "093b17c345055671af18369096a572c5608d963c0b4fdb600cee2abb98e078a9"
+      "sha256": "c9077c13ed309097a5d5e34b2b633f849e02f520e5f773ec458ac9e03747141f"
     },
     {
       "name": "documentation-handover",
@@ -60,7 +60,7 @@
     {
       "name": "llm-api-integration",
       "path": "skills/llm-api-integration/SKILL.md",
-      "sha256": "b2e9fa4ac7da66502e24ae8081875958cb589478fa47f73103dfdeceeb558061"
+      "sha256": "17114669b1344e921cf4d708421dc790e205c81bdf31befce1981ae29b1e2dab"
     },
     {
       "name": "load-resilience-testing",
@@ -70,7 +70,7 @@
     {
       "name": "mcp-integration-builder",
       "path": "skills/mcp-integration-builder/SKILL.md",
-      "sha256": "f6dc54635e77eaba02d4a9ff37b8198437346b55fc34af544cb3b37430d22409"
+      "sha256": "d4ac6623fa11265de81d506adc56ea7b69689679913f48de801adbb85f347737"
     },
     {
       "name": "observability-monitoring",
@@ -80,7 +80,7 @@
     {
       "name": "performance-accessibility",
       "path": "skills/performance-accessibility/SKILL.md",
-      "sha256": "179ce3eee76a9147bf88ccbf6c14518bb8682abbe5f39764a3fff4ba92eaadc0"
+      "sha256": "c3ef51649f8c28a564bc8e1454032b9225e43824bea40d194c8880d719e7a358"
     },
     {
       "name": "playwright-webapp-testing",

@@ -1,0 +1,13 @@
+{
+  "fictional": true,
+  "packages": [
+    {
+      "name": "demo-parser",
+      "version": "1.2.3",
+      "source": "approved-registry",
+      "integrity": "sha256:aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa",
+      "license": "MIT",
+      "install_scripts": false
+    }
+  ]
+}

@@ -11,21 +11,28 @@ Check permissions, user intent and safety before destructive/external actions.
 
 ## Specialist workflow
 
-# Performance and accessibility
-1. Establish audience, critical devices/network conditions, accessible interaction needs and baseline user journeys.
-2. Measure first: profiling, bundle size, request waterfall, query timing, core web vitals where feasible; state tool and environment.
-3. Find the real bottleneck before refactoring: expensive renders, waterfalls, slow queries, oversized assets or long tasks.
-4. Define realistic performance budgets and verify key interactions with mobile throttling where possible.
-5. Audit semantic markup, contrast, keyboard order, screen-reader labels, focus, dynamic announcements, touch targets and reduced motion.
-6. Propose minimal incremental fixes that preserve behavior; run regression and a11y checks again.
-7. State which items require human assistive-tech review and what was not tested.
+# Web performance and accessibility — measurable user journeys
 
-Output: measured baseline, prioritized findings, affected routes/components, remediation, measured change and outstanding accessibility risks.
-Do not claim WCAG conformity from automated scanning alone.
+## Scope and anti-trigger
+Use for slow pages, Core Web Vitals, interaction lag, excessive bundles, image loading, keyboard navigation, screen-reader problems, WCAG-related audits and RTL responsive issues. Do not invoke a heavy browser audit for a documentation typo.
 
-## Local accessibility/performance boundary
+## Specialist process
+1. Define users, languages (RTL/LTR), disabilities and devices, affected routes, browser/viewport/network, critical journeys and actual baseline. A synthetic desktop screenshot cannot prove phone accessibility or field performance.
+2. Keep **observed** measurements distinct from targets: Web Vitals such as LCP, CLS and INP (where supported), request totals, transferred bytes, CPU long tasks, JS bundle and backend/database timings. Report real device versus laboratory method, percentile/sample count and measurement variability.
+3. Identify the dominant root cause before changing code: layout shift source, oversized images, render waterfalls, unbounded state updates, expensive SQL, disabled caching or blocking third-party scripts.
+4. Define testable budgets and gates with units, percentile and environment. Avoid invented Lighthouse/axe scores; when a tool is unavailable, specify it as NOT RUN and provide the commands.
+5. Perform keyboard-only tab sequence, focus-visible and reset/return focus, form labels/errors, accessible names/roles, polite live regions, contrast, zoom/reflow, reduced motion and screen reader review. Automated passes do **not** prove WCAG conformance.
+6. For Persian and mixed-direction UI, verify document language, RTL order, numeric input and localized status messaging, truncated text and mobile no-overflow behavior. Fix HTML semantics rather than relying exclusively on ARIA patches.
+7. Prefer minimal reversible changes, then rerun the **same browser/device profile** and verify functional regression, accessibility and performance before claiming success.
 
-The `examples/frontend-rtl` specimen provides focus-visible, reduced-motion and semantic-label patterns, while `examples/observability-gate` provides an offline latency gate. Neither replaces axe/Lighthouse/browser measurements, WCAG audits or real field performance data. State the measured-versus-proposed boundary in all outcomes.
+## Evidence contract
+Journey | baseline vs revised metric + units | tool/browser/viewport | p75 where applicable | screenshot/trace | issue severity | fix and owner | PASS/FAIL/NOT RUN. Separate user-impact claims from measured facts.
+
+## Executable reference
+The local `examples/frontend-rtl/browser_smoke.py` already checks real Edge RTL/keyboard behavior. New `examples/perf-budget/` measures a **self-hosted** synthetic page's visible DOM and request budget against declared thresholds using a local browser when installed; it makes no external requests. This does not substitute for axe, Lighthouse, production RUM or a human screen-reader audit.
+
+## Security and compatibility
+Do not run unapproved invasive testing on production endpoints, introduce telemetry collecting personal data or assert compliance based on a few scripted controls. On ChatGPT Web lacking browser tools, return a test plan and mark checks NOT RUN.
 
 ## Your task
 

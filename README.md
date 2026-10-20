@@ -90,7 +90,7 @@ Each `skills/<name>/SKILL.md` needs a frontmatter `name` and useful `description
 
 Original material in **this** repository is available under the [MIT License](LICENSE). No Anthropic skill source files are redistributed. Existing upstream skill names and concepts are referenced descriptively with links in [docs/ANTHROPIC_COMPARISON.md](docs/ANTHROPIC_COMPARISON.md). Third-party skills may have **different per-skill licenses**; check before copying or modifying any upstream content. “Claude”, “ChatGPT” and “Codex” are trademarks of their respective owners.
 
-**Status: v0.6.0 — three strengthened specialist skills, runnable evidence and independent ChatGPT Web Kit.** Manifest checks, heuristic pre-install security scanning, fixture-based evaluator tests and CI are automated. End-to-end benchmark gains, production deployments and security certification are *not* claimed.
+**Status: v0.7.0 — six additional strengthened specialist skills, six A/B evidence pairs, independent ChatGPT Web Kit.** Manifest checks, heuristic pre-install security scanning, fixture-based evaluator tests and CI are automated. End-to-end benchmark gains, production deployments and security certification are *not* claimed.
 
 ### v0.2: safety tooling and measured pilot
 
@@ -125,3 +125,15 @@ Run `python scripts/validate_benchmark.py`, the example tests and the existing v
 The first targeted quality upgrade focuses on three previously weaker domains: [privacy data governance](skills/privacy-data-governance/SKILL.md), [bounded load/resilience](skills/load-resilience-testing/SKILL.md) and [visual asset design](skills/visual-assets-design/SKILL.md). Each has an executable, fictional reference: [privacy field checks](examples/privacy-inventory/), [strict local HTTP load](examples/bounded-load/) and [authored SVG + rights/contrast checks](examples/visual-asset/). **All 29 browser-compatible cards are rebuilt from the same canonical skill texts.**
 
 See [v0.6 release documentation](docs/V0_6_RELEASE.md) and [honest evaluation record](evals/V0_6_RESULTS.md). Real model A/B attempts were blocked by Codex transport HTTP 404, so no new A/B success claim or 8.5/10 expert score is asserted.
+
+### v0.7: six more domains — runnable examples and actual A/B outputs
+
+Six expert skills have substantially stronger operational contracts: **LLM API Integration, MCP Integration Builder, DevOps CI/CD, Dependency Supply Chain, Backup & Disaster Recovery and Performance Accessibility**. See [release notes](docs/V0_7_RELEASE.md) and six new isolated examples under [examples/](examples/).
+
+There are 12 complete Codex text-only A/B outputs (six matched cases), with preserved SHA-256 and independent session IDs in [v0.7 evaluation records](evals/V0_7_RESULTS.md). **Results are deliberately UNSCORED** until independent blind review; there is no claimed 8.5/10 average or proven overall improvement. Source skills are automatically synchronized to the separate [ChatGPT Web Kit](web-kit/README.md).
+
+### v0.7: six more domains — runnable examples and actual A/B outputs
+
+Six expert skills have stronger operational contracts: LLM API Integration, MCP Integration Builder, DevOps CI/CD, Dependency Supply Chain, Backup & Disaster Recovery and Performance Accessibility. See [release notes](docs/V0_7_RELEASE.md).
+
+There are 12 complete read-only Codex A/B outputs (six matched cases), with preserved SHA-256 and independent session IDs in [evaluation records](evals/V0_7_RESULTS.md). Results are intentionally UNSCORED until independent blind review; no 8.5/10 average or general efficacy gain is claimed. The same skill content is supplied through the separate [ChatGPT Web Kit](web-kit/README.md).

@@ -1,0 +1,33 @@
+**Readiness: NO-GO / NOT TESTED.** A green backup dashboard is only job-status evidence—not proof that the platform can recover consistently.
+
+| Evidence gate | Required evidence | Status |
+|---|---|---|
+| Scope and ownership | Inventory: booking DB, transaction/WAL logs, uploaded assets, payment/idempotency state, queues, DNS/runtime config, third-party dependencies, encryption keys (names only), owners | NOT RUN / OPEN |
+| Recovery targets | Stakeholder-approved RPO, RTO, retention, jurisdiction, recovery priority | NOT RUN / OPEN |
+| Consistent protection | Database-consistent backup plus required transaction logs/PITR chain; offsite/immutable encrypted copy; independent recovery credentials | NOT RUN |
+| Integrity | Backup catalogue, checksums, timestamps, coverage of critical tables/tenants, storage reachability | NOT RUN |
+| Key recovery | Authorized proof that the required decryption key/version and recovery permissions work in isolation | NOT RUN |
+| Restore drill | Measured, isolated restore of a representative synthetic backup; achieved RPO/RTO recorded | NOT RUN |
+| Application consistency | Referential integrity, booking/payment state reconciliation, queue handling, actor/tenant isolation | NOT RUN |
+| Approval | Named accountable owner accepts measured results and remaining caveats | NOT RUN |
+
+Proposed isolated restore gate:
+
+1. Use only synthetic, disposable data and a segregated environment with outbound payment/webhook delivery disabled.
+2. Restore database base backup, then apply logs to a defined recovery point. Record source timestamp, restore completion time, and actual data-loss interval.
+3. Validate schema/version compatibility, referential integrity, bookings versus payment/idempotency records, tenant isolation, and essential application smoke checks.
+4. Keep workers paused initially; verify pending jobs can be inspected or replayed safely without payment callbacks or external side effects.
+5. Document exact commands, backup identifiers, key identifiers (not secrets), approvals, timings, validation results, and protected originals.
+
+Required negative drills, all **NOT RUN**:
+
+| Drill | Expected fail-closed evidence |
+|---|---|
+| Corrupt archive/object | Checksum or restore validation detects corruption; original backup remains untouched; escalation path documented |
+| Missing WAL/log segment | Point-in-time restore halts clearly; achieved recovery point is reported, not assumed |
+| Key access failure/stale key | Restore cannot proceed; key-owner escalation and recovery/rotation procedure are proven |
+| Incomplete backup/catalogue mismatch | Coverage gap is identified before application start |
+| Pending payment callbacks after restore | Callbacks remain disabled/quarantined; idempotency controls prevent duplicate charge or booking effects |
+| Pending deletion/privacy request | Recovery procedure identifies how post-backup deletion obligations are reapplied |
+
+Release criteria should require: an approved RPO/RTO, a successful isolated restore with measured results, transaction-consistency validation, safe payment/queue behavior, proven key access, and documented remediation owners for every failed drill. Until then, the correct declaration is **NOT TESTED / NO-GO for recovery readiness**.

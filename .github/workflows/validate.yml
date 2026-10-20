@@ -46,6 +46,20 @@ jobs:
         run: python -m unittest discover -s examples/bounded-load -p "test_*.py" -v
       - name: Verify authored SVG, contrast and rights boundaries
         run: python -m unittest discover -s examples/visual-asset -p "test_*.py" -v
+      - name: Verify 12 v0.7 model run artifacts (scores pending independent review)
+        run: python scripts/verify_v07_runs.py
+      - name: Validate provider-neutral LLM schema and safe retries
+        run: python -m unittest discover -s examples/llm-contract -p "test_*.py" -v
+      - name: Validate scoped MCP-like mock dispatcher and replay handling
+        run: python -m unittest discover -s examples/mcp-contract -p "test_*.py" -v
+      - name: Validate release policy and fail-closed CI evidence
+        run: python -m unittest discover -s examples/release-policy -p "test_*.py" -v
+      - name: Validate declared dependency source and license policy
+        run: python -m unittest discover -s examples/supply-chain -p "test_*.py" -v
+      - name: Validate isolated synthetic no-overwrite recovery
+        run: python -m unittest discover -s examples/restore-drill -p "test_*.py" -v
+      - name: Validate local performance and mobile overflow budget rules
+        run: python -m unittest discover -s examples/perf-budget -p "test_*.py" -v
       - uses: actions/setup-node@v4
         with:
           node-version: "22"

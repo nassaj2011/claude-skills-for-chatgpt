@@ -1,0 +1,27 @@
+**NOT RUN:** no manifest inspection, lockfile review, vulnerability lookup, network access, CI inspection, package installation, or tests. No current CVEs are asserted.
+
+Treat this as a release blocker until provenance, execution, and licensing are resolved.
+
+| Finding | Risk | Triage | Gate |
+|---|---|---|---|
+| `demo-widget@^2` | Medium: floating minor/patch updates can change resolved code | Record exact lockfile-resolved version and integrity hash; assess update policy | Require a committed lockfile and reviewed dependency-update PRs; do not silently update |
+| Unverified Git dependency | High: mutable source and unclear publisher/revision | Identify repository owner, commit SHA/tag signature, review source and build artifact path | Block unless pinned to immutable commit SHA, provenance is verified, and source is approved |
+| Install-time script | High: arbitrary code runs during install, often with CI credentials | Determine lifecycle hook, commands, whether it downloads/executes code, and required privileges | Block by default; permit only after code review, sandboxed install, least-privilege CI, and documented exception |
+| Unknown transitive license | Medium to high, depending on distribution/use | Generate an SBOM/license inventory from the resolved dependency graph; validate obligations | Block release where policy requires known/approved licenses; legal review for copyleft, proprietary, or unknown terms |
+| Unpinned third-party CI action | High: action tag can be retargeted | Identify action publisher, permissions, inputs, and referenced revision | Pin to full immutable commit SHA; restrict token permissions and approve action provenance |
+
+A defensible audit workflow:
+
+1. Preserve the current state: archive the manifest, lockfile, CI workflow, and exact commit. Make no updates during the audit.
+2. Resolve the dependency graph from the lockfile and produce an SBOM containing names, exact versions, source URLs, hashes, licenses, and dependency paths.
+3. Verify integrity and provenance: registry hashes/signatures where available; Git dependencies fixed to a reviewed commit SHA; approved publisher/repository ownership.
+4. Analyze install scripts in an isolated environment with network and credentials disabled. Flag downloads, shell execution, environment-variable access, postinstall compilation, and native binaries.
+5. Scan the *resolved* graph against an approved vulnerability source when access is authorized. Record database/version/date, affected paths, exploitability, and remediation status—never infer CVEs from package names alone.
+6. Review CI actions as dependencies: full-SHA pinning, verified creator/publisher, minimal `GITHUB_TOKEN`/OIDC permissions, restricted secrets exposure, and protected workflow changes.
+7. Produce an exception register with owner, rationale, compensating controls, expiry, and review date.
+
+Recommended release policy:
+
+- **No-go:** unpinned/unverified Git code, unreviewed install-time execution, mutable CI action references, or unknown/disallowed licenses.
+- **Conditional go:** `demo-widget` remains at its existing lockfile resolution, provided it is integrity-pinned and has no unresolved policy findings.
+- **Post-audit changes:** remediate through explicit, reviewable PRs that show lockfile diff, SBOM diff, license diff, script changes, CI action SHA changes, and test/security evidence.
