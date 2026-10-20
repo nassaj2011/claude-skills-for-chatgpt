@@ -1,7 +1,7 @@
 # مهارت‌های کلاد برای چت‌جی‌پی‌تی
 ## Claude Skills for ChatGPT — Idea → Production
 
-[فارسی](README.fa.md) · [Workflow](docs/WORKFLOW.md) · [v0.2 changes](docs/V0_2_RELEASE.md) · [Evaluation rubric](evals/README.md) · [Anthropic comparison](docs/ANTHROPIC_COMPARISON.md) · [Contribute](CONTRIBUTING.md)
+[فارسی](README.fa.md) · [Workflow](docs/WORKFLOW.md) · [v0.3 improvements](docs/V0_3_RELEASE.md) · [Privacy & provenance](docs/PROVENANCE_AND_PRIVACY.md) · [Evaluation rubric](evals/README.md) · [Anthropic comparison](docs/ANTHROPIC_COMPARISON.md) · [Contribute](CONTRIBUTING.md)
 
 > **Independent community project.** Inspired by the *Agent Skills* approach and the public [Anthropic Skills](https://github.com/anthropics/skills) examples, but **not affiliated with, endorsed by, or maintained by Anthropic or OpenAI**. The skill instructions in this repository are newly authored, not verbatim copies or an official Claude-to-ChatGPT conversion.
 
@@ -75,7 +75,8 @@ Use [the fictional end-to-end worked example](examples/from-idea-to-production.m
 
 ```bash
 python scripts/validate_skills.py
-python scripts/audit_skills.py --root skills
+python scripts/audit_skills.py --root skills --fail-on review
+python scripts/provenance.py
 python -m unittest discover -s tests -v
 ```
 
@@ -85,8 +86,24 @@ Each `skills/<name>/SKILL.md` needs a frontmatter `name` and useful `description
 
 Original material in **this** repository is available under the [MIT License](LICENSE). No Anthropic skill source files are redistributed. Existing upstream skill names and concepts are referenced descriptively with links in [docs/ANTHROPIC_COMPARISON.md](docs/ANTHROPIC_COMPARISON.md). Third-party skills may have **different per-skill licenses**; check before copying or modifying any upstream content. “Claude”, “ChatGPT” and “Codex” are trademarks of their respective owners.
 
-**Status: v0.2 community foundation.** Manifest checks, heuristic pre-install security scanning, fixture-based evaluator tests and CI are automated. End-to-end benchmark gains, production deployments and security certification are *not* claimed.
+**Status: v0.3 community hardening release.** Manifest checks, heuristic pre-install security scanning, fixture-based evaluator tests and CI are automated. End-to-end benchmark gains, production deployments and security certification are *not* claimed.
 
 ### v0.2: safety tooling and measured pilot
 
 The seven new risk-oriented skills ship with an install-time heuristic safety scan, real read-only PR evidence CLI, file-backup checksum verifier, and a transparent A/B scoring framework. See [release notes](docs/V0_2_RELEASE.md), [benchmark protocol](evals/README.md), and the [first genuine-model pilot](evals/PILOT_RESULT.md). The single review-case pilot showed **no measured improvement** (baseline 100%, skill-instructed 100%). This is not an end-to-end assessment of all 29 skills.
+
+### v0.3: provenance, privacy and fail-closed installation
+
+Read the [security and privacy policy](docs/PROVENANCE_AND_PRIVACY.md) and [release notes](docs/V0_3_RELEASE.md). A new [CATALOG.json](CATALOG.json) contains SHA-256 hashes for all 29 public SKILL.md files and identifies the official source. **These hashes detect divergence but do not authenticate the publisher without a trusted Git revision or signature.**
+
+```bash
+python scripts/provenance.py
+python scripts/audit_skills.py --root skills --fail-on review
+# Review any flagged source files manually before installation:
+python scripts/install.py --target ~/.agents/skills --only code-review-pr
+python scripts/install.py --target ~/.agents/skills --only code-review-pr --apply
+# Only after MANUALLY verifying any REVIEW findings:
+# python scripts/install.py --target ~/.agents/skills --only SKILL --apply --accept-review
+```
+
+Optional on-device receipt: `--receipt /path/to/new/receipt.json` (never uploaded, no user ID). Existing installations are **not overwritten** and are **not silently upgraded**. Tools such as `pr_review_report.py` stay in this source checkout; a standalone installed SKILL.md does not bundle them. No hidden tracking, covert access to user code or automatic source uploads are implemented.

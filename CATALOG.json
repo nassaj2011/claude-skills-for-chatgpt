@@ -1,0 +1,155 @@
+{
+  "schema": 1,
+  "project": "Claude Skills for ChatGPT",
+  "source": "https://github.com/nassaj2011/claude-skills-for-chatgpt",
+  "version": "v0.3.0",
+  "tracking": false,
+  "contains_user_identity": false,
+  "skills": [
+    {
+      "name": "agent-skill-security-auditor",
+      "path": "skills/agent-skill-security-auditor/SKILL.md",
+      "sha256": "fd00c10a3c14a5f08a81bc270e121d54e89daec932fd3223a2819033282fecbc"
+    },
+    {
+      "name": "backend-api-engineer",
+      "path": "skills/backend-api-engineer/SKILL.md",
+      "sha256": "21df7ef890d950ac608d83261f4439d69ec907d14188e4307ace9e9474be1923"
+    },
+    {
+      "name": "backend-debugging",
+      "path": "skills/backend-debugging/SKILL.md",
+      "sha256": "9477c7d14384c58db44e23631e2b59aed3446339680d79304d26c1eeaa506aa0"
+    },
+    {
+      "name": "backup-disaster-recovery",
+      "path": "skills/backup-disaster-recovery/SKILL.md",
+      "sha256": "1fdd00ef76ede4f19e0e5723a98475ab972568fb76539e0d0b492b7f41366d37"
+    },
+    {
+      "name": "code-review-pr",
+      "path": "skills/code-review-pr/SKILL.md",
+      "sha256": "3780272aa528a05cfe673441a1dad1f328f42347c1282631916d6a264da88e65"
+    },
+    {
+      "name": "database-transaction-integrity",
+      "path": "skills/database-transaction-integrity/SKILL.md",
+      "sha256": "a7c14d15e02df4c461b14b0577b208dce7a313349bf2b2284f1a558859403045"
+    },
+    {
+      "name": "dependency-supply-chain-auditor",
+      "path": "skills/dependency-supply-chain-auditor/SKILL.md",
+      "sha256": "27010e42d1c365fdb169f0f518a7ae49637d012fe95fb22d139824a4040256f5"
+    },
+    {
+      "name": "devops-ci-cd",
+      "path": "skills/devops-ci-cd/SKILL.md",
+      "sha256": "9929a97a065dcaf283be8af4b1997c72220132af8333dc7d360d15f5dca5ef3f"
+    },
+    {
+      "name": "documentation-handover",
+      "path": "skills/documentation-handover/SKILL.md",
+      "sha256": "f7936e969612eb8298f6986b7f6820016622bd060f98e50e8a25e3c04fe0bc7b"
+    },
+    {
+      "name": "frontend-design-direction",
+      "path": "skills/frontend-design-direction/SKILL.md",
+      "sha256": "0cd4f0c3868ff54add226f57d6b6b93f6ea98c9684d01b451f67942d20e7009f"
+    },
+    {
+      "name": "llm-api-integration",
+      "path": "skills/llm-api-integration/SKILL.md",
+      "sha256": "b2e9fa4ac7da66502e24ae8081875958cb589478fa47f73103dfdeceeb558061"
+    },
+    {
+      "name": "load-resilience-testing",
+      "path": "skills/load-resilience-testing/SKILL.md",
+      "sha256": "770ec5c6536a14808197ea4e7f396db0df6c9351b577dc22ca643ae25385f92f"
+    },
+    {
+      "name": "mcp-integration-builder",
+      "path": "skills/mcp-integration-builder/SKILL.md",
+      "sha256": "f6dc54635e77eaba02d4a9ff37b8198437346b55fc34af544cb3b37430d22409"
+    },
+    {
+      "name": "observability-monitoring",
+      "path": "skills/observability-monitoring/SKILL.md",
+      "sha256": "4542563de3238c9ba1508250feed884aacad0224af474eab88050ea6c653b274"
+    },
+    {
+      "name": "performance-accessibility",
+      "path": "skills/performance-accessibility/SKILL.md",
+      "sha256": "62272b1e300414be85cbdbe07543a10a9df250b0f870b6dae6ef84a9ee476ccd"
+    },
+    {
+      "name": "playwright-webapp-testing",
+      "path": "skills/playwright-webapp-testing/SKILL.md",
+      "sha256": "9e7adc181b9e40ff4d3e6148f7956ccef437d0580b41610f5500bb6a134fbb71"
+    },
+    {
+      "name": "privacy-data-governance",
+      "path": "skills/privacy-data-governance/SKILL.md",
+      "sha256": "b8b1aae7326730e64ff7069ae17a0da377586a4bda5b1be79ae20e6e07a9c175"
+    },
+    {
+      "name": "product-business-analyst",
+      "path": "skills/product-business-analyst/SKILL.md",
+      "sha256": "9d904a9da1f70f3c8b9552ce47aa7d106d2ab6cb05eccc6dcb2ad612334d177a"
+    },
+    {
+      "name": "project-bootstrap-environments",
+      "path": "skills/project-bootstrap-environments/SKILL.md",
+      "sha256": "e18580be0686c26066710579ba14704401958fb688ad35b523d1c235e4b26e03"
+    },
+    {
+      "name": "qa-release-gatekeeper",
+      "path": "skills/qa-release-gatekeeper/SKILL.md",
+      "sha256": "d6e05ce4ddd5ece3abcc8a6b06e990af7bf1d96700118f910073a2dd8ce976ea"
+    },
+    {
+      "name": "qa-test-strategy",
+      "path": "skills/qa-test-strategy/SKILL.md",
+      "sha256": "717c87d23c96c5aa9cc4aae889cc5c4aa1d4db4fb296892a01f7b92782c4e433"
+    },
+    {
+      "name": "react-artifacts-builder",
+      "path": "skills/react-artifacts-builder/SKILL.md",
+      "sha256": "42caaa51d2d767485de8f8be7e5892b418de66c2ee90e8185a1b7657776b6591"
+    },
+    {
+      "name": "security-authorization-auditor",
+      "path": "skills/security-authorization-auditor/SKILL.md",
+      "sha256": "3d4711134b6236e698dd744cef49ccd46312b2b58ecf21c93d09686025363e3b"
+    },
+    {
+      "name": "skill-authoring-toolkit",
+      "path": "skills/skill-authoring-toolkit/SKILL.md",
+      "sha256": "c305a030b3fa88370a8ac828e226ff9b6518687f86f5fd193144deae9ca40885"
+    },
+    {
+      "name": "skill-evaluation-benchmark",
+      "path": "skills/skill-evaluation-benchmark/SKILL.md",
+      "sha256": "6304cc2d092760a2b465cabd54a6db5cbabeee62e9b9864e33a5c88026d2ac89"
+    },
+    {
+      "name": "software-architect",
+      "path": "skills/software-architect/SKILL.md",
+      "sha256": "27865219fe11c6c38d4f2e12429e0ba97bbcfce9a5cc17209d3bde3018d922e5"
+    },
+    {
+      "name": "technical-project-orchestrator",
+      "path": "skills/technical-project-orchestrator/SKILL.md",
+      "sha256": "3eaad2e3c9ded846678b275a4c3c142f784566bbe37ae31842aa5c64cbaec60e"
+    },
+    {
+      "name": "theme-design-system",
+      "path": "skills/theme-design-system/SKILL.md",
+      "sha256": "81cd71d30a1f0c56e5b8ee2d7c6b927adff5055dbad7e036ebafd196959c27f1"
+    },
+    {
+      "name": "visual-assets-design",
+      "path": "skills/visual-assets-design/SKILL.md",
+      "sha256": "74403626e04d014c2649ec58013a43e2e288dce85d4f11e156b135ac78d27bea"
+    }
+  ]
+}

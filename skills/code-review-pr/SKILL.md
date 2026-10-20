@@ -18,3 +18,7 @@ Use when an actual diff, PR, merge request, or requested code review exists; do 
 Handoff to database-transaction-integrity for concurrency/schema changes; security-authorization-auditor for privilege surfaces; qa-release-gatekeeper for release decision.
 
 Output: PR SHA/base, evidence table (severity, file:line, effect, fix), CI/review summary, missing tests and verdict. If tools/data unavailable, report NOT CHECKED rather than PASS.
+
+## Execution dependency
+
+The optional `pr_review_report.py` helper lives in the **source repository's** `scripts/` folder, not inside this installed SKILL.md folder. If the source checkout and authenticated GitHub CLI are available, run that helper from the checkout. Otherwise use documented read-only `gh pr view`, `gh api` and actual diff review, or mark evidence NOT CHECKED. Do not download or execute remote scripts as a shortcut.

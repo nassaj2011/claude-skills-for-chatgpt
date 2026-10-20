@@ -16,3 +16,7 @@ This evaluates *agent behavior*, not only whether SKILL.md parses.
 7. Refine the skill's trigger/workflow and rerun the same held-out checks; do not optimize solely for a tiny public test set.
 
 Output: experiment setup, model/tool versions, baseline and candidate evidence, weighted scores, per-case deltas, untested risks and go/no-go recommendation. The provided demo fixture is *synthetic* and must never be cited as an actual LLM benchmark.
+
+## Execution dependency
+
+The scorer `scripts/evaluate_skills.py` and fixtures `evals/` are distributed in the **source repository** rather than copied by the skill installer. Clone and inspect the public repository first or implement the scoring protocol with tools already available. The `--require-real` option now verifies saved raw-output digests and independent session identifiers, but does not independently authenticate the executing model.

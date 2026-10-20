@@ -7,6 +7,7 @@ Independent reviewers attach evidence to each boolean rubric judgment.
 from __future__ import annotations
 
 import argparse
+import hashlib
 import json
 from pathlib import Path
 
@@ -86,6 +87,34 @@ def compare(cases: dict, baseline: dict, candidate: dict) -> dict:
     }
 
 
+def verify_run_artifact(run: dict, repo_root: Path) -> None:
+    """Require raw model output. Digest proves consistency, not genuine execution."""
+    metadata = run.get("metadata", {})
+    if metadata.get("synthetic") is not False:
+        raise ValueError("Real run must explicitly set synthetic=false")
+    for key in ("model", "session_id", "artifact"):
+        if not metadata.get(key):
+            raise ValueError(f"Real run must include metadata.{key}")
+    artifact = metadata["artifact"]
+    if not isinstance(artifact, dict):
+        raise ValueError("metadata.artifact must contain path and sha256")
+    path = artifact.get("path", "")
+    sha = artifact.get("sha256", "")
+    if not isinstance(path, str) or not path or Path(path).is_absolute() or ".." in Path(path).parts:
+        raise ValueError("Artifact path must be safe and relative to this repository")
+    candidate = repo_root / path
+    resolved = candidate.resolve()
+    try:
+        resolved.relative_to(repo_root.resolve())
+    except ValueError as exc:
+        raise ValueError("Artifact escapes the repository") from exc
+    if candidate.is_symlink() or not resolved.is_file():
+        raise ValueError(f"Missing/linked agent output: {path}")
+    digest = hashlib.sha256(resolved.read_bytes()).hexdigest()
+    if not isinstance(sha, str) or digest != sha:
+        raise ValueError(f"Output digest mismatch: {path}")
+
+
 def main() -> int:
     parser = argparse.ArgumentParser(description=__doc__)
     parser.add_argument("--cases", type=Path, required=True)
@@ -95,11 +124,24 @@ def main() -> int:
     parser.add_argument("--require-real", action="store_true", help="Reject synthetic example runs")
     args = parser.parse_args()
     try:
-        report = compare(read_json(args.cases), read_json(args.baseline), read_json(args.candidate))
+        cases = read_json(args.cases)
+        baseline = read_json(args.baseline)
+        candidate = read_json(args.candidate)
+        report = compare(cases, baseline, candidate)
+        if args.require_real:
+            if report["evaluation_type"] == "SYNTHETIC_DEMONSTRATION":
+                raise ValueError("Synthetic demonstration scores are not real agent evidence")
+            base_meta = baseline["metadata"]
+            next_meta = candidate["metadata"]
+            if base_meta["model"] != next_meta["model"]:
+                raise ValueError("Model mismatch; baseline and candidate are not directly comparable")
+            if base_meta.get("session_id") == next_meta.get("session_id"):
+                raise ValueError("Independent sessions are required")
+            repo_root = Path(__file__).resolve().parents[1]
+            verify_run_artifact(baseline, repo_root)
+            verify_run_artifact(candidate, repo_root)
     except (OSError, ValueError, KeyError, TypeError, json.JSONDecodeError) as exc:
         parser.error(str(exc))
-    if args.require_real and report["evaluation_type"] == "SYNTHETIC_DEMONSTRATION":
-        parser.error("Synthetic demonstration scores are not evidence of real agent runs")
     if args.json:
         print(json.dumps(report, ensure_ascii=False, indent=2))
     else:

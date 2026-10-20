@@ -2,7 +2,7 @@
 
 ### مجموعه متن‌باز اسکیل‌های ساخت پلتفرم از ایده تا محیط تولید
 
-[English](README.md) · [نقشه گردش کار](docs/WORKFLOW.md) · [تغییرات نسخه ۰٫۲](docs/V0_2_RELEASE.md) · [ارزیابی اسکیل‌ها](evals/README.md) · [مقایسه با Anthropic](docs/ANTHROPIC_COMPARISON.md)
+[English](README.md) · [نقشه گردش کار](docs/WORKFLOW.md) · [تقویت نسخه ۰٫۳](docs/V0_3_RELEASE.md) · [حریم خصوصی و منشأ انتشار](docs/PROVENANCE_AND_PRIVACY.md) · [ارزیابی اسکیل‌ها](evals/README.md) · [مقایسه با Anthropic](docs/ANTHROPIC_COMPARISON.md)
 
 این مخزن شامل **۲۹ اسکیل اصیل و قابل‌استفاده مجدد** برای عامل‌های برنامه‌نویسی مبتنی بر استاندارد `SKILL.md` است: از کشف نیاز و طراحی محصول تا معماری، UX، برنامه‌نویسی، دیباگ، تست، استقرار و مانیتورینگ.
 
@@ -59,7 +59,8 @@ python .\scripts\install.py --target "$env:USERPROFILE\.agents\skills" --apply
 
 ```bash
 python scripts/validate_skills.py
-python scripts/audit_skills.py --root skills
+python scripts/audit_skills.py --root skills --fail-on review
+python scripts/provenance.py
 python -m unittest discover -s tests -v
 ```
 
@@ -67,8 +68,21 @@ python -m unittest discover -s tests -v
 
 مشارکت از طریق Issue و Pull Request آزاد است. قواعد در [CONTRIBUTING.md](CONTRIBUTING.md) نوشته شده‌اند. متن اصلی این مخزن با مجوز [MIT](LICENSE) منتشر می‌شود. مجوز فایل‌های مخازن دیگر ممکن است متفاوت باشد و پیش از کپی باید بررسی شود.
 
-**وضعیت:** نسخه ۰٫۲؛ اعتبارسنجی ساختار، اسکن امنیتی محدود پیش از نصب، چارچوب ارزیابی A/B و تست‌های خودکار اضافه شده است. بهبود عملکرد همه اسکیل‌ها روی پروژه واقعی هنوز اثبات نشده است.
+**وضعیت:** نسخه ۰٫۳؛ اعتبارسنجی ساختار، اسکن امنیتی محدود پیش از نصب، چارچوب ارزیابی A/B و تست‌های خودکار اضافه شده است. بهبود عملکرد همه اسکیل‌ها روی پروژه واقعی هنوز اثبات نشده است.
 
 ### نسخه ۰٫۲: امنیت، ابزارهای اجرایی و ارزیابی واقعی
 
 هفت اسکیل جدید و ابزارهای ممیزی امنیت پیش از نصب، بررسی PR، کنترل یکپارچگی فایل پشتیبان و امتیازدهی مقایسه‌ای اضافه شدند. [تغییرات نسخه](docs/V0_2_RELEASE.md)، [پروتکل آزمون](evals/README.md) و [اولین آزمایش واقعی مدل](evals/PILOT_RESULT.md) منتشر شده‌اند. در آزمایش یک سناریوی PR، امتیاز بدون اسکیل و با دستورالعمل اسکیل هر دو ۱۰۰٪ بود؛ بنابراین **بهبود قابل‌اثباتی در این نمونه دیده نشد** و این نتیجه به کل ۲۹ اسکیل قابل تعمیم نیست.
+
+### نسخه ۰٫۳: منشأ قابل بررسی، حریم خصوصی و نصب سخت‌گیرانه
+
+[سیاست امنیت و حریم خصوصی](docs/PROVENANCE_AND_PRIVACY.md) و [تغییرات نسخه ۰٫۳](docs/V0_3_RELEASE.md) منتشر شدند. فایل [CATALOG.json](CATALOG.json) شامل هش SHA-256 اسکیل‌های عمومی و نشانی مخزن رسمی است؛ این هش‌ها به‌تنهایی امضای دیجیتال معتبر ناشر نیستند.
+
+```bash
+python scripts/provenance.py
+python scripts/audit_skills.py --root skills --fail-on review
+python scripts/install.py --target ~/.agents/skills --only code-review-pr
+python scripts/install.py --target ~/.agents/skills --only code-review-pr --apply
+```
+
+نصب‌کننده فایل‌های موجود را جایگزین نمی‌کند و هنگام یافتن مورد مشکوک نصب را متوقف می‌کند؛ پس از بررسی دستی، فقط برای موارد REVIEW می‌توان با `--accept-review` نصب را تأیید کرد. ثبت رسید محلی با `--receipt` اختیاری است، هیچ گزارشی آپلود نمی‌شود و شناسه کاربران یا کدهای تولیدشده جمع‌آوری نمی‌شود. اسکریپت‌های اجرایی در نسخه منبع GitHub هستند و با نصب صرف فایل SKILL.md منتقل نمی‌شوند.

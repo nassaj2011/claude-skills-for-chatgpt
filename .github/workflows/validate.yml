@@ -19,8 +19,12 @@ jobs:
       - name: Validate all skill manifests
         run: python scripts/validate_skills.py
       - name: Run read-only heuristic skill security scanner
-        run: python scripts/audit_skills.py --root skills --fail-on high
+        run: python scripts/audit_skills.py --root skills --fail-on review
+      - name: Verify published source catalog hashes
+        run: python scripts/provenance.py
       - name: Run standard-library tests
         run: python -m unittest discover -s tests -v
+      - name: Verify historical A/B raw-output integrity
+        run: python scripts/evaluate_skills.py --cases evals/pilot_cases.json --baseline evals/runs/pilot-pr-baseline.json --candidate evals/runs/pilot-pr-candidate.json --require-real
       - name: Verify deterministic A/B evaluator fixture
         run: python scripts/evaluate_skills.py --cases evals/fixtures/demo_cases.json --baseline evals/fixtures/demo_baseline.json --candidate evals/fixtures/demo_candidate.json --json

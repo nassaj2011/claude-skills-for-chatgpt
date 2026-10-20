@@ -16,3 +16,7 @@ A skill folder is executable guidance, not a sandbox: all third-party skills req
 7. Prefer explicit user-scope, no-overwrite installation; pin revision and re-audit when upgrading.
 
 Output: inventory, findings with file/line/reason, rights/provenance, tool permissions, mitigation and decision. A clean static scan **does not certify safety** or detect every prompt injection.
+
+## Execution dependency
+
+The static scanner is `scripts/audit_skills.py` in the **public source checkout**. Installing only this SKILL.md does not install the Python utility. Use a locally inspected copy of the repository or conduct manual source review when the helper is absent. Never fetch-and-execute an unknown scanner; absence of a scanner is not an approval to install untrusted skills.
