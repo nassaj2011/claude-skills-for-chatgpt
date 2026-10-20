@@ -8,7 +8,8 @@ These files are natural-language instructions. They are **not sandbox boundaries
 4. Limit testing to local or explicitly authorized staging/production surfaces. Default to non-destructive verification.
 5. Record actual evidence and versions. A proposed security check or test run does not constitute a passed audit.
 6. Never assume a skill grants tool availability, SaaS credentials, API limits or special ChatGPT entitlements.
-7. Report suspected sensitive vulnerabilities privately to the maintainer instead of posting exploit payloads or customer information publicly.
+7. Before installing third-party skills, use `python scripts/audit_skills.py --root PATH` and inspect every file, network request and privilege request manually. The scanner is heuristic and can miss sophisticated malicious behavior.
+8. Report suspected sensitive vulnerabilities privately to the maintainer instead of posting exploit payloads or customer information publicly.
 
 ## Threat model reminder
 

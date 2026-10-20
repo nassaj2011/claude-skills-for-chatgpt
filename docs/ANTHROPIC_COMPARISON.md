@@ -20,3 +20,7 @@ Additional original skills close gaps common to end-to-end delivery: backend deb
 **Names and trademarks:** The names “Claude”, “Anthropic”, “ChatGPT”, “Codex” and “OpenAI” are used only to describe relevant products/interoperability. This project is not endorsed by either vendor.
 
 **Related communities:** [borghei/Claude-Skills](https://github.com/borghei/Claude-Skills), [ever-works/skills](https://github.com/ever-works/skills), [sollexia/agent-skills](https://github.com/sollexia/agent-skills). Related work existed before this repository; do not market this as the first Claude-to-ChatGPT skill project.
+
+## v0.2 additions
+
+New original skills: [code-review-pr](../skills/code-review-pr/SKILL.md), [skill-evaluation-benchmark](../skills/skill-evaluation-benchmark/SKILL.md), [agent-skill-security-auditor](../skills/agent-skill-security-auditor/SKILL.md), [backup-disaster-recovery](../skills/backup-disaster-recovery/SKILL.md), [dependency-supply-chain-auditor](../skills/dependency-supply-chain-auditor/SKILL.md), [load-resilience-testing](../skills/load-resilience-testing/SKILL.md), and [project-bootstrap-environments](../skills/project-bootstrap-environments/SKILL.md). These respond to coverage gaps seen in broader community collections; they are **independently authored**, not upstream skill copies. See [v0.2 release notes](V0_2_RELEASE.md).

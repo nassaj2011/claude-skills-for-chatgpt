@@ -1,0 +1,13 @@
+Verdict: **NEEDS CHANGES**
+
+PR SHA/base: **Not provided — not checked.**
+
+| Severity | Evidence | Effect | Required action |
+|---|---|---|---|
+| High | Resource-ownership enforcement is questioned but unverified | A caller could potentially transfer funds from or access another user’s resource | Confirm server-side ownership validation on every transfer source/destination; add negative authorization tests. |
+
+Real evidence: build passes.
+
+Missing evidence: authorization tests have not run; no proof that ownership is enforced; no reviewer-thread resolution or CI authorization-gate result.
+
+Next actions: run authorization tests, inspect the endpoint’s ownership checks and callers, add/verify cross-account transfer rejection tests, then re-review before merge.

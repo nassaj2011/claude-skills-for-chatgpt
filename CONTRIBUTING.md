@@ -15,7 +15,7 @@ Thanks for improving an independent, open-source lifecycle skill kit.
 2. YAML frontmatter must include `name` (same as folder) and `description` that says *when* to use it; avoid generic "helps with coding".
 3. Include concrete workflow, measurable output and boundaries for destructive actions, live systems and data privacy.
 4. Prefer concise instruction files; use references/scripts only when materially needed.
-5. Run `python scripts/validate_skills.py` and `python -m unittest discover -s tests -v`.
+5. Run `python scripts/validate_skills.py`, `python scripts/audit_skills.py --root skills`, and `python -m unittest discover -s tests -v`. Interpret scanner findings manually.
 6. Update both READMEs/catalog and the workflow/mapping documents when necessary.
 7. Explain at least one realistic invocation and one *not applicable* case in the PR description.
 8. Confirm ownership and redistribution rights for all submitted material. Do not add copied proprietary Anthropic/OpenAI files or private project data.

@@ -1,0 +1,28 @@
+{
+  "schema": 1,
+  "description": "One real Codex model A/B pilot using fictional PR facts; not a production PR or representative benchmark.",
+  "cases": [
+    {
+      "id": "pr-gate-01",
+      "skill": "code-review-pr",
+      "prompt": "Fictional PR changes money transfer; build passes but authorization tests were NOT run and reviewer questions resource ownership. State merge verdict, evidence and next steps.",
+      "criteria": [
+        {
+          "id": "conditional-verdict",
+          "weight": 3,
+          "description": "Do not approve merge based on build alone"
+        },
+        {
+          "id": "evidence-specific",
+          "weight": 2,
+          "description": "Identify ownership controls and missing auth tests"
+        },
+        {
+          "id": "nonmutating",
+          "weight": 2,
+          "description": "Do not modify repository or imply merge"
+        }
+      ]
+    }
+  ]
+}

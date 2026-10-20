@@ -2,9 +2,9 @@
 
 ### مجموعه متن‌باز اسکیل‌های ساخت پلتفرم از ایده تا محیط تولید
 
-[English](README.md) · [نقشه گردش کار](docs/WORKFLOW.md) · [مقایسه با Anthropic](docs/ANTHROPIC_COMPARISON.md)
+[English](README.md) · [نقشه گردش کار](docs/WORKFLOW.md) · [تغییرات نسخه ۰٫۲](docs/V0_2_RELEASE.md) · [ارزیابی اسکیل‌ها](evals/README.md) · [مقایسه با Anthropic](docs/ANTHROPIC_COMPARISON.md)
 
-این مخزن شامل **۲۲ اسکیل اصیل و قابل‌استفاده مجدد** برای عامل‌های برنامه‌نویسی مبتنی بر استاندارد `SKILL.md` است: از کشف نیاز و طراحی محصول تا معماری، UX، برنامه‌نویسی، دیباگ، تست، استقرار و مانیتورینگ.
+این مخزن شامل **۲۹ اسکیل اصیل و قابل‌استفاده مجدد** برای عامل‌های برنامه‌نویسی مبتنی بر استاندارد `SKILL.md` است: از کشف نیاز و طراحی محصول تا معماری، UX، برنامه‌نویسی، دیباگ، تست، استقرار و مانیتورینگ.
 
 > **این پروژه مستقل و اجتماعی است.** از ایده و رویکرد [Anthropic Skills](https://github.com/anthropics/skills) الهام می‌گیرد، اما محصول رسمی، ترجمه تحت حمایت یا وابسته به Anthropic یا OpenAI نیست. متن اسکیل‌ها اختصاصاً برای این پروژه نوشته شده و کپی فایل‌های اصلی Claude نیست.
 
@@ -24,7 +24,9 @@
 | API و یکپارچه‌سازی | `mcp-integration-builder`، `llm-api-integration` |
 | عیب‌یابی و آزمون | `backend-debugging`، `playwright-webapp-testing`، `qa-test-strategy` |
 | تحویل و بهره‌برداری | `devops-ci-cd`، `qa-release-gatekeeper`، `observability-monitoring`، `documentation-handover` |
-| توسعه اسکیل‌های جدید | `skill-authoring-toolkit` |
+| توسعه و ارزیابی اسکیل | `skill-authoring-toolkit`، `skill-evaluation-benchmark` |
+| بازبینی و امنیت توسعه | `code-review-pr`، `agent-skill-security-auditor`، `dependency-supply-chain-auditor` |
+| بازیابی، ظرفیت و راه‌اندازی | `backup-disaster-recovery`، `load-resilience-testing`، `project-bootstrap-environments` |
 
 ## نصب در Codex
 
@@ -43,7 +45,7 @@ python .\scripts\install.py --target "$env:USERPROFILE\.agents\skills" --apply
 
 اگر `CODEX_HOME` به مسیر سفارشی اشاره می‌کند، می‌توانید `"$env:CODEX_HOME\skills"` را به‌عنوان هدف بدهید. برای نصب مختص یک مخزن نیز پوشه `.agents/skills` همان مخزن را انتخاب کنید.
 
-نصب‌کننده به‌صورت پیش‌فرض فقط پیش‌نمایش نشان می‌دهد و **هیچ فایل موجودی را جایگزین نمی‌کند**.
+نصب‌کننده به‌صورت پیش‌فرض فقط پیش‌نمایش نشان می‌دهد و **هیچ فایل موجودی را جایگزین نمی‌کند**؛ پیش از نصب، اسکن امنیتی ایستا انجام می‌شود. نتیجه پاک این اسکن به معنی تضمین ایمنی نیست.
 
 ## استفاده در ChatGPT
 
@@ -57,6 +59,7 @@ python .\scripts\install.py --target "$env:USERPROFILE\.agents\skills" --apply
 
 ```bash
 python scripts/validate_skills.py
+python scripts/audit_skills.py --root skills
 python -m unittest discover -s tests -v
 ```
 
@@ -64,4 +67,8 @@ python -m unittest discover -s tests -v
 
 مشارکت از طریق Issue و Pull Request آزاد است. قواعد در [CONTRIBUTING.md](CONTRIBUTING.md) نوشته شده‌اند. متن اصلی این مخزن با مجوز [MIT](LICENSE) منتشر می‌شود. مجوز فایل‌های مخازن دیگر ممکن است متفاوت باشد و پیش از کپی باید بررسی شود.
 
-**وضعیت:** نسخه اولیه ۰٫۱؛ آزمون ساختار مهارت‌ها موجود است، اما تأیید عملیاتی همه مهارت‌ها روی پروژه واقعی ادعا نمی‌شود.
+**وضعیت:** نسخه ۰٫۲؛ اعتبارسنجی ساختار، اسکن امنیتی محدود پیش از نصب، چارچوب ارزیابی A/B و تست‌های خودکار اضافه شده است. بهبود عملکرد همه اسکیل‌ها روی پروژه واقعی هنوز اثبات نشده است.
+
+### نسخه ۰٫۲: امنیت، ابزارهای اجرایی و ارزیابی واقعی
+
+هفت اسکیل جدید و ابزارهای ممیزی امنیت پیش از نصب، بررسی PR، کنترل یکپارچگی فایل پشتیبان و امتیازدهی مقایسه‌ای اضافه شدند. [تغییرات نسخه](docs/V0_2_RELEASE.md)، [پروتکل آزمون](evals/README.md) و [اولین آزمایش واقعی مدل](evals/PILOT_RESULT.md) منتشر شده‌اند. در آزمایش یک سناریوی PR، امتیاز بدون اسکیل و با دستورالعمل اسکیل هر دو ۱۰۰٪ بود؛ بنابراین **بهبود قابل‌اثباتی در این نمونه دیده نشد** و این نتیجه به کل ۲۹ اسکیل قابل تعمیم نیست.

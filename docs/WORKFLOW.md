@@ -35,3 +35,14 @@ At any boundary, pass:
 - New dashboard: product-business-analyst → frontend-design-direction → theme-design-system → react-artifacts-builder → playwright-webapp-testing → performance-accessibility.
 - API integration: software-architect → mcp-integration-builder (if MCP is warranted) or backend-api-engineer → security-authorization-auditor → qa-test-strategy → observability-monitoring.
 - Production bug: backend-debugging or playwright-webapp-testing → smallest repair → regression test → qa-release-gatekeeper.
+
+## v0.2 cross-cutting gates
+
+- **Before bootstrap:** use `project-bootstrap-environments` for new environments, secret-free config and reproducible local setup.
+- **Before installing third-party skills:** `agent-skill-security-auditor`; run the read-only scanner and manually inspect source/provenance.
+- **Before merge:** `code-review-pr` assesses actual diff, reviews, check runs and ownership tests; no implicit merge.
+- **Before migration/deploy:** `backup-disaster-recovery` confirms backup evidence and requests a non-production restore drill where needed; `dependency-supply-chain-auditor` checks exposed packages.
+- **Before declaring capacity:** `load-resilience-testing` requires explicit authorization, fixed bounds, a safe environment and measured results.
+- **Before claiming skill quality:** `skill-evaluation-benchmark` compares genuine, independently scored baseline and skill-enabled runs; parser tests are insufficient.
+
+These gates do **not** permit production writes, high-volume testing or destructive changes without a separate user instruction.

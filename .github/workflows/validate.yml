@@ -18,5 +18,9 @@ jobs:
           python-version: "3.12"
       - name: Validate all skill manifests
         run: python scripts/validate_skills.py
+      - name: Run read-only heuristic skill security scanner
+        run: python scripts/audit_skills.py --root skills --fail-on high
       - name: Run standard-library tests
         run: python -m unittest discover -s tests -v
+      - name: Verify deterministic A/B evaluator fixture
+        run: python scripts/evaluate_skills.py --cases evals/fixtures/demo_cases.json --baseline evals/fixtures/demo_baseline.json --candidate evals/fixtures/demo_candidate.json --json

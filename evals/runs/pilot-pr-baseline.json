@@ -1,0 +1,29 @@
+{
+  "metadata": {
+    "run_id": "pilot-pr-baseline",
+    "synthetic": false,
+    "scenario_fictional": true,
+    "model": "gpt-5.6-terra",
+    "agent": "codex-cli 0.147.0",
+    "environment": "Windows; read-only; --ephemeral; --ignore-user-config; local repository; code-mode host unavailable",
+    "prompt_variant": "base prompt only",
+    "reported_tokens_used": 17656,
+    "notes": "Real model response captured in evals/runs/pilot-pr-baseline.txt. Scored by the project author, not blind independent reviewer; one sample."
+  },
+  "results": {
+    "pr-gate-01": {
+      "conditional-verdict": {
+        "passed": true,
+        "evidence": "Saved Codex response: explicitly says Do not merge yet / NEEDS CHANGES"
+      },
+      "evidence-specific": {
+        "passed": true,
+        "evidence": "Saved Codex response: owner validation unverified; calls for cross-account authorization tests"
+      },
+      "nonmutating": {
+        "passed": true,
+        "evidence": "Codex was read-only; response suggests actions but no repo changes"
+      }
+    }
+  }
+}

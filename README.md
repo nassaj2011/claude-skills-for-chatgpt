@@ -1,11 +1,11 @@
 # مهارت‌های کلاد برای چت‌جی‌پی‌تی
 ## Claude Skills for ChatGPT — Idea → Production
 
-[فارسی](README.fa.md) · [Workflow](docs/WORKFLOW.md) · [Anthropic comparison](docs/ANTHROPIC_COMPARISON.md) · [Contribute](CONTRIBUTING.md)
+[فارسی](README.fa.md) · [Workflow](docs/WORKFLOW.md) · [v0.2 changes](docs/V0_2_RELEASE.md) · [Evaluation rubric](evals/README.md) · [Anthropic comparison](docs/ANTHROPIC_COMPARISON.md) · [Contribute](CONTRIBUTING.md)
 
 > **Independent community project.** Inspired by the *Agent Skills* approach and the public [Anthropic Skills](https://github.com/anthropics/skills) examples, but **not affiliated with, endorsed by, or maintained by Anthropic or OpenAI**. The skill instructions in this repository are newly authored, not verbatim copies or an official Claude-to-ChatGPT conversion.
 
-**22 original, portable Agent Skills** covering the entire software-platform lifecycle: discovery, architecture, UI/UX, application development, API integrations, security, debugging, tests, CI/CD, observability, release and handover.
+**29 original, portable Agent Skills** covering the entire software-platform lifecycle: discovery, architecture, UI/UX, application development, API integrations, security, debugging, tests, CI/CD, observability, release and handover.
 
 This is **a workflow kit, not a new AI model, a SaaS platform or a deployment engine**. An installed skill guides an agent; tools, permissions, coding environment and testing still determine what it can actually execute.
 
@@ -22,7 +22,9 @@ Instead of collecting hundreds of unrelated prompts, this project combines a cur
 | 04 · Build | [react-artifacts-builder](skills/react-artifacts-builder/SKILL.md), [backend-api-engineer](skills/backend-api-engineer/SKILL.md), [mcp-integration-builder](skills/mcp-integration-builder/SKILL.md), [llm-api-integration](skills/llm-api-integration/SKILL.md) |
 | 05 · Debug and test | [backend-debugging](skills/backend-debugging/SKILL.md), [playwright-webapp-testing](skills/playwright-webapp-testing/SKILL.md), [qa-test-strategy](skills/qa-test-strategy/SKILL.md) |
 | 06 · Ship and operate | [devops-ci-cd](skills/devops-ci-cd/SKILL.md), [qa-release-gatekeeper](skills/qa-release-gatekeeper/SKILL.md), [observability-monitoring](skills/observability-monitoring/SKILL.md), [documentation-handover](skills/documentation-handover/SKILL.md) |
-| 07 · Extend the kit | [skill-authoring-toolkit](skills/skill-authoring-toolkit/SKILL.md) |
+| 07 · Extend and evaluate | [skill-authoring-toolkit](skills/skill-authoring-toolkit/SKILL.md), [skill-evaluation-benchmark](skills/skill-evaluation-benchmark/SKILL.md) |
+| 08 · Review and secure delivery | [code-review-pr](skills/code-review-pr/SKILL.md), [agent-skill-security-auditor](skills/agent-skill-security-auditor/SKILL.md), [dependency-supply-chain-auditor](skills/dependency-supply-chain-auditor/SKILL.md) |
+| 09 · Recover, scale and bootstrap | [backup-disaster-recovery](skills/backup-disaster-recovery/SKILL.md), [load-resilience-testing](skills/load-resilience-testing/SKILL.md), [project-bootstrap-environments](skills/project-bootstrap-environments/SKILL.md) |
 
 ### Install for Codex
 
@@ -54,7 +56,7 @@ python .\scripts\install.py --target "$env:USERPROFILE\.agents\skills" --apply
 python .\scripts\install.py --target "$env:CODEX_HOME\skills" --apply
 ```
 
-The installer **does not overwrite** existing skills, never deletes files, and runs in preview mode unless `--apply` is passed. It uses only Python's standard library. You can install selected skills with `--only frontend-design-direction qa-release-gatekeeper`.
+The installer **does not overwrite** existing skills, never deletes files, performs read-only heuristic skill auditing before installation, and runs in preview mode unless `--apply` is passed. A clean static scan is not proof of safety. It uses only Python's standard library. You can install selected skills with `--only frontend-design-direction qa-release-gatekeeper`.
 
 Restart or refresh your coding agent to discover new skills. A skill may be selected automatically based on its description or explicitly by name, depending on the host.
 
@@ -73,6 +75,7 @@ Use [the fictional end-to-end worked example](examples/from-idea-to-production.m
 
 ```bash
 python scripts/validate_skills.py
+python scripts/audit_skills.py --root skills
 python -m unittest discover -s tests -v
 ```
 
@@ -82,4 +85,8 @@ Each `skills/<name>/SKILL.md` needs a frontmatter `name` and useful `description
 
 Original material in **this** repository is available under the [MIT License](LICENSE). No Anthropic skill source files are redistributed. Existing upstream skill names and concepts are referenced descriptively with links in [docs/ANTHROPIC_COMPARISON.md](docs/ANTHROPIC_COMPARISON.md). Third-party skills may have **different per-skill licenses**; check before copying or modifying any upstream content. “Claude”, “ChatGPT” and “Codex” are trademarks of their respective owners.
 
-**Status: v0.1 community foundation.** Skill-format checks are automated; end-to-end agent evaluations, integration deployments and production certification are *not* claimed.
+**Status: v0.2 community foundation.** Manifest checks, heuristic pre-install security scanning, fixture-based evaluator tests and CI are automated. End-to-end benchmark gains, production deployments and security certification are *not* claimed.
+
+### v0.2: safety tooling and measured pilot
+
+The seven new risk-oriented skills ship with an install-time heuristic safety scan, real read-only PR evidence CLI, file-backup checksum verifier, and a transparent A/B scoring framework. See [release notes](docs/V0_2_RELEASE.md), [benchmark protocol](evals/README.md), and the [first genuine-model pilot](evals/PILOT_RESULT.md). The single review-case pilot showed **no measured improvement** (baseline 100%, skill-instructed 100%). This is not an end-to-end assessment of all 29 skills.

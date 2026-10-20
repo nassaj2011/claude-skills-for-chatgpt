@@ -1,0 +1,18 @@
+---
+name: skill-evaluation-benchmark
+description: Evaluate whether an agent skill actually improves task outcomes using repeatable tasks, baseline-versus-skill runs, human-scored criteria and variance analysis.
+---
+
+# Skill evaluation and benchmarking
+
+This evaluates *agent behavior*, not only whether SKILL.md parses.
+
+1. State the skill's intended improvement and when it should **not** trigger. Choose representative task prompts, a negative routing case, and objective or human-reviewable success criteria.
+2. Freeze comparable inputs: repository commit, target model/settings, prompt, tools, task data and time budget. Record any unavoidable differences.
+3. Run baseline **without** skill and candidate **with** skill independently where the coding agent is available; retain full output or reproducible artifacts. Do not synthesize results to pretend a model ran.
+4. Score each run against named weighted criteria; provide specific evidence for passed criteria. Include correctness, safety, scope adherence, command/test evidence, cost/latency when available and unnecessary skill triggering.
+5. Record ratings in the `evals/runs/*.json` schema described in `evals/README.md`; use `python scripts/evaluate_skills.py --baseline ... --candidate ...` to calculate comparison.
+6. Inspect actual failures and variance over more than one case; note subjective scoring and the difference between a benchmark and production validation.
+7. Refine the skill's trigger/workflow and rerun the same held-out checks; do not optimize solely for a tiny public test set.
+
+Output: experiment setup, model/tool versions, baseline and candidate evidence, weighted scores, per-case deltas, untested risks and go/no-go recommendation. The provided demo fixture is *synthetic* and must never be cited as an actual LLM benchmark.
