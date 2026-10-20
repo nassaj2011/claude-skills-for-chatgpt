@@ -14,7 +14,7 @@ from pathlib import Path
 
 PROJECT = "Claude Skills for ChatGPT"
 SOURCE = "https://github.com/nassaj2011/claude-skills-for-chatgpt"
-VERSION = "v0.4.0"
+VERSION = "v0.5.0"
 
 
 def build(skills_dir: Path) -> dict:

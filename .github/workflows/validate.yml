@@ -22,6 +22,8 @@ jobs:
         run: python scripts/audit_skills.py --root skills --fail-on review
       - name: Verify published source catalog hashes
         run: python scripts/provenance.py
+      - name: Validate offline ChatGPT Web distribution
+        run: python scripts/build_web_kit.py
       - name: Run standard-library tests
         run: python -m unittest discover -s tests -v
       - name: Verify historical A/B raw-output integrity

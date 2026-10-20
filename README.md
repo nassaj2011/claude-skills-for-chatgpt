@@ -10,7 +10,11 @@
 This is **a workflow kit, not a new AI model, a SaaS platform or a deployment engine**. An installed skill guides an agent; tools, permissions, coding environment and testing still determine what it can actually execute.
 
 ### What makes this different?
-Instead of collecting hundreds of unrelated prompts, this project combines a curated lifecycle, explicit handoffs, evidence-based release gates, reproducible skill validation, and honest capability boundaries. It works best with **OpenAI Codex** and other Agent Skills-compatible execution environments. ChatGPT web support varies by product surface and plan.
+Instead of collecting hundreds of unrelated prompts, this project combines a curated lifecycle, explicit handoffs, evidence-based release gates, reproducible skill validation, and honest capability boundaries. It supports **two documented usage modes**: native Agent Skills in Codex/compatible execution environments, and a separate [ChatGPT Web kit](web-kit/README.md) with copy-ready prompts and Project sources. Web use requires no terminal, Git or local skill installer; executing code still depends on tools genuinely available in that ChatGPT conversation.
+
+### ChatGPT Web — no Codex, terminal or installer required
+
+Use the browser-first [Persian guide](web-kit/README.fa.md), download the [single uploadable TXT library](web-kit/CHATGPT_WEB_LIBRARY.txt), or [copy ready-made prompts](web-kit/index.html) from the offline selector. For ChatGPT Projects, add the TXT file as a project source and paste [PROJECT_INSTRUCTIONS.txt](web-kit/PROJECT_INSTRUCTIONS.txt) into Project settings. These instructions are **not** native skill installation or permission to execute code; real tool availability still depends on the user's session and authorization.
 
 ### Skill catalog
 
@@ -86,7 +90,7 @@ Each `skills/<name>/SKILL.md` needs a frontmatter `name` and useful `description
 
 Original material in **this** repository is available under the [MIT License](LICENSE). No Anthropic skill source files are redistributed. Existing upstream skill names and concepts are referenced descriptively with links in [docs/ANTHROPIC_COMPARISON.md](docs/ANTHROPIC_COMPARISON.md). Third-party skills may have **different per-skill licenses**; check before copying or modifying any upstream content. “Claude”, “ChatGPT” and “Codex” are trademarks of their respective owners.
 
-**Status: v0.4.0 — executable references and initial A/B evidence.** Manifest checks, heuristic pre-install security scanning, fixture-based evaluator tests and CI are automated. End-to-end benchmark gains, production deployments and security certification are *not* claimed.
+**Status: v0.5.0 — native agent skills and independent ChatGPT Web Kit.** Manifest checks, heuristic pre-install security scanning, fixture-based evaluator tests and CI are automated. End-to-end benchmark gains, production deployments and security certification are *not* claimed.
 
 ### v0.2: safety tooling and measured pilot
 
