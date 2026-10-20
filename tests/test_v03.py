@@ -166,6 +166,18 @@ class V03Tests(unittest.TestCase):
             with self.assertRaisesRegex(ValueError, "safe and relative"):
                 verify_run_artifact(data, Path(tmp))
 
+    def test_provenance_is_stable_across_windows_and_unix_line_endings(self):
+        with tempfile.TemporaryDirectory() as tmp:
+            root = Path(tmp)
+            skill = root / "one"
+            skill.mkdir()
+            file = skill / "SKILL.md"
+            file.write_bytes(b"---\r\nname: one\r\n---\r\nbody\r\n")
+            windows_digest = build(root)["skills"][0]["sha256"]
+            file.write_bytes(b"---\nname: one\n---\nbody\n")
+            unix_digest = build(root)["skills"][0]["sha256"]
+            self.assertEqual(windows_digest, unix_digest)
+
 
 if __name__ == "__main__":
     unittest.main()

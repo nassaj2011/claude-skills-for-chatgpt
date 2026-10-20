@@ -14,7 +14,7 @@ from pathlib import Path
 
 PROJECT = "Claude Skills for ChatGPT"
 SOURCE = "https://github.com/nassaj2011/claude-skills-for-chatgpt"
-VERSION = "v0.3.0"
+VERSION = "v0.3.1"
 
 
 def build(skills_dir: Path) -> dict:
@@ -27,16 +27,17 @@ def build(skills_dir: Path) -> dict:
         skill = folder / "SKILL.md"
         if not skill.is_file() or skill.is_symlink():
             raise ValueError(f"Missing or linked SKILL.md: {folder.name}")
-        content = skill.read_bytes()
+        content = skill.read_bytes().replace(b"\r\n", b"\n")
         entries.append({"name": folder.name, "path": "skills/" + folder.name + "/SKILL.md",
                         "sha256": hashlib.sha256(content).hexdigest()})
     return {"schema": 1, "project": PROJECT, "source": SOURCE, "version": VERSION,
+            "hash_normalization": "CRLF-to-LF",
             "tracking": False, "contains_user_identity": False, "skills": entries}
 
 
 def verify(catalog: dict, current: dict) -> list[str]:
     errors = []
-    for key in ("schema", "project", "source", "version", "tracking", "contains_user_identity"):
+    for key in ("schema", "project", "source", "version", "hash_normalization", "tracking", "contains_user_identity"):
         if catalog.get(key) != current[key]:
             errors.append(f"Catalog metadata mismatch: {key}")
     expected = {e["name"]: e for e in catalog.get("skills", [])}
