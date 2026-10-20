@@ -1,0 +1,36 @@
+<!doctype html>
+<html lang="fa" dir="rtl">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="color-scheme" content="light dark">
+  <title>رزرو زمین — نمونه آزمایشی</title>
+  <link rel="stylesheet" href="./tokens.css">
+  <script type="module" src="./ui.mjs"></script>
+</head>
+<body>
+  <main class="shell">
+    <header>
+      <p class="eyebrow">نمونه آزمایشی بدون اتصال به سرور</p>
+      <h1>رزرو زمین تنیس</h1>
+      <p>وضعیت سانس را انتخاب کنید. هیچ پرداخت واقعی انجام نمی‌شود.</p>
+    </header>
+    <section class="panel" aria-labelledby="booking-heading">
+      <h2 id="booking-heading">ثبت درخواست</h2>
+      <form id="booking-form" novalidate>
+        <label for="slot">سانس</label>
+        <select id="slot" name="slot" required aria-describedby="slot-help">
+          <option value="">انتخاب کنید</option>
+          <option value="morning">۹ تا ۱۰ صبح</option>
+          <option value="evening">۶ تا ۷ عصر</option>
+        </select>
+        <p id="slot-help" class="hint">فقط برای نمایش رفتار رابط کاربری است.</p>
+        <button id="submit" type="submit">درخواست رزرو</button>
+        <button id="reset" type="button" class="secondary">بازنشانی</button>
+      </form>
+      <div id="status" role="status" aria-live="polite" aria-atomic="true"></div>
+    </section>
+    <aside aria-label="توضیحات امنیتی" class="note">این رابط، اعتبارسنجی و کنترل دسترسی سمت سرور را جایگزین نمی‌کند.</aside>
+  </main>
+</body>
+</html>

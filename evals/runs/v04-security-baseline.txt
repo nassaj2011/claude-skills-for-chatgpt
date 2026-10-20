@@ -1,0 +1,24 @@
+Cannot safely deploy.
+
+- **Critical — IDOR / data disclosure:** Any logged-in player can pass another player’s `userId` to read their reservations.
+  - Remediate: ignore `req.query.userId` for players; derive identity from the authenticated session. Permit manager access only after explicit role and venue-scope checks.
+
+- **Critical — IDOR / unauthorized cancellation:** Any logged-in player can delete any reservation by guessing or obtaining its `bookingId`.
+  - Remediate: delete only where the reservation belongs to the session user, or where an authorized manager owns/manages the reservation’s venue. Return a non-revealing `404` when no authorized matching record exists.
+
+- **High — authentication is insufficiently defined:** Checking only that `req.session` exists does not establish a valid user identity or role.
+  - Remediate: require a validated authenticated principal, e.g. session user ID and server-validated role/venue assignments.
+
+- **Medium — unvalidated input / error exposure:** Unvalidated IDs can cause malformed requests or database errors; raw errors may reveal internals.
+  - Remediate: validate identifier format and map expected failures to safe `400`/`404` responses.
+
+- **Medium — possible CSRF:** If this is cookie-session browser traffic, a cross-site request could trigger cancellation.
+  - Remediate: require CSRF protection and appropriate `SameSite` cookie settings for state-changing requests.
+
+Negative tests:
+
+1. Authenticate as Player A; request `getReservations?userId=<Player-B-id>`; assert no Player B data is returned.
+2. Authenticate as Player A; cancel a reservation owned by Player B; assert it remains intact and response is `404`/`403`.
+3. Authenticate as an ordinary player; request reservations for every known manager/player ID; assert no cross-user data is returned.
+4. Authenticate as a manager assigned to Venue A; attempt to cancel a Venue B reservation; assert denial and no deletion.
+5. Submit missing, malformed, or non-existent `bookingId`; assert safe `400`/`404`, no database details, and no deletion.

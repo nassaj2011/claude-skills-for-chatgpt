@@ -1,0 +1,35 @@
+{
+  "cases": [
+    {
+      "id": "v04-security",
+      "skill": "security-authorization-auditor",
+      "criteria": [
+        {
+          "id": "read-idor",
+          "weight": 3,
+          "description": "Identify read endpoint horizontal privilege escalation via userId query."
+        },
+        {
+          "id": "delete-idor",
+          "weight": 3,
+          "description": "Identify destructive object-level authorization flaw and propose guarded deletion."
+        },
+        {
+          "id": "negative-tests",
+          "weight": 3,
+          "description": "Specify wrong-owner and venue manager scope denial regression tests."
+        },
+        {
+          "id": "matrix",
+          "weight": 2,
+          "description": "Provide an explicit role/resource/action permissions matrix."
+        },
+        {
+          "id": "unreviewed",
+          "weight": 2,
+          "description": "Distinguish unreviewed security surfaces from confirmed findings."
+        }
+      ]
+    }
+  ]
+}

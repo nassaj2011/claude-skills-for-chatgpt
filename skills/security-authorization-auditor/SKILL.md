@@ -15,3 +15,7 @@ description: Audit authentication, authorization, roles, object ownership, API d
 
 Output: evidence paths, threat scenario, severity, fix, test and residual risk.
 Never reveal secrets, run unauthorized external scans, or change live credentials without approval.
+
+## Local regression evidence
+
+Use the fictional ownership and permission checks in `examples/reference-platform/tests/test_booking.py`, plus benchmark `v04-security` under `evals/benchmarks/` for a deliberately vulnerable API example. The benchmark has archived real-model read-only outputs but no verified production exploit or penetration test. A run of `python -m unittest discover -s examples/reference-platform/tests -v` tests domain ownership, not session-auth middleware or network security.

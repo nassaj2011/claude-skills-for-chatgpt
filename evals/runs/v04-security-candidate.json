@@ -1,0 +1,42 @@
+{
+  "metadata": {
+    "run_id": "v04-security-candidate",
+    "synthetic": false,
+    "model": "gpt-5.6-terra",
+    "session_id": "01a15b36-b796-7151-ae91-57eacb3d93e3",
+    "agent": "codex-cli 0.147.0",
+    "artifact": {
+      "path": "evals/runs/v04-security-candidate.txt",
+      "sha256": "cf5d34e302b88ccb036de1f95cc6fb58192e155fef50765c95dc80f0c64ce49b"
+    },
+    "scenario_fictional": true,
+    "prompt_file": "evals/prompts/security-ownership.txt",
+    "scope": "read-only; no file modifications or network permitted",
+    "skill_activation": "SKILL.md for security-authorization-auditor prepended via stdin; native auto-trigger not tested",
+    "judge": "One non-blind investigator; manually marked explicit rubric (not independent audit)"
+  },
+  "results": {
+    "v04-security": {
+      "read-idor": {
+        "passed": true,
+        "evidence": "Critical horizontal privilege escalation from query userId. See evals/runs/v04-security-candidate.txt"
+      },
+      "delete-idor": {
+        "passed": true,
+        "evidence": "Critical unauthorized cancellation; ownership predicate on delete. See evals/runs/v04-security-candidate.txt"
+      },
+      "negative-tests": {
+        "passed": true,
+        "evidence": "Negative tests Player A vs B and manager-scoped access. See evals/runs/v04-security-candidate.txt"
+      },
+      "matrix": {
+        "passed": true,
+        "evidence": "Tabular Role / Reservations / Read / Cancel matrix. See evals/runs/v04-security-candidate.txt"
+      },
+      "unreviewed": {
+        "passed": true,
+        "evidence": "Unreviewed surface: CSRF, rate limiting, audit logs, response minimization and concurrency. See evals/runs/v04-security-candidate.txt"
+      }
+    }
+  }
+}

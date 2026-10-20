@@ -14,3 +14,7 @@ description: Plan product telemetry, health checks, logs, metrics, traces, SLOs 
 
 Output: telemetry contract, dashboard panels, alerts, runbook, test evidence and costs.
 Do not claim monitoring is operational merely because instrumentation code exists.
+
+## Offline SLO calculation specimen
+
+Run `python examples/observability-gate/gate.py --sample examples/observability-gate/sample.jsonl` and `python -m unittest discover -s examples/observability-gate -p "test_*.py" -v`. These are synthetic sanitized request samples; the calculated 95th percentile and error budget do **not** prove operational telemetry, production SLO attainment or release readiness.

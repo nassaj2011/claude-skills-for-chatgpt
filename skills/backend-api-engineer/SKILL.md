@@ -16,3 +16,7 @@ description: Build and review maintainable backend endpoints, service boundaries
 
 Output: contract, touched components, behavior changes, verification evidence, security/reliability risks.
 Do not perform production writes or expose credentials while debugging.
+
+## Reference service boundary
+
+The `examples/reference-platform` project demonstrates transaction-safe application-domain logic for bookings and receipts. No HTTP API or real identity provider is bundled: design response contracts and server-side authentication separately, and verify route-to-service authorization through integration tests. A green domain test cannot establish API compliance.

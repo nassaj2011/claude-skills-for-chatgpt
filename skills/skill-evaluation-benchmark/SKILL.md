@@ -20,3 +20,7 @@ Output: experiment setup, model/tool versions, baseline and candidate evidence, 
 ## Execution dependency
 
 The scorer `scripts/evaluate_skills.py` and fixtures `evals/` are distributed in the **source repository** rather than copied by the skill installer. Clone and inspect the public repository first or implement the scoring protocol with tools already available. The `--require-real` option now verifies saved raw-output digests and independent session identifiers, but does not independently authenticate the executing model.
+
+## v0.4 real-run fixtures and 29-case coverage
+
+`evals/29-skill-benchmark.json` supplies a designed-but-**not-run** criterion set for every skill. `scripts/prepare_benchmark.py` emits reproducible baseline or skill-instructed prompts without executing a model. Two additional real, read-only Codex A/B pairs are recorded in `evals/runs/v04-*.txt` with manually scored rubrics under `evals/benchmarks/`. These are **in-context skill instruction** tests, not native host auto-trigger tests; use multiple replications and blind graders before asserting general benefit.

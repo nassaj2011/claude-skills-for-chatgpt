@@ -14,3 +14,7 @@ description: Create balanced automated test portfolios including unit, contract,
 
 Output: test pyramid/matrix, test IDs, fixture needs, CI stages, execution evidence and next high-value tests.
 Do not describe proposed tests as passed tests.
+
+## Runnable example portfolio
+
+Use `examples/reference-platform/tests` for invariant/negative/concurrency tests, `examples/frontend-rtl/ui.test.mjs` for pure UI-state tests and `examples/observability-gate/test_gate.py` for deterministic quality checks. Add request/contract/browser tests separately for a full test pyramid. Record test runner output, commit and environment; never claim E2E coverage from pure function tests.

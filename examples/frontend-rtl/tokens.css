@@ -1,0 +1,34 @@
+:root {
+  color-scheme: light dark;
+  font-family: Tahoma, system-ui, sans-serif;
+  --surface: #f6f8f6;
+  --panel: #ffffff;
+  --ink: #13271d;
+  --muted: #465b51;
+  --primary: #145a3d;
+  --on-primary: #ffffff;
+  --ring: #f5a623;
+  --border: #c4d1c9;
+}
+* { box-sizing: border-box; }
+body { margin: 0; background: var(--surface); color: var(--ink); line-height: 1.6; }
+.shell { margin: min(6vw, 64px) auto; max-width: 48rem; padding: 1rem; }
+h1 { font-size: clamp(1.8rem, 4vw, 2.8rem); }
+.eyebrow { color: var(--muted); font-size: 0.9rem; }
+.panel { background: var(--panel); border: 1px solid var(--border); border-radius: 1rem; padding: clamp(1rem, 3vw, 2rem); }
+form { display: grid; grid-template-columns: 1fr 1fr; gap: 0.8rem; }
+label, select, .hint { grid-column: 1 / -1; }
+select, button { min-height: 44px; font: inherit; border-radius: 0.5rem; }
+select { padding-inline: 0.8rem; border: 1px solid var(--border); background: var(--panel); color: var(--ink); }
+button { background: var(--primary); color: var(--on-primary); border: 2px solid transparent; cursor: pointer; padding: 0.55rem; }
+button.secondary { background: var(--panel); border-color: var(--primary); color: var(--primary); }
+button:focus-visible, select:focus-visible { outline: 3px solid var(--ring); outline-offset: 3px; }
+button:disabled { opacity: 0.6; cursor: progress; }
+.hint, .note { color: var(--muted); font-size: 0.9rem; }
+#status { min-height: 2rem; margin-block-start: 1rem; }
+.note { margin-block-start: 1.5rem; }
+@media (max-width: 400px) { form { grid-template-columns: 1fr; } }
+@media (prefers-reduced-motion: reduce) { *, *::before, *::after { animation: none !important; transition: none !important; } }
+@media (prefers-color-scheme: dark) {
+  :root { --surface: #101c16; --panel: #1c2f25; --ink: #f0f8f3; --muted: #d5e4d9; --primary: #9fdfb9; --on-primary: #0c2117; --border: #58715f; --ring: #ffd078; }
+}

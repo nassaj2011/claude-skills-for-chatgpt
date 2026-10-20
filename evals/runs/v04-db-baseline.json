@@ -1,0 +1,42 @@
+{
+  "metadata": {
+    "run_id": "v04-db-baseline",
+    "synthetic": false,
+    "model": "gpt-5.6-terra",
+    "session_id": "01a15b36-862b-79e3-805d-6ec7529a3785",
+    "agent": "codex-cli 0.147.0",
+    "artifact": {
+      "path": "evals/runs/v04-db-baseline.txt",
+      "sha256": "b3c7669ecdcd0f39f51e825de9bca9565d9644c34eeb828bd780b734eade0f11"
+    },
+    "scenario_fictional": true,
+    "prompt_file": "evals/prompts/booking-race.txt",
+    "scope": "read-only; no file modifications or network permitted",
+    "skill_activation": "No SKILL.md content",
+    "judge": "One non-blind investigator; manually marked explicit rubric (not independent audit)"
+  },
+  "results": {
+    "v04-db": {
+      "unique": {
+        "passed": true,
+        "evidence": "Enforce slot exclusivity in the database; use a single atomic write/transaction. See evals/runs/v04-db-baseline.txt"
+      },
+      "missing-state": {
+        "passed": true,
+        "evidence": "state is updated but does not exist in the shown schema. See evals/runs/v04-db-baseline.txt"
+      },
+      "payment-replay": {
+        "passed": true,
+        "evidence": "Process payment callbacks with a provider-verified, unique event/transaction identifier. See evals/runs/v04-db-baseline.txt"
+      },
+      "crash-matrix": {
+        "passed": false,
+        "evidence": "Not addressed: crash before/after commit and recovery tests. See evals/runs/v04-db-baseline.txt"
+      },
+      "rollout": {
+        "passed": false,
+        "evidence": "Not addressed: migration/backfill/release strategy. See evals/runs/v04-db-baseline.txt"
+      }
+    }
+  }
+}

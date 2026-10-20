@@ -1,0 +1,42 @@
+{
+  "metadata": {
+    "run_id": "v04-security-baseline",
+    "synthetic": false,
+    "model": "gpt-5.6-terra",
+    "session_id": "01a15b36-8e59-7982-968d-0e46d2135232",
+    "agent": "codex-cli 0.147.0",
+    "artifact": {
+      "path": "evals/runs/v04-security-baseline.txt",
+      "sha256": "536e9baa3ff6fe693c8cf5243ea40a3ea5691503c2795a27e7172ad7a1ce3488"
+    },
+    "scenario_fictional": true,
+    "prompt_file": "evals/prompts/security-ownership.txt",
+    "scope": "read-only; no file modifications or network permitted",
+    "skill_activation": "No SKILL.md content",
+    "judge": "One non-blind investigator; manually marked explicit rubric (not independent audit)"
+  },
+  "results": {
+    "v04-security": {
+      "read-idor": {
+        "passed": true,
+        "evidence": "Critical IDOR/data disclosure: any logged-in player can pass another player userId. See evals/runs/v04-security-baseline.txt"
+      },
+      "delete-idor": {
+        "passed": true,
+        "evidence": "Critical IDOR: can delete any reservation by bookingId. See evals/runs/v04-security-baseline.txt"
+      },
+      "negative-tests": {
+        "passed": true,
+        "evidence": "Negative tests: Player A vs B; manager Venue A vs Venue B. See evals/runs/v04-security-baseline.txt"
+      },
+      "matrix": {
+        "passed": false,
+        "evidence": "The response discusses manager scope but has no explicit role/resource/action matrix. See evals/runs/v04-security-baseline.txt"
+      },
+      "unreviewed": {
+        "passed": false,
+        "evidence": "Mentions possible CSRF conditional on cookie, but no consolidated unreviewed-surfaces inventory. See evals/runs/v04-security-baseline.txt"
+      }
+    }
+  }
+}

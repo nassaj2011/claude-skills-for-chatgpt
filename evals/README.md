@@ -58,3 +58,12 @@ Recompute the recorded judgments:
 ```bash
 python scripts/evaluate_skills.py --cases evals/pilot_cases.json --baseline evals/runs/pilot-pr-baseline.json --candidate evals/runs/pilot-pr-candidate.json --require-real
 ```
+
+## v0.4 extensions
+
+- [Complete 29-case specification](29-skill-benchmark.json) — 29 thoughtfully designed **NOT_RUN** cases, not results
+- [Archived 2-case A/B report](V0_4_RESULTS.md) — independent Codex sessions and inspectable saved responses
+- [Reproducible prompt builder](../scripts/prepare_benchmark.py) — emits read-only baseline/candidate task text with `--case`, `--mode` and `--output`. It does **not** call a model, verify native skill routing or claim execution
+- [Executable test suites](../docs/V0_4_RELEASE.md) — transaction, UI state and offline SLO gates, all run without private data
+
+The catalog's earlier seven-case rubric and initial PR-review pilot remain preserved. To evaluate the remaining cases, repeat several genuine agent runs per case under matched conditions, score blind where possible and archive full outputs before making comparative claims.

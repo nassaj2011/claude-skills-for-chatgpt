@@ -14,3 +14,7 @@ description: Assess and improve web performance and accessibility with measurabl
 
 Output: measured baseline, prioritized findings, affected routes/components, remediation, measured change and outstanding accessibility risks.
 Do not claim WCAG conformity from automated scanning alone.
+
+## Local accessibility/performance boundary
+
+The `examples/frontend-rtl` specimen provides focus-visible, reduced-motion and semantic-label patterns, while `examples/observability-gate` provides an offline latency gate. Neither replaces axe/Lighthouse/browser measurements, WCAG audits or real field performance data. State the measured-versus-proposed boundary in all outcomes.
