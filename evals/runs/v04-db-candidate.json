@@ -1,0 +1,42 @@
+{
+  "metadata": {
+    "run_id": "v04-db-candidate",
+    "synthetic": false,
+    "model": "gpt-5.6-terra",
+    "session_id": "01a15b36-a1cc-7050-b0fd-55eed983567d",
+    "agent": "codex-cli 0.147.0",
+    "artifact": {
+      "path": "evals/runs/v04-db-candidate.txt",
+      "sha256": "c742fa543408d8ed63ff68461deb1fb419b290432ef412cbf40fff350be27d24"
+    },
+    "scenario_fictional": true,
+    "prompt_file": "evals/prompts/booking-race.txt",
+    "scope": "read-only; no file modifications or network permitted",
+    "skill_activation": "SKILL.md for database-transaction-integrity prepended via stdin; native auto-trigger not tested",
+    "judge": "One non-blind investigator; manually marked explicit rubric (not independent audit)"
+  },
+  "results": {
+    "v04-db": {
+      "unique": {
+        "passed": true,
+        "evidence": "Add UNIQUE(slot) and attempt insert atomically. See evals/runs/v04-db-candidate.txt"
+      },
+      "missing-state": {
+        "passed": true,
+        "evidence": "No declared state column; add model via migration. See evals/runs/v04-db-candidate.txt"
+      },
+      "payment-replay": {
+        "passed": true,
+        "evidence": "Store provider event/idempotency key with unique constraint. See evals/runs/v04-db-candidate.txt"
+      },
+      "crash-matrix": {
+        "passed": true,
+        "evidence": "Race/failure matrix: a crash before commit must leave neither ... while after commit retriable. See evals/runs/v04-db-candidate.txt"
+      },
+      "rollout": {
+        "passed": true,
+        "evidence": "Migration sequence: expand, backfill/validate, mixed-version-compatible code, backups and rollback. See evals/runs/v04-db-candidate.txt"
+      }
+    }
+  }
+}

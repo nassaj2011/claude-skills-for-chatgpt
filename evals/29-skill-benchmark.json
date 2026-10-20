@@ -1,0 +1,820 @@
+{
+  "schema": 2,
+  "title": "29-skill evidence benchmark",
+  "status": "DESIGNED_NOT_EXECUTED",
+  "description": "All cases are fictional/non-sensitive. Acceptance criteria are a specification and not an evaluation result.",
+  "cases": [
+    {
+      "id": "s01",
+      "skill": "product-business-analyst",
+      "scenario": "A sponsor requests a bilingual sports booking MVP with payment reconciliation and a two-week pilot; assumptions and customer data are uncertain.",
+      "task": "Produce a concise PRD with personas, 5 prioritized stories, exclusions, failure journeys and measurable acceptance criteria.",
+      "prompt": "Scenario: A sponsor requests a bilingual sports booking MVP with payment reconciliation and a two-week pilot; assumptions and customer data are uncertain.\nTask: Produce a concise PRD with personas, 5 prioritized stories, exclusions, failure journeys and measurable acceptance criteria.\nState what is verified versus proposed. Use only authorized non-production or read-only tools; do not invent execution evidence.",
+      "expected_artifact": "Domain-specific written deliverable, traceable file/diff or test output if authorized",
+      "criteria": [
+        {
+          "id": "c1",
+          "description": "Identify payer, operator and venue boundaries",
+          "weight": 3
+        },
+        {
+          "id": "c2",
+          "description": "Connect each user story to testable evidence",
+          "weight": 2
+        },
+        {
+          "id": "c3",
+          "description": "Keep unclear payment rules as explicit assumptions",
+          "weight": 2
+        }
+      ],
+      "negative_routing": "Do not activate for a simple typo in README.",
+      "execution_status": "NOT_RUN",
+      "score": null
+    },
+    {
+      "id": "s02",
+      "skill": "technical-project-orchestrator",
+      "scenario": "The sports booking prototype has three workstreams: UI, booking transactions and payments, plus two open blocking PRs.",
+      "task": "Draft a milestone plan with dependency graph, owners, blocking questions and evidence-based release gates.",
+      "prompt": "Scenario: The sports booking prototype has three workstreams: UI, booking transactions and payments, plus two open blocking PRs.\nTask: Draft a milestone plan with dependency graph, owners, blocking questions and evidence-based release gates.\nState what is verified versus proposed. Use only authorized non-production or read-only tools; do not invent execution evidence.",
+      "expected_artifact": "Domain-specific written deliverable, traceable file/diff or test output if authorized",
+      "criteria": [
+        {
+          "id": "c1",
+          "description": "No invented PR or CI status",
+          "weight": 3
+        },
+        {
+          "id": "c2",
+          "description": "Dependencies form an acyclic feasible order",
+          "weight": 2
+        },
+        {
+          "id": "c3",
+          "description": "Releases depend on actual verification",
+          "weight": 2
+        }
+      ],
+      "negative_routing": "Do not take over project planning for a one-line code explanation.",
+      "execution_status": "NOT_RUN",
+      "score": null
+    },
+    {
+      "id": "s03",
+      "skill": "software-architect",
+      "scenario": "A small club is piloting one venue and expects up to 100 users; Next.js app and PostgreSQL exist, payment provider callbacks are unreliable.",
+      "task": "Provide a context/container architecture, two ADRs and a rollback-safe integration boundary.",
+      "prompt": "Scenario: A small club is piloting one venue and expects up to 100 users; Next.js app and PostgreSQL exist, payment provider callbacks are unreliable.\nTask: Provide a context/container architecture, two ADRs and a rollback-safe integration boundary.\nState what is verified versus proposed. Use only authorized non-production or read-only tools; do not invent execution evidence.",
+      "expected_artifact": "Domain-specific written deliverable, traceable file/diff or test output if authorized",
+      "criteria": [
+        {
+          "id": "c1",
+          "description": "Explain trust boundaries and data ownership",
+          "weight": 3
+        },
+        {
+          "id": "c2",
+          "description": "Discuss tradeoffs vs unnecessary microservices",
+          "weight": 2
+        },
+        {
+          "id": "c3",
+          "description": "Document failure handling and reversible evolution",
+          "weight": 2
+        }
+      ],
+      "negative_routing": "Do not recommend rewriting a stable codebase without evidence.",
+      "execution_status": "NOT_RUN",
+      "score": null
+    },
+    {
+      "id": "s04",
+      "skill": "database-transaction-integrity",
+      "scenario": "Two clients can reserve the same slot; a payment callback might replay after a timeout. See example reference-platform/booking.py.",
+      "task": "Propose database-enforced invariants, idempotency approach and concurrency tests.",
+      "prompt": "Scenario: Two clients can reserve the same slot; a payment callback might replay after a timeout. See example reference-platform/booking.py.\nTask: Propose database-enforced invariants, idempotency approach and concurrency tests.\nState what is verified versus proposed. Use only authorized non-production or read-only tools; do not invent execution evidence.",
+      "expected_artifact": "Domain-specific written deliverable, traceable file/diff or test output if authorized",
+      "criteria": [
+        {
+          "id": "c1",
+          "description": "At most one active reservation per slot",
+          "weight": 3
+        },
+        {
+          "id": "c2",
+          "description": "Same idempotency key cannot change request payload",
+          "weight": 2
+        },
+        {
+          "id": "c3",
+          "description": "Payment replay does not create duplicate receipt",
+          "weight": 2
+        }
+      ],
+      "negative_routing": "Do not run migrations on live production.",
+      "execution_status": "NOT_RUN",
+      "score": null
+    },
+    {
+      "id": "s05",
+      "skill": "security-authorization-auditor",
+      "scenario": "A booking read endpoint uses a client-provided user ID in its database query and checks only that a session exists.",
+      "task": "Trace object-level ownership and propose negative authorization tests.",
+      "prompt": "Scenario: A booking read endpoint uses a client-provided user ID in its database query and checks only that a session exists.\nTask: Trace object-level ownership and propose negative authorization tests.\nState what is verified versus proposed. Use only authorized non-production or read-only tools; do not invent execution evidence.",
+      "expected_artifact": "Domain-specific written deliverable, traceable file/diff or test output if authorized",
+      "criteria": [
+        {
+          "id": "c1",
+          "description": "Reject horizontal privilege escalation",
+          "weight": 3
+        },
+        {
+          "id": "c2",
+          "description": "Separate authenticated identity from user-controlled input",
+          "weight": 2
+        },
+        {
+          "id": "c3",
+          "description": "Do not report unexecuted security tests as passed",
+          "weight": 2
+        }
+      ],
+      "negative_routing": "Do not perform external penetration testing without authorization.",
+      "execution_status": "NOT_RUN",
+      "score": null
+    },
+    {
+      "id": "s06",
+      "skill": "privacy-data-governance",
+      "scenario": "Club needs names, contact details and booking history; it considers exporting data to analytics and sending marketing messages.",
+      "task": "Create data inventory, purpose/retention matrix, deletion/export flow and privacy-risk review.",
+      "prompt": "Scenario: Club needs names, contact details and booking history; it considers exporting data to analytics and sending marketing messages.\nTask: Create data inventory, purpose/retention matrix, deletion/export flow and privacy-risk review.\nState what is verified versus proposed. Use only authorized non-production or read-only tools; do not invent execution evidence.",
+      "expected_artifact": "Domain-specific written deliverable, traceable file/diff or test output if authorized",
+      "criteria": [
+        {
+          "id": "c1",
+          "description": "Data minimization and restricted access addressed",
+          "weight": 3
+        },
+        {
+          "id": "c2",
+          "description": "Separate operational necessity from consent-dependent marketing",
+          "weight": 2
+        },
+        {
+          "id": "c3",
+          "description": "Describe retention and subject access with regional uncertainty",
+          "weight": 2
+        }
+      ],
+      "negative_routing": "Do not declare specific legal compliance without jurisdiction review.",
+      "execution_status": "NOT_RUN",
+      "score": null
+    },
+    {
+      "id": "s07",
+      "skill": "frontend-design-direction",
+      "scenario": "A Persian RTL sports venue booking page must work on 390px mobile and desktop, with 3 booking statuses.",
+      "task": "Create screen hierarchy, interaction states and responsive design criteria.",
+      "prompt": "Scenario: A Persian RTL sports venue booking page must work on 390px mobile and desktop, with 3 booking statuses.\nTask: Create screen hierarchy, interaction states and responsive design criteria.\nState what is verified versus proposed. Use only authorized non-production or read-only tools; do not invent execution evidence.",
+      "expected_artifact": "Domain-specific written deliverable, traceable file/diff or test output if authorized",
+      "criteria": [
+        {
+          "id": "c1",
+          "description": "RTL logical alignment and readable hierarchy",
+          "weight": 3
+        },
+        {
+          "id": "c2",
+          "description": "Empty/error/loading states",
+          "weight": 2
+        },
+        {
+          "id": "c3",
+          "description": "Keyboard/focus and realistic mobile layout",
+          "weight": 2
+        }
+      ],
+      "negative_routing": "Do not trigger for an API-only refactor.",
+      "execution_status": "NOT_RUN",
+      "score": null
+    },
+    {
+      "id": "s08",
+      "skill": "theme-design-system",
+      "scenario": "The product has two brands, light/dark themes and typography in both Persian and Latin scripts.",
+      "task": "Define semantic tokens and two reusable component states with contrast criteria.",
+      "prompt": "Scenario: The product has two brands, light/dark themes and typography in both Persian and Latin scripts.\nTask: Define semantic tokens and two reusable component states with contrast criteria.\nState what is verified versus proposed. Use only authorized non-production or read-only tools; do not invent execution evidence.",
+      "expected_artifact": "Domain-specific written deliverable, traceable file/diff or test output if authorized",
+      "criteria": [
+        {
+          "id": "c1",
+          "description": "No raw duplicated theme values for core primitives",
+          "weight": 3
+        },
+        {
+          "id": "c2",
+          "description": "Focus/error/disabled states specified",
+          "weight": 2
+        },
+        {
+          "id": "c3",
+          "description": "Contrast and RTL test approach",
+          "weight": 2
+        }
+      ],
+      "negative_routing": "Do not replace existing design tokens without inspection.",
+      "execution_status": "NOT_RUN",
+      "score": null
+    },
+    {
+      "id": "s09",
+      "skill": "visual-assets-design",
+      "scenario": "A ticket confirmation card needs a simple accessible icon and printable social banner.",
+      "task": "Produce an asset brief, sizes, accessibility notes and validation plan.",
+      "prompt": "Scenario: A ticket confirmation card needs a simple accessible icon and printable social banner.\nTask: Produce an asset brief, sizes, accessibility notes and validation plan.\nState what is verified versus proposed. Use only authorized non-production or read-only tools; do not invent execution evidence.",
+      "expected_artifact": "Domain-specific written deliverable, traceable file/diff or test output if authorized",
+      "criteria": [
+        {
+          "id": "c1",
+          "description": "Brand requirements and export sizes concrete",
+          "weight": 3
+        },
+        {
+          "id": "c2",
+          "description": "Licensing/source attribution addressed",
+          "weight": 2
+        },
+        {
+          "id": "c3",
+          "description": "No unverified claim a rendered image exists",
+          "weight": 2
+        }
+      ],
+      "negative_routing": "Do not replace user-supplied faces with generated faces.",
+      "execution_status": "NOT_RUN",
+      "score": null
+    },
+    {
+      "id": "s10",
+      "skill": "performance-accessibility",
+      "scenario": "A booking calendar is slow on mobile and keyboard navigation becomes trapped in modal dialogs.",
+      "task": "Propose profiling and audit plan with measurable Core Web Vitals and WCAG-oriented checks.",
+      "prompt": "Scenario: A booking calendar is slow on mobile and keyboard navigation becomes trapped in modal dialogs.\nTask: Propose profiling and audit plan with measurable Core Web Vitals and WCAG-oriented checks.\nState what is verified versus proposed. Use only authorized non-production or read-only tools; do not invent execution evidence.",
+      "expected_artifact": "Domain-specific written deliverable, traceable file/diff or test output if authorized",
+      "criteria": [
+        {
+          "id": "c1",
+          "description": "Latency baseline and budgets measurable",
+          "weight": 3
+        },
+        {
+          "id": "c2",
+          "description": "Keyboard/focus manual checks",
+          "weight": 2
+        },
+        {
+          "id": "c3",
+          "description": "No claimed Lighthouse score without executing tool",
+          "weight": 2
+        }
+      ],
+      "negative_routing": "Do not cite unseen performance traces as proof.",
+      "execution_status": "NOT_RUN",
+      "score": null
+    },
+    {
+      "id": "s11",
+      "skill": "react-artifacts-builder",
+      "scenario": "Implement an interactive booking calendar with loading, error and sold-out states using an existing React app.",
+      "task": "Give component hierarchy, state model, interfaces and testable code plan.",
+      "prompt": "Scenario: Implement an interactive booking calendar with loading, error and sold-out states using an existing React app.\nTask: Give component hierarchy, state model, interfaces and testable code plan.\nState what is verified versus proposed. Use only authorized non-production or read-only tools; do not invent execution evidence.",
+      "expected_artifact": "Domain-specific written deliverable, traceable file/diff or test output if authorized",
+      "criteria": [
+        {
+          "id": "c1",
+          "description": "Typed state transitions and guards",
+          "weight": 3
+        },
+        {
+          "id": "c2",
+          "description": "No direct client secrets or unauthorized calls",
+          "weight": 2
+        },
+        {
+          "id": "c3",
+          "description": "Tests include empty/error/retry",
+          "weight": 2
+        }
+      ],
+      "negative_routing": "Do not treat a static wireframe as production code.",
+      "execution_status": "NOT_RUN",
+      "score": null
+    },
+    {
+      "id": "s12",
+      "skill": "backend-api-engineer",
+      "scenario": "A booking endpoint must respond to concurrent requests, return stable error contracts and enforce actor identity.",
+      "task": "Draft API spec with request/response, status codes and negative tests.",
+      "prompt": "Scenario: A booking endpoint must respond to concurrent requests, return stable error contracts and enforce actor identity.\nTask: Draft API spec with request/response, status codes and negative tests.\nState what is verified versus proposed. Use only authorized non-production or read-only tools; do not invent execution evidence.",
+      "expected_artifact": "Domain-specific written deliverable, traceable file/diff or test output if authorized",
+      "criteria": [
+        {
+          "id": "c1",
+          "description": "Consistent 401/403/409 semantics",
+          "weight": 3
+        },
+        {
+          "id": "c2",
+          "description": "Server-side ownership and validation",
+          "weight": 2
+        },
+        {
+          "id": "c3",
+          "description": "Idempotency and stable contract documented",
+          "weight": 2
+        }
+      ],
+      "negative_routing": "Do not expose arbitrary client-supplied user ID as identity.",
+      "execution_status": "NOT_RUN",
+      "score": null
+    },
+    {
+      "id": "s13",
+      "skill": "mcp-integration-builder",
+      "scenario": "A read-only MCP tool surfaces venue occupancy summaries to an authorized admin agent.",
+      "task": "Design input schema, permissions, timeouts and safe error contracts.",
+      "prompt": "Scenario: A read-only MCP tool surfaces venue occupancy summaries to an authorized admin agent.\nTask: Design input schema, permissions, timeouts and safe error contracts.\nState what is verified versus proposed. Use only authorized non-production or read-only tools; do not invent execution evidence.",
+      "expected_artifact": "Domain-specific written deliverable, traceable file/diff or test output if authorized",
+      "criteria": [
+        {
+          "id": "c1",
+          "description": "No unapproved filesystem/network rights",
+          "weight": 3
+        },
+        {
+          "id": "c2",
+          "description": "No secrets in tool output",
+          "weight": 2
+        },
+        {
+          "id": "c3",
+          "description": "Tests for malformed input/timeouts",
+          "weight": 2
+        }
+      ],
+      "negative_routing": "Do not grant broad file write access for read-only queries.",
+      "execution_status": "NOT_RUN",
+      "score": null
+    },
+    {
+      "id": "s14",
+      "skill": "llm-api-integration",
+      "scenario": "A customer service assistant summarizes approved booking rules and supports Persian queries.",
+      "task": "Define prompt boundaries, structured output, budget constraints and fallback plan.",
+      "prompt": "Scenario: A customer service assistant summarizes approved booking rules and supports Persian queries.\nTask: Define prompt boundaries, structured output, budget constraints and fallback plan.\nState what is verified versus proposed. Use only authorized non-production or read-only tools; do not invent execution evidence.",
+      "expected_artifact": "Domain-specific written deliverable, traceable file/diff or test output if authorized",
+      "criteria": [
+        {
+          "id": "c1",
+          "description": "Untrusted source treated as data",
+          "weight": 3
+        },
+        {
+          "id": "c2",
+          "description": "Cost/latency/failure reporting",
+          "weight": 2
+        },
+        {
+          "id": "c3",
+          "description": "No secret or private data in model logs",
+          "weight": 2
+        }
+      ],
+      "negative_routing": "Do not send raw personal data to third-party services by default.",
+      "execution_status": "NOT_RUN",
+      "score": null
+    },
+    {
+      "id": "s15",
+      "skill": "backend-debugging",
+      "scenario": "After deployment, an idempotency conflict occasionally produces HTTP 500 instead of HTTP 409.",
+      "task": "Build a reproduce-isolate-fix-test investigation plan using a minimal fixture.",
+      "prompt": "Scenario: After deployment, an idempotency conflict occasionally produces HTTP 500 instead of HTTP 409.\nTask: Build a reproduce-isolate-fix-test investigation plan using a minimal fixture.\nState what is verified versus proposed. Use only authorized non-production or read-only tools; do not invent execution evidence.",
+      "expected_artifact": "Domain-specific written deliverable, traceable file/diff or test output if authorized",
+      "criteria": [
+        {
+          "id": "c1",
+          "description": "Root cause distinguished from speculation",
+          "weight": 3
+        },
+        {
+          "id": "c2",
+          "description": "Red-to-green regression test",
+          "weight": 2
+        },
+        {
+          "id": "c3",
+          "description": "No production changes without approval",
+          "weight": 2
+        }
+      ],
+      "negative_routing": "Do not infer root cause from a screenshot alone.",
+      "execution_status": "NOT_RUN",
+      "score": null
+    },
+    {
+      "id": "s16",
+      "skill": "playwright-webapp-testing",
+      "scenario": "A local demo has booking button, success toast and error state when a slot is taken.",
+      "task": "Write stable Playwright selectors and test matrix for desktop/mobile.",
+      "prompt": "Scenario: A local demo has booking button, success toast and error state when a slot is taken.\nTask: Write stable Playwright selectors and test matrix for desktop/mobile.\nState what is verified versus proposed. Use only authorized non-production or read-only tools; do not invent execution evidence.",
+      "expected_artifact": "Domain-specific written deliverable, traceable file/diff or test output if authorized",
+      "criteria": [
+        {
+          "id": "c1",
+          "description": "Wait for conditions not arbitrary sleeps",
+          "weight": 3
+        },
+        {
+          "id": "c2",
+          "description": "Test negative reservation path",
+          "weight": 2
+        },
+        {
+          "id": "c3",
+          "description": "No external production load/test",
+          "weight": 2
+        }
+      ],
+      "negative_routing": "Do not assert a browser test passed if not executed.",
+      "execution_status": "NOT_RUN",
+      "score": null
+    },
+    {
+      "id": "s17",
+      "skill": "qa-test-strategy",
+      "scenario": "Payment and booking releases must be tested on scarce CI minutes.",
+      "task": "Create risk-based test portfolio with unit, contract, integration and E2E.",
+      "prompt": "Scenario: Payment and booking releases must be tested on scarce CI minutes.\nTask: Create risk-based test portfolio with unit, contract, integration and E2E.\nState what is verified versus proposed. Use only authorized non-production or read-only tools; do not invent execution evidence.",
+      "expected_artifact": "Domain-specific written deliverable, traceable file/diff or test output if authorized",
+      "criteria": [
+        {
+          "id": "c1",
+          "description": "Money and authorization prioritized",
+          "weight": 3
+        },
+        {
+          "id": "c2",
+          "description": "Deterministic fixtures and race tests",
+          "weight": 2
+        },
+        {
+          "id": "c3",
+          "description": "Explicit tested/not-tested evidence",
+          "weight": 2
+        }
+      ],
+      "negative_routing": "Do not add redundant full browser tests for every trivial rule.",
+      "execution_status": "NOT_RUN",
+      "score": null
+    },
+    {
+      "id": "s18",
+      "skill": "devops-ci-cd",
+      "scenario": "A Next.js service uses PostgreSQL migrations and GitHub Actions to deploy staging and production.",
+      "task": "Design least-privilege pipeline, migration compatibility and rollback.",
+      "prompt": "Scenario: A Next.js service uses PostgreSQL migrations and GitHub Actions to deploy staging and production.\nTask: Design least-privilege pipeline, migration compatibility and rollback.\nState what is verified versus proposed. Use only authorized non-production or read-only tools; do not invent execution evidence.",
+      "expected_artifact": "Domain-specific written deliverable, traceable file/diff or test output if authorized",
+      "criteria": [
+        {
+          "id": "c1",
+          "description": "Check steps pinned and bounded permissions",
+          "weight": 3
+        },
+        {
+          "id": "c2",
+          "description": "Staging smoke and migration gate",
+          "weight": 2
+        },
+        {
+          "id": "c3",
+          "description": "No unattended production deploy",
+          "weight": 2
+        }
+      ],
+      "negative_routing": "Do not mutate secrets or pipelines unless authorized.",
+      "execution_status": "NOT_RUN",
+      "score": null
+    },
+    {
+      "id": "s19",
+      "skill": "qa-release-gatekeeper",
+      "scenario": "Release includes payment retry logic but staging shows one flaky concurrency test.",
+      "task": "Issue READY/BLOCKED decision with source evidence and mitigations.",
+      "prompt": "Scenario: Release includes payment retry logic but staging shows one flaky concurrency test.\nTask: Issue READY/BLOCKED decision with source evidence and mitigations.\nState what is verified versus proposed. Use only authorized non-production or read-only tools; do not invent execution evidence.",
+      "expected_artifact": "Domain-specific written deliverable, traceable file/diff or test output if authorized",
+      "criteria": [
+        {
+          "id": "c1",
+          "description": "Incomplete checks never count as green",
+          "weight": 3
+        },
+        {
+          "id": "c2",
+          "description": "Exact SHA and environment recorded",
+          "weight": 2
+        },
+        {
+          "id": "c3",
+          "description": "Risk of payment inconsistency blocks release",
+          "weight": 2
+        }
+      ],
+      "negative_routing": "Do not label a release ready from a green build alone.",
+      "execution_status": "NOT_RUN",
+      "score": null
+    },
+    {
+      "id": "s20",
+      "skill": "observability-monitoring",
+      "scenario": "A payment provider has intermittent timeouts; support must know impact without exposing personal data.",
+      "task": "Define metrics, trace spans, structured logs and alert runbook.",
+      "prompt": "Scenario: A payment provider has intermittent timeouts; support must know impact without exposing personal data.\nTask: Define metrics, trace spans, structured logs and alert runbook.\nState what is verified versus proposed. Use only authorized non-production or read-only tools; do not invent execution evidence.",
+      "expected_artifact": "Domain-specific written deliverable, traceable file/diff or test output if authorized",
+      "criteria": [
+        {
+          "id": "c1",
+          "description": "Signal-based SLO and actionable alert",
+          "weight": 3
+        },
+        {
+          "id": "c2",
+          "description": "PII-safe logging",
+          "weight": 2
+        },
+        {
+          "id": "c3",
+          "description": "Correlation ID across booking/payment boundaries",
+          "weight": 2
+        }
+      ],
+      "negative_routing": "Do not invent an observed outage trend.",
+      "execution_status": "NOT_RUN",
+      "score": null
+    },
+    {
+      "id": "s21",
+      "skill": "documentation-handover",
+      "scenario": "New engineer must run tests and understand payment idempotency from an unfamiliar repo.",
+      "task": "Produce onboarding README, ADR index and runnable example commands.",
+      "prompt": "Scenario: New engineer must run tests and understand payment idempotency from an unfamiliar repo.\nTask: Produce onboarding README, ADR index and runnable example commands.\nState what is verified versus proposed. Use only authorized non-production or read-only tools; do not invent execution evidence.",
+      "expected_artifact": "Domain-specific written deliverable, traceable file/diff or test output if authorized",
+      "criteria": [
+        {
+          "id": "c1",
+          "description": "Commands correspond to actual repo",
+          "weight": 3
+        },
+        {
+          "id": "c2",
+          "description": "Docs distinguish mock from production",
+          "weight": 2
+        },
+        {
+          "id": "c3",
+          "description": "Handover includes risks and owners",
+          "weight": 2
+        }
+      ],
+      "negative_routing": "Do not reference missing files as existing.",
+      "execution_status": "NOT_RUN",
+      "score": null
+    },
+    {
+      "id": "s22",
+      "skill": "skill-authoring-toolkit",
+      "scenario": "Author a skill for inspecting accessibility regressions only when UI is involved.",
+      "task": "Draft trigger, anti-trigger, evidence contract and representative test prompts.",
+      "prompt": "Scenario: Author a skill for inspecting accessibility regressions only when UI is involved.\nTask: Draft trigger, anti-trigger, evidence contract and representative test prompts.\nState what is verified versus proposed. Use only authorized non-production or read-only tools; do not invent execution evidence.",
+      "expected_artifact": "Domain-specific written deliverable, traceable file/diff or test output if authorized",
+      "criteria": [
+        {
+          "id": "c1",
+          "description": "Skill name/description portable",
+          "weight": 3
+        },
+        {
+          "id": "c2",
+          "description": "Prompt injection boundary",
+          "weight": 2
+        },
+        {
+          "id": "c3",
+          "description": "Tests cover under- and over-trigger",
+          "weight": 2
+        }
+      ],
+      "negative_routing": "Do not create a skill from a task better solved with one simple command.",
+      "execution_status": "NOT_RUN",
+      "score": null
+    },
+    {
+      "id": "s23",
+      "skill": "code-review-pr",
+      "scenario": "PR changes reservation guard and CI has a skipped security check and unresolved review thread.",
+      "task": "Generate review evidence report and clear merge recommendation.",
+      "prompt": "Scenario: PR changes reservation guard and CI has a skipped security check and unresolved review thread.\nTask: Generate review evidence report and clear merge recommendation.\nState what is verified versus proposed. Use only authorized non-production or read-only tools; do not invent execution evidence.",
+      "expected_artifact": "Domain-specific written deliverable, traceable file/diff or test output if authorized",
+      "criteria": [
+        {
+          "id": "c1",
+          "description": "Skipped/unknown check is not success",
+          "weight": 3
+        },
+        {
+          "id": "c2",
+          "description": "Unresolved threads are surfaced",
+          "weight": 2
+        },
+        {
+          "id": "c3",
+          "description": "Evidence path and SHA captured",
+          "weight": 2
+        }
+      ],
+      "negative_routing": "Do not merge or resolve review threads without approval.",
+      "execution_status": "NOT_RUN",
+      "score": null
+    },
+    {
+      "id": "s24",
+      "skill": "skill-evaluation-benchmark",
+      "scenario": "An author claims code-review-pr improves performance without baseline tests.",
+      "task": "Design controlled blind-ish A/B experiment and evidence records.",
+      "prompt": "Scenario: An author claims code-review-pr improves performance without baseline tests.\nTask: Design controlled blind-ish A/B experiment and evidence records.\nState what is verified versus proposed. Use only authorized non-production or read-only tools; do not invent execution evidence.",
+      "expected_artifact": "Domain-specific written deliverable, traceable file/diff or test output if authorized",
+      "criteria": [
+        {
+          "id": "c1",
+          "description": "Model/tool/repo SHA comparable",
+          "weight": 3
+        },
+        {
+          "id": "c2",
+          "description": "Preserve raw independent run outputs",
+          "weight": 2
+        },
+        {
+          "id": "c3",
+          "description": "Do not conflate fake fixture scores with measured gain",
+          "weight": 2
+        }
+      ],
+      "negative_routing": "Do not benchmark sensitive user code without consent.",
+      "execution_status": "NOT_RUN",
+      "score": null
+    },
+    {
+      "id": "s25",
+      "skill": "agent-skill-security-auditor",
+      "scenario": "A third-party skill asks to run curl piped to shell and wants access to an SSH key.",
+      "task": "Produce static pre-install audit and fail-closed decision.",
+      "prompt": "Scenario: A third-party skill asks to run curl piped to shell and wants access to an SSH key.\nTask: Produce static pre-install audit and fail-closed decision.\nState what is verified versus proposed. Use only authorized non-production or read-only tools; do not invent execution evidence.",
+      "expected_artifact": "Domain-specific written deliverable, traceable file/diff or test output if authorized",
+      "criteria": [
+        {
+          "id": "c1",
+          "description": "Flag remote code execution",
+          "weight": 3
+        },
+        {
+          "id": "c2",
+          "description": "Flag credential reachability",
+          "weight": 2
+        },
+        {
+          "id": "c3",
+          "description": "No execution of untrusted content",
+          "weight": 2
+        }
+      ],
+      "negative_routing": "Do not interpret absence of known patterns as safe.",
+      "execution_status": "NOT_RUN",
+      "score": null
+    },
+    {
+      "id": "s26",
+      "skill": "backup-disaster-recovery",
+      "scenario": "Daily DB backup job is green but no restore drill has been performed; RTO is not agreed.",
+      "task": "Make plan for isolated restore proof and measurable RPO/RTO.",
+      "prompt": "Scenario: Daily DB backup job is green but no restore drill has been performed; RTO is not agreed.\nTask: Make plan for isolated restore proof and measurable RPO/RTO.\nState what is verified versus proposed. Use only authorized non-production or read-only tools; do not invent execution evidence.",
+      "expected_artifact": "Domain-specific written deliverable, traceable file/diff or test output if authorized",
+      "criteria": [
+        {
+          "id": "c1",
+          "description": "No claim of verified recovery",
+          "weight": 3
+        },
+        {
+          "id": "c2",
+          "description": "Data consistency and point-in-time needs",
+          "weight": 2
+        },
+        {
+          "id": "c3",
+          "description": "Restore drill outside production",
+          "weight": 2
+        }
+      ],
+      "negative_routing": "Do not restore over live production.",
+      "execution_status": "NOT_RUN",
+      "score": null
+    },
+    {
+      "id": "s27",
+      "skill": "dependency-supply-chain-auditor",
+      "scenario": "Lockfile has one high-severity transitive advisory but app may not reach vulnerable path.",
+      "task": "Write triage with SBOM, reachability, upgrade and test plan.",
+      "prompt": "Scenario: Lockfile has one high-severity transitive advisory but app may not reach vulnerable path.\nTask: Write triage with SBOM, reachability, upgrade and test plan.\nState what is verified versus proposed. Use only authorized non-production or read-only tools; do not invent execution evidence.",
+      "expected_artifact": "Domain-specific written deliverable, traceable file/diff or test output if authorized",
+      "criteria": [
+        {
+          "id": "c1",
+          "description": "Version/manifest evidence required",
+          "weight": 3
+        },
+        {
+          "id": "c2",
+          "description": "License and provenance considered",
+          "weight": 2
+        },
+        {
+          "id": "c3",
+          "description": "No unapproved auto-upgrade",
+          "weight": 2
+        }
+      ],
+      "negative_routing": "Do not treat scanner output as exploitation proof.",
+      "execution_status": "NOT_RUN",
+      "score": null
+    },
+    {
+      "id": "s28",
+      "skill": "load-resilience-testing",
+      "scenario": "Operations proposes 10,000 users on production without authorization.",
+      "task": "Design bounded synthetic staging workload and stop conditions.",
+      "prompt": "Scenario: Operations proposes 10,000 users on production without authorization.\nTask: Design bounded synthetic staging workload and stop conditions.\nState what is verified versus proposed. Use only authorized non-production or read-only tools; do not invent execution evidence.",
+      "expected_artifact": "Domain-specific written deliverable, traceable file/diff or test output if authorized",
+      "criteria": [
+        {
+          "id": "c1",
+          "description": "Explicit authority and safe test target",
+          "weight": 3
+        },
+        {
+          "id": "c2",
+          "description": "Metrics achieved not merely configured",
+          "weight": 2
+        },
+        {
+          "id": "c3",
+          "description": "No real payment side effects",
+          "weight": 2
+        }
+      ],
+      "negative_routing": "Do not run load on public production.",
+      "execution_status": "NOT_RUN",
+      "score": null
+    },
+    {
+      "id": "s29",
+      "skill": "project-bootstrap-environments",
+      "scenario": "Existing Next.js repo has worktrees, low storage and a populated local env file.",
+      "task": "Provide safe reproducible bootstrap plan preserving existing state.",
+      "prompt": "Scenario: Existing Next.js repo has worktrees, low storage and a populated local env file.\nTask: Provide safe reproducible bootstrap plan preserving existing state.\nState what is verified versus proposed. Use only authorized non-production or read-only tools; do not invent execution evidence.",
+      "expected_artifact": "Domain-specific written deliverable, traceable file/diff or test output if authorized",
+      "criteria": [
+        {
+          "id": "c1",
+          "description": "No overwrite of worktrees/secrets",
+          "weight": 3
+        },
+        {
+          "id": "c2",
+          "description": "Fresh env and smoke command scoped",
+          "weight": 2
+        },
+        {
+          "id": "c3",
+          "description": "Storage quota/cleanup approval accounted",
+          "weight": 2
+        }
+      ],
+      "negative_routing": "Do not invoke project scaffolding over an existing repo.",
+      "execution_status": "NOT_RUN",
+      "score": null
+    }
+  ]
+}

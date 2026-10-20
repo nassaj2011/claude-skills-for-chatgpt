@@ -1,0 +1,35 @@
+{
+  "cases": [
+    {
+      "id": "v04-db",
+      "skill": "database-transaction-integrity",
+      "criteria": [
+        {
+          "id": "unique",
+          "weight": 3,
+          "description": "Require database-enforced UNIQUE slot invariant and atomic insert."
+        },
+        {
+          "id": "missing-state",
+          "weight": 3,
+          "description": "Detect payment UPDATE referencing a state column absent from shown schema."
+        },
+        {
+          "id": "payment-replay",
+          "weight": 3,
+          "description": "Require verified, idempotent provider callback and negative replay test."
+        },
+        {
+          "id": "crash-matrix",
+          "weight": 2,
+          "description": "Explicitly cover before/after-commit failure and safe retry."
+        },
+        {
+          "id": "rollout",
+          "weight": 2,
+          "description": "Provide phased migration/backfill compatibility and rollback considerations."
+        }
+      ]
+    }
+  ]
+}

@@ -1,0 +1,19 @@
+Cannot safely deploy.
+
+| Defect | Corrected design |
+|---|---|
+| Check-then-insert race allows double booking. | Add `UNIQUE(slot)` and attempt the insert atomically; treat uniqueness conflict as taken. Use a short write transaction/retry policy for SQLite lock contention. |
+| No declared `state` column, so payment update is invalid against this schema. | Add a defined booking/payment state model via migration before deploying the handler. |
+| Payment callback has no authorization, provider verification, amount/currency, or booking ownership check. | Verify signed provider event and expected payment details; authorize actor where applicable. |
+| Duplicate/out-of-order callbacks can overwrite state or mark the wrong booking paid. | Store a provider event/idempotency key with a unique constraint; make only legal conditional transitions, e.g. pending → paid. |
+| `slot` is unconstrained free text; no validity or canonicalization rule. | Define canonical slot representation and validate it before atomic reservation. |
+
+| Invariant | Enforcement | Negative test |
+|---|---|---|
+| At most one booking per slot | Database `UNIQUE(slot)` | Two concurrent reservations for the same slot |
+| A payment event is processed once | Unique provider-event/idempotency key | Replay the same callback |
+| Only verified, legal payment transitions occur | Verified event plus conditional update | Callback for unknown booking, wrong amount, or invalid state |
+
+Race/failure matrix: concurrent reservations must yield one insert and one conflict; duplicate callbacks must yield one state transition and one no-op/conflict; a crash before commit must leave neither a booking nor payment transition durable, while a crash after commit must be safely retriable through idempotency.
+
+Migration sequence: expand schema with the required state/payment-event fields and indexes; backfill/validate existing data; deploy mixed-version-compatible code; then enforce non-null/state-transition requirements once validation is complete. Gate it on backup, rollback plan, and lock-impact review.

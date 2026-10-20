@@ -15,3 +15,7 @@ description: Create deliberate, distinctive, accessible frontend visual directio
 
 Output: visual rationale, key screen/state inventory, responsive rules, implementation details, visual verification and limitations.
 Do not substitute a static mockup for functioning behavior when the user requested an application.
+
+## Local RTL example
+
+Review `examples/frontend-rtl/index.html` and `tokens.css` for a Persian RTL accessible-form prototype. The `node --test examples/frontend-rtl/ui.test.mjs` check covers state logic only. Perform real browser layout, keyboard and screen-reader checks before asserting visual/accessibility quality.

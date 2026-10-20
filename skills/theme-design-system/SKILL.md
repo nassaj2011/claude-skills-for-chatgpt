@@ -15,3 +15,7 @@ description: Define and evolve a cohesive web or mobile design system with acces
 
 Output: theme rationale, token table or CSS variables, component state matrix, sample usage and integration notes.
 Do not claim WCAG compliance without measured checks.
+
+## Token reference
+
+Inspect `examples/frontend-rtl/tokens.css` for semantic light/dark tokens, logical layout properties, focus outlines and reduced-motion preference. This is a testable starting point rather than a general-purpose component library. Measure actual contrast and RTL behavior in a browser before certification.

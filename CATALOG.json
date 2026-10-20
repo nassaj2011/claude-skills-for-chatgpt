@@ -2,7 +2,7 @@
   "schema": 1,
   "project": "Claude Skills for ChatGPT",
   "source": "https://github.com/nassaj2011/claude-skills-for-chatgpt",
-  "version": "v0.3.1",
+  "version": "v0.4.0",
   "hash_normalization": "CRLF-to-LF",
   "tracking": false,
   "contains_user_identity": false,
@@ -15,7 +15,7 @@
     {
       "name": "backend-api-engineer",
       "path": "skills/backend-api-engineer/SKILL.md",
-      "sha256": "21df7ef890d950ac608d83261f4439d69ec907d14188e4307ace9e9474be1923"
+      "sha256": "448d5f45a491d2f933512420b373decf74d0345f0f3d6663721c1b2c6ea1d27d"
     },
     {
       "name": "backend-debugging",
@@ -35,7 +35,7 @@
     {
       "name": "database-transaction-integrity",
       "path": "skills/database-transaction-integrity/SKILL.md",
-      "sha256": "a7c14d15e02df4c461b14b0577b208dce7a313349bf2b2284f1a558859403045"
+      "sha256": "2c197e0f6af6703be5152a07fd87417463e43f4f2951795410aef8f082c406ac"
     },
     {
       "name": "dependency-supply-chain-auditor",
@@ -45,7 +45,7 @@
     {
       "name": "devops-ci-cd",
       "path": "skills/devops-ci-cd/SKILL.md",
-      "sha256": "9929a97a065dcaf283be8af4b1997c72220132af8333dc7d360d15f5dca5ef3f"
+      "sha256": "093b17c345055671af18369096a572c5608d963c0b4fdb600cee2abb98e078a9"
     },
     {
       "name": "documentation-handover",
@@ -55,7 +55,7 @@
     {
       "name": "frontend-design-direction",
       "path": "skills/frontend-design-direction/SKILL.md",
-      "sha256": "0cd4f0c3868ff54add226f57d6b6b93f6ea98c9684d01b451f67942d20e7009f"
+      "sha256": "75a0e7f4f7fb711f23ab51ba11b4a1d9c7647446d16ba41f00384778f408692f"
     },
     {
       "name": "llm-api-integration",
@@ -75,17 +75,17 @@
     {
       "name": "observability-monitoring",
       "path": "skills/observability-monitoring/SKILL.md",
-      "sha256": "4542563de3238c9ba1508250feed884aacad0224af474eab88050ea6c653b274"
+      "sha256": "4a93ae3094580ff22b822cdd8c420db4f6e9768c2676a7e898966536f8ce57ea"
     },
     {
       "name": "performance-accessibility",
       "path": "skills/performance-accessibility/SKILL.md",
-      "sha256": "62272b1e300414be85cbdbe07543a10a9df250b0f870b6dae6ef84a9ee476ccd"
+      "sha256": "179ce3eee76a9147bf88ccbf6c14518bb8682abbe5f39764a3fff4ba92eaadc0"
     },
     {
       "name": "playwright-webapp-testing",
       "path": "skills/playwright-webapp-testing/SKILL.md",
-      "sha256": "9e7adc181b9e40ff4d3e6148f7956ccef437d0580b41610f5500bb6a134fbb71"
+      "sha256": "3805810cf0991c1201d2a8c04d157711626d70cd93ba4341997f7de3b8ee5108"
     },
     {
       "name": "privacy-data-governance",
@@ -105,22 +105,22 @@
     {
       "name": "qa-release-gatekeeper",
       "path": "skills/qa-release-gatekeeper/SKILL.md",
-      "sha256": "d6e05ce4ddd5ece3abcc8a6b06e990af7bf1d96700118f910073a2dd8ce976ea"
+      "sha256": "aa9615b555c827c882c2aead274f7852f18a274e3c0c3373f695791b3cd72676"
     },
     {
       "name": "qa-test-strategy",
       "path": "skills/qa-test-strategy/SKILL.md",
-      "sha256": "717c87d23c96c5aa9cc4aae889cc5c4aa1d4db4fb296892a01f7b92782c4e433"
+      "sha256": "8a44d2850edcd19b30ad271dab6226f88a9ffc10ab9a511c123d350ea0731659"
     },
     {
       "name": "react-artifacts-builder",
       "path": "skills/react-artifacts-builder/SKILL.md",
-      "sha256": "42caaa51d2d767485de8f8be7e5892b418de66c2ee90e8185a1b7657776b6591"
+      "sha256": "d22ddb421e5135fdf61fe876d180c404beeb404c0941a2a1b9ee61ba2a8d384a"
     },
     {
       "name": "security-authorization-auditor",
       "path": "skills/security-authorization-auditor/SKILL.md",
-      "sha256": "3d4711134b6236e698dd744cef49ccd46312b2b58ecf21c93d09686025363e3b"
+      "sha256": "2207d9303bf4f7c605f9deb7e599412bf20e5a94d04b398ed91aa19b880615b8"
     },
     {
       "name": "skill-authoring-toolkit",
@@ -130,7 +130,7 @@
     {
       "name": "skill-evaluation-benchmark",
       "path": "skills/skill-evaluation-benchmark/SKILL.md",
-      "sha256": "6304cc2d092760a2b465cabd54a6db5cbabeee62e9b9864e33a5c88026d2ac89"
+      "sha256": "8e096740f2d73f04af75e6e7f6c2bbd7a29e374613c88d718eb67817b62787f0"
     },
     {
       "name": "software-architect",
@@ -145,7 +145,7 @@
     {
       "name": "theme-design-system",
       "path": "skills/theme-design-system/SKILL.md",
-      "sha256": "81cd71d30a1f0c56e5b8ee2d7c6b927adff5055dbad7e036ebafd196959c27f1"
+      "sha256": "20fd3c97163a6e70a54c6c3918cb2f1fb255e04cd6d5a1ebe9e89cdd72b01b31"
     },
     {
       "name": "visual-assets-design",

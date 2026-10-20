@@ -14,3 +14,7 @@ description: Judge software release readiness from executed tests, change scope,
 
 Output: GO/CONDITIONAL GO/NO-GO, exact SHA, evidence matrix, blockers, accepted risks, monitoring and rollback.
 Missing evidence is NOT RUN, never PASS.
+
+## Executable evidence gate
+
+The source checkout includes `examples/observability-gate/gate.py` with explicit availability and p95 thresholds and an intentionally synthetic fixture. Use actual authorized telemetry and inspect all CI/security/migration checks for a genuine release decision; never promote a synthetic sample or an isolated GREEN result into production authorization.

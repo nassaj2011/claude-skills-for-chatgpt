@@ -1,0 +1,35 @@
+Cannot safely deploy.
+
+- **Critical — Horizontal privilege escalation:** Any signed-in player can query `?userId=<another-player-id>` and read that player’s reservations.  
+  **Fix:** Ignore client-supplied `userId` for player access; derive it from the authenticated session. Allow manager-wide access only through an explicit server-side role check.
+
+- **Critical — Unauthorized cancellation:** Any signed-in player who knows or guesses a `bookingId` can delete another player’s reservation, including a manager’s.  
+  **Fix:** Delete only with an ownership/authorization predicate, e.g. player: `{ id: bookingId, userId: session.userId }`; manager access must require `session.role === "manager"`.
+
+- **High — No role/permission model is enforced:** The endpoint distinguishes only “has a session,” so players and venue managers receive identical broad capabilities.  
+  **Fix:** Validate authenticated identity and role centrally; implement explicit per-action authorization.
+
+- **Medium — Missing input validation:** `userId` and `bookingId` are unvalidated. This risks malformed requests, confusing errors, and potentially unsafe ORM behavior depending on implementation.  
+  **Fix:** Require expected identifier format, reject absent/invalid values, and return controlled errors.
+
+- **Medium — Session presence is not session validity:** `if (!req.session)` does not demonstrate expiry, revocation, integrity, or identity validation.  
+  **Fix:** Use verified session middleware and require a valid `session.userId` (and role where relevant).
+
+- **Unreviewed surface:** CSRF protection, rate limiting, audit logs, response-data minimization, and delete concurrency/error handling are not shown.
+
+| Role | Reservations | Read | Cancel |
+|---|---|---:|---:|
+| Player | Own only | Yes | Yes |
+| Player | Other player’s | No | No |
+| Venue manager | Club-scoped, if required | Yes | Per policy |
+
+Specific negative tests:
+
+1. Authenticated Player A requests reservations with `userId=PlayerB`; expect `403` or only Player A’s records.
+2. Authenticated Player A cancels Player B’s booking ID; expect `403/404` and verify B’s reservation remains.
+3. Unauthenticated request to either endpoint; expect `401` and no database access.
+4. Player submits a manager-only operation or manager-scoped reservation identifier; expect `403`.
+5. Expired/revoked session calling either endpoint; expect `401`.
+6. Missing, malformed, or non-string `bookingId`; expect `400`, with no deletion.
+
+Residual risk remains until the session middleware, role source, database schema/tenant boundaries, and CSRF behavior are reviewed.

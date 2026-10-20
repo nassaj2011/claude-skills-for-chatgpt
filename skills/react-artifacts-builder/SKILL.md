@@ -16,3 +16,7 @@ description: Build multi-component interactive web interfaces using a compatible
 
 Output: files changed, architecture sketch, interaction states, test commands/results and remaining caveats.
 Prefer working features to ornamental complexity.
+
+## State-machine reference
+
+Use `examples/frontend-rtl/ui.mjs` to inspect loading/success/error/reset transitions and safe text rendering, with `node --test examples/frontend-rtl/ui.test.mjs`. This example deliberately uses framework-free JavaScript, **not React**, so it can inform React state management but does not validate hooks, hydration or Next.js routing. Write framework-specific tests in the target project.

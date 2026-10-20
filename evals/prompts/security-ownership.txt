@@ -1,0 +1,13 @@
+You are reviewing this deliberately flawed web endpoint for a fictional club. Do not inspect files, execute commands, access network or modify anything. Respond concisely with a severity-tagged defect list, minimal safe remediation and at least three specific negative tests. State whether it can safely deploy.
+
+async function getReservations(req) {
+  if (!req.session) return 401;
+  const userId = req.query.userId;
+  return db.reservation.findMany({ where: { userId } });
+}
+async function cancelReservation(req) {
+  if (!req.session) return 401;
+  return db.reservation.delete({ where: { id: req.body.bookingId } });
+}
+
+The API will be used by ordinary players and a venue manager. Trust only what is shown; do not assume further guards exist.

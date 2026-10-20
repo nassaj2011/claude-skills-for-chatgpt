@@ -14,3 +14,7 @@ description: Design reliable CI/CD, infrastructure configuration, staging/prod s
 
 Output: current-state topology, proposed workflow, environment matrix, approvals, rollback criteria and verified tests.
 Deployment is a distinct authorized action, not implied by writing a workflow file.
+
+## CI demonstration
+
+The repository's `.github/workflows/validate.yml` runs source manifest scans, checksum verification, 29-case benchmark validation, Python domain regression, dependency-free RTL UI tests and historical A/B raw-output digest checks. This pipeline validates the **skill kit and examples**, not any user's application or deployment. For production CI/CD, add environment-specific migration/rollback approvals.

@@ -86,7 +86,7 @@ Each `skills/<name>/SKILL.md` needs a frontmatter `name` and useful `description
 
 Original material in **this** repository is available under the [MIT License](LICENSE). No Anthropic skill source files are redistributed. Existing upstream skill names and concepts are referenced descriptively with links in [docs/ANTHROPIC_COMPARISON.md](docs/ANTHROPIC_COMPARISON.md). Third-party skills may have **different per-skill licenses**; check before copying or modifying any upstream content. “Claude”, “ChatGPT” and “Codex” are trademarks of their respective owners.
 
-**Status: v0.3.1 community hardening release.** Manifest checks, heuristic pre-install security scanning, fixture-based evaluator tests and CI are automated. End-to-end benchmark gains, production deployments and security certification are *not* claimed.
+**Status: v0.4.0 — executable references and initial A/B evidence.** Manifest checks, heuristic pre-install security scanning, fixture-based evaluator tests and CI are automated. End-to-end benchmark gains, production deployments and security certification are *not* claimed.
 
 ### v0.2: safety tooling and measured pilot
 
@@ -107,3 +107,11 @@ python scripts/install.py --target ~/.agents/skills --only code-review-pr --appl
 ```
 
 Optional on-device receipt: `--receipt /path/to/new/receipt.json` (never uploaded, no user ID). Existing installations are **not overwritten** and are **not silently upgraded**. Tools such as `pr_review_report.py` stay in this source checkout; a standalone installed SKILL.md does not bundle them. No hidden tracking, covert access to user code or automatic source uploads are implemented.
+
+### v0.4: runnable specialist samples and controlled benchmarks
+
+- [v0.4 release notes](docs/V0_4_RELEASE.md) detail three dependency-light executable reference slices: [transactional booking](examples/reference-platform/README.md), [Persian RTL UI](examples/frontend-rtl/README.md), and [offline observability gate](examples/observability-gate/README.md).
+- [All 29 skill scenarios](evals/29-skill-benchmark.json) specify tasks, weighted acceptance criteria and negative activation examples. Their status remains **NOT_RUN** until real agent runs are performed.
+- [Two additional real-model A/B pairs](evals/V0_4_RESULTS.md) on fictional booking concurrency and authorization scenarios showed richer specialist handoffs with skill text. These are single, non-blind exploratory comparisons, **not a verified model-wide performance gain**.
+
+Run `python scripts/validate_benchmark.py`, the example tests and the existing validation suite before proposing a skill change. Do not install dependencies just to run these examples; all Python tests use the standard library and the UI sample uses Node built-ins.

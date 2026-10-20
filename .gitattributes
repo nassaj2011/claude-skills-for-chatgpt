@@ -1,0 +1,4 @@
+# Raw model output is hashed byte-for-byte; avoid line-ending changes on Windows checkout.
+evals/runs/*.txt -text
+# Source prompts and normal text can use consistent LF in the Git repository.
+evals/prompts/*.txt text eol=lf

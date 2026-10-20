@@ -16,3 +16,7 @@ description: Safeguard SQL schemas, transactions, migrations, concurrent updates
 
 Output: invariant table (rule, enforcement, test), race/failure matrix, migration sequence and safe/conditional/blocked verdict.
 Never run destructive SQL on production without explicit permission.
+
+## Local executable verification
+
+The public source checkout includes `examples/reference-platform/booking.py` and nine database tests. On an authorized local checkout run `python -m unittest discover -s examples/reference-platform/tests -v`. Review its README for limits: SQLite semantics and an injected `verified` flag are **not** production payment-provider authentication. The negative tests include six-client contention, duplicate provider receipt, mismatched amount and ownership denial. Never generalize passing local tests to production DB migrations.

@@ -14,3 +14,7 @@ description: Test authorized local or staging web apps with Playwright, browser 
 7. Report the commit, exact test command, pass/fail/not-run outcomes, expected vs actual and reproduction steps.
 
 Output: executable test plan, evidence, regression candidates and prioritized defects. Do not claim Playwright was run unless it was actually executed.
+
+## Demo and evidence
+
+The optional `examples/playwright/smoke.spec.ts` is an executable template only when a compatible runner and approved local app already exist. The separate `examples/frontend-rtl` does not auto-run Playwright. Browser observations must be captured from an actual browser run; unit-test passes are not browser-pass evidence.
