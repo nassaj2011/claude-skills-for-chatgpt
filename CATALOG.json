@@ -2,7 +2,7 @@
   "schema": 1,
   "project": "Claude Skills for ChatGPT",
   "source": "https://github.com/nassaj2011/claude-skills-for-chatgpt",
-  "version": "v0.4.0",
+  "version": "v0.5.0",
   "hash_normalization": "CRLF-to-LF",
   "tracking": false,
   "contains_user_identity": false,

@@ -44,7 +44,7 @@ export function attachDemo(document) {
     await Promise.resolve(); // illustrative async boundary; NO API request
     if (token === generation) update({ type: "RESOLVE" });
   });
-  document.getElementById("reset").addEventListener("click", () => {
+  document.getElementById("reset-button").addEventListener("click", () => {
     generation++;
     form.reset();
     update({ type: "RESET" });

@@ -11,3 +11,6 @@ Thumbs.db
 .vscode/
 .coverage
 .pytest_cache/
+
+# Local distribution bundles (uploaded as release assets, not committed)
+dist/
