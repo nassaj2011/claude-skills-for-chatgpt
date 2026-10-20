@@ -1,0 +1,97 @@
+No live integration, account access, or MCP protocol implementation is available. **All tests: NOT RUN.**
+
+### Minimal tool catalog
+
+```json
+{
+  "name": "venue.list_reservations",
+  "purpose": "List reservations only for a venue the verified caller may view.",
+  "input": {
+    "venue_id": "string, 1..64 chars",
+    "cursor": "string, 1..256 chars, optional",
+    "limit": "integer, 1..100, default 25"
+  },
+  "output": {
+    "reservations": [
+      {
+        "reservation_id": "string",
+        "slot_start": "RFC3339 timestamp",
+        "slot_end": "RFC3339 timestamp",
+        "state": "held|confirmed|cancelled"
+      }
+    ],
+    "next_cursor": "string|null"
+  }
+}
+```
+
+```json
+{
+  "name": "venue.change_slot_state",
+  "purpose": "Change a permitted slot state after explicit confirmation.",
+  "input": {
+    "venue_id": "string, 1..64 chars",
+    "slot_id": "string, 1..64 chars",
+    "target_state": "held|confirmed|cancelled",
+    "idempotency_key": "string, 16..128 chars",
+    "confirmation": {
+      "action": "change_slot_state",
+      "venue_id": "must equal input venue_id",
+      "slot_id": "must equal input slot_id",
+      "target_state": "must equal input target_state"
+    }
+  },
+  "output": {
+    "slot_id": "string",
+    "previous_state": "held|confirmed|cancelled",
+    "state": "held|confirmed|cancelled",
+    "replayed": "boolean",
+    "audit_event_id": "string"
+  }
+}
+```
+
+Both contracts reject unknown fields, enforce bounded field lengths and timeouts, and derive actor identity and tenant from authenticated server-side context—not model-provided input. Reservation details should be minimized; do not return customer PII unless separately justified and authorized.
+
+### Permission matrix
+
+| Operation | Caller/scope | Consent | Enforcement |
+|---|---|---|---|
+| `venue.list_reservations` | Authenticated actor with `reservations:read` for the resolved tenant and `venue_id` | Normal access authorization | Verify tenant ownership/membership before query; paginate and redact fields |
+| `venue.change_slot_state` | Authenticated actor with `slots:write` for the resolved tenant and venue | Explicit, action-bound confirmation | Re-check authorization at write time; validate legal state transition; persist idempotency record and audit event |
+| Cross-tenant/unknown venue | Any | N/A | Deny without revealing whether the venue exists |
+| Elevated override | Designated operator role only | Separate documented approval | Require policy-backed elevation and auditable reason; never infer from tool description |
+
+### Error taxonomy and retry rules
+
+| Code | Meaning | Retry guidance |
+|---|---|---|
+| `INVALID_INPUT` | Malformed value, excessive length, invalid cursor/state | Fix input; no retry |
+| `UNKNOWN_FIELD` | Request contains an unsupported property | Remove field; no retry |
+| `UNAUTHENTICATED` | No valid actor/session | Re-authenticate |
+| `FORBIDDEN` | Actor lacks tenant, venue, or action permission | Do not retry |
+| `CONFIRMATION_REQUIRED` | Write lacks matching explicit confirmation | Obtain new confirmation |
+| `INVALID_STATE_TRANSITION` | Requested state change violates business rules | Review current state; no automatic retry |
+| `IDEMPOTENCY_CONFLICT` | Same key used with different request body | Use a new key only after resolving intent |
+| `REPLAYED_RESULT` | Same key and equivalent prior request | Return original result; no new write |
+| `RATE_LIMITED` | Vendor/service quota exceeded | Retry only after bounded `retry_after` |
+| `DEPENDENCY_TIMEOUT` | Outcome may be unknown | Reconcile using idempotency key; do not blindly repeat |
+| `INTERNAL_ERROR` | Unexpected server failure | Return redacted correlation ID; investigate |
+
+### Required negative tests
+
+**NOT RUN — proposed mock tests only:**
+
+- Reject arbitrary `venue_id` when the authenticated actor is not assigned to that tenant/venue.
+- Reject unauthenticated calls and model-supplied `actor_id`, `tenant_id`, or role fields.
+- Reject unknown fields, malformed IDs, oversized strings, invalid cursors, and `limit > 100`.
+- Reject a slot mutation without explicit matching confirmation.
+- Reject state transitions not allowed by the server-side state machine.
+- Submit the same idempotency key twice with identical content; assert one write and a replayed original result.
+- Reuse an idempotency key with different content; assert `IDEMPOTENCY_CONFLICT`.
+- Simulate timeout after persistence; assert reconciliation returns the prior outcome rather than issuing another write.
+- Simulate 429; assert bounded retry behavior only for the safe read operation.
+- Feed retrieved reservation text containing prompt-injection instructions; assert it is treated as data and cannot alter authorization, invoke tools, or affect execution.
+- Assert logs contain correlation/audit identifiers but no reservation PII, credentials, or tokens.
+
+Remaining risk: these controls are a design only. They require a real authenticated service boundary, tenant/venue authorization source, durable idempotency storage, audited confirmation mechanism, and implementation-level testing before any provider connection or production use.

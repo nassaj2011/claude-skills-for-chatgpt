@@ -1,0 +1,46 @@
+No repository, manifest, lockfile, CI workflow, advisory database, or network evidence was provided. All inspections and scans are **NOT RUN**. The items below are fictional-risk hypotheses, not verified vulnerabilities or license findings.
+
+| Item | Status | Risk | Required evidence / gate |
+|---|---|---|---|
+| `demo-widget@^2` | SUSPECTED | Medium: floating major-range may resolve to different releases | Record actual resolved version and integrity hash from lockfile; require a reviewed, reproducible lockfile. |
+| Dependency from unverified Git URL | SUSPECTED | High: mutable/untrusted source and provenance risk | Require exact immutable commit SHA, repository ownership verification, signed/reviewed release provenance, and documented reason registry package is unsuitable. |
+| Install-time script | SUSPECTED | High: code execution during install | Identify package, lifecycle hook, script contents, downloaded binaries/network activity, and whether it runs in CI/developer environments. Require explicit approval or eliminate it. |
+| Unknown transitive license | UNKNOWN | Medium to High, depending on policy | Generate SBOM and identify package/version/license from package metadata; legal/owner approval before distribution. |
+| Unpinned third-party CI action | VERIFIED from scenario | High: workflow supply-chain compromise exposure | Pin to a full immutable commit SHA, review action source, minimize token permissions, and document update ownership. |
+
+## Audit and SBOM plan — NOT RUN
+
+1. Capture the exact source revision, runtime/platform, package-manager version, manifest(s), lockfile(s), and CI workflow files.
+2. Produce an SBOM from the lockfile—not only the manifest—with:
+   - package name, resolved version, source URL, integrity/checksum;
+   - direct/transitive dependency path;
+   - runtime versus development use;
+   - license/SPDX identifier and package metadata source.
+3. Compare lockfile sources against the approved registry and organization allowlist. Flag Git URLs, tarball URLs, local paths, floating ranges, missing integrity values, and registry overrides.
+4. Run approved read-only vulnerability and license scanners only after their advisory/SBOM database timestamps and coverage are recorded. Do not label any package vulnerable without an exact resolved-version match and advisory evidence.
+
+## Suspicious-source and script checks — NOT RUN
+
+For the Git dependency, inspect whether it is pinned to a full commit SHA. A tag, branch, shortened SHA, or mutable archive URL is insufficient. Verify repository ownership, commit provenance, maintenance status, and package contents; ideally replace it with an approved registry release.
+
+For the lifecycle script, record the exact hook (`preinstall`, `install`, `postinstall`, etc.), command, package owner, and execution context. Treat shell execution, `curl`/`wget`, remote binary downloads, compiler/toolchain bootstrapping, credential/environment access, and writes outside the project directory as escalation triggers. Installation should be tested in a disposable, least-privileged environment after approval; **NOT RUN** here.
+
+## Risk triage and gates
+
+- **Block release / install promotion:** Git dependency is mutable or provenance cannot be established; lifecycle script cannot be explained and approved; CI action remains tag- or branch-pinned; unknown license violates policy or cannot be identified.
+- **Conditional approval:** `demo-widget` resolves to a reviewed exact version with integrity data, and testing confirms compatibility.
+- **Do not treat as a finding yet:** current CVEs, exploitability, reachability, or specific license obligations. These require actual resolved versions, advisory data, execution paths, and legal-policy context.
+
+## Minimal remediation plan
+
+1. Replace `demo-widget@^2` with the exact reviewed resolution through the package manager’s normal lockfile workflow; do not hand-edit or silently upgrade dependencies.
+2. Prefer a vetted registry release for the Git dependency. If exception is necessary, pin a full commit SHA and checksum/provenance evidence, assign an owner, and set an exception expiry.
+3. Remove the install hook where possible. Otherwise gate it behind documented review, sandboxed validation, and a narrow allowlist.
+4. Resolve the transitive license from authoritative package metadata; obtain legal/policy approval for any restrictive or unknown license before shipping.
+5. Pin the third-party CI action to a full commit SHA; assign a maintainer for deliberate updates. Set workflow `permissions:` to least privilege, avoid exposing secrets to untrusted pull requests, and protect workflow changes with review.
+
+## Compatibility, rollback, and approval evidence
+
+Before changing a resolved dependency, require a change record showing old/new versions, source and integrity differences, fixed advisory range if any, owner approval, and a test matrix for supported runtime/platform combinations. Regenerate the lockfile only using the declared package manager in a controlled environment; retain the prior lockfile and revert via source control if validation fails. Tests are **NOT RUN**.
+
+Residual blind spots include malicious-but-unflagged packages, compromised maintainer accounts, build-time behavior not exercised by tests, incomplete license metadata, registry compromise, and vulnerabilities absent from the chosen advisory feed. A clean scan or lint result cannot certify the full supply chain.

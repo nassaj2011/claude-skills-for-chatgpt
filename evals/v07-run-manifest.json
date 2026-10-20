@@ -1,0 +1,89 @@
+{
+  "schema": 1,
+  "model": "gpt-5.6-terra",
+  "agent": "codex-cli 0.147.0",
+  "mode": "ephemeral read-only no tools",
+  "kind": "IN_CONTEXT_SKILL_TEXT_NOT_NATIVE_AUTOTRIGGER",
+  "grading": "NOT_SCORED",
+  "notes": "Saved model final responses from independent sessions on fictional, non-sensitive scenarios. Digest check proves file integrity not identity or causal improvement.",
+  "cases": [
+    {
+      "id": "v07-llm",
+      "baseline": {
+        "session_id": "01a15b88-64ea-7451-a687-cb38d306c469",
+        "path": "evals/runs/v07-llm-baseline.txt",
+        "sha256": "3f2872af18ad29d6472e90ae5a3820cc214d0c013f37303f2155cff77ca538da"
+      },
+      "candidate": {
+        "session_id": "01a15b88-a133-7c03-af6e-aa055572e6c0",
+        "path": "evals/runs/v07-llm-candidate.txt",
+        "sha256": "36eb631a4e243205d344655db9954a57ff6860ab3ebb9a11bc374a3906217baa"
+      }
+    },
+    {
+      "id": "v07-mcp",
+      "baseline": {
+        "session_id": "01a15b88-d3eb-7ac0-af1c-3d0db955631f",
+        "path": "evals/runs/v07-mcp-baseline.txt",
+        "sha256": "1b456b61a90a25fa57d09e5845c9178ceedc035fd442c721f33f26a83a90e23f"
+      },
+      "candidate": {
+        "session_id": "01a15b89-0487-78f3-bfed-c4b4f7c3ac90",
+        "path": "evals/runs/v07-mcp-candidate.txt",
+        "sha256": "0a1f0538758e3bb2a3fcfed263a37dc099de1ef0723917c5d78fae2a0b2d39c2"
+      }
+    },
+    {
+      "id": "v07-devops",
+      "baseline": {
+        "session_id": "01a15b89-32e3-7733-ba66-86e258e330d9",
+        "path": "evals/runs/v07-devops-baseline.txt",
+        "sha256": "c60473ae44064f9dc63eaac1521211f2b20a1cf114921216a6ae55157d44afde"
+      },
+      "candidate": {
+        "session_id": "01a15b89-623e-7243-9d27-6139695a159c",
+        "path": "evals/runs/v07-devops-candidate.txt",
+        "sha256": "b256d9d91fb404a15079ff4a691f20aaf08a8c2e963376bbfca41f15f7e72358"
+      }
+    },
+    {
+      "id": "v07-supply",
+      "baseline": {
+        "session_id": "01a15b89-a614-7f32-8174-eefb8d34f9aa",
+        "path": "evals/runs/v07-supply-baseline.txt",
+        "sha256": "a3247b542faafc1ba38eef60fff579d152cbedff3d6d5c8967c3e85675be578e"
+      },
+      "candidate": {
+        "session_id": "01a15b89-db4f-7932-8022-ef4516b99271",
+        "path": "evals/runs/v07-supply-candidate.txt",
+        "sha256": "5a900a7e6dea9212dde1cb5416683f1f3343a7b00e8a22b6f50f9acb59036dd1"
+      }
+    },
+    {
+      "id": "v07-backup",
+      "baseline": {
+        "session_id": "01a15b8a-0c4e-7dc1-99ee-271bae57bb67",
+        "path": "evals/runs/v07-backup-baseline.txt",
+        "sha256": "010f50cc8822c394a4cb5da20a291298af91b24360af2a0852ed497151eee1ea"
+      },
+      "candidate": {
+        "session_id": "01a15b8a-3ef0-7ee1-a6c5-4929b7869cb0",
+        "path": "evals/runs/v07-backup-candidate.txt",
+        "sha256": "f9096bbbc59d70c8f9b3708e8b36c4ae78370c050f00a1856e8e7ed6810bcb68"
+      }
+    },
+    {
+      "id": "v07-perf",
+      "baseline": {
+        "session_id": "01a15b8a-7150-7983-8d1c-f8da290bc622",
+        "path": "evals/runs/v07-perf-baseline.txt",
+        "sha256": "7e3edd38ea22c7ad814ab82daa6a4435bae3109948b96316c6357906cb162c2e"
+      },
+      "candidate": {
+        "session_id": "01a15b8a-a506-7340-9be4-c12908b27e26",
+        "path": "evals/runs/v07-perf-candidate.txt",
+        "sha256": "0080945329a0870c7f278e7aa822b3ac5b9e143fca8750e06407d338d94a0935"
+      }
+    }
+  ]
+}

@@ -1,0 +1,135 @@
+Use a provider-neutral adapter that treats all model/provider output as untrusted text—not as an executable object.
+
+```text
+Provider response text
+  → bounded JSON parse
+  → strict schema validation
+  → policy validation (allowlisted read-only tools only)
+  → server-side authorization
+  → deterministic tool dispatch
+  → normalized result
+```
+
+Key rules:
+
+- Never execute a provider-supplied tool name directly.
+- The adapter owns the tool registry and maps a validated enum to a handler.
+- Only expose read-only booking/search tools, e.g. `search_venues`, `get_availability`, `get_booking_policy`.
+- Do not expose write, payment, cancellation, messaging, filesystem, shell, or arbitrary HTTP tools to this flow.
+- Reject unknown fields and unknown tool names.
+- Validate arguments again at the tool boundary, even after response validation.
+
+Example typed contract (TypeScript-style):
+
+```ts
+type ToolRequest =
+  | {
+      kind: "tool_call";
+      tool: "search_venues";
+      args: { city: string; sport: "football" | "tennis"; date: string };
+    }
+  | {
+      kind: "tool_call";
+      tool: "get_availability";
+      args: { venueId: string; date: string };
+    }
+  | {
+      kind: "refusal";
+      reason: "unsupported_request" | "insufficient_information";
+    };
+
+const ALLOWED_TOOLS = new Set([
+  "search_venues",
+  "get_availability",
+  "get_booking_policy",
+] as const);
+```
+
+The schema should enforce:
+
+- a discriminated `kind`;
+- exact tool enum values;
+- strict per-tool argument schemas;
+- string length, array length, date format, and identifier limits;
+- no additional properties;
+- a maximum raw response size before parsing.
+
+Malformed JSON, schema violations, prompt-injection prose, and attempts such as `"tool": "create_booking"` all produce a normalized non-executing failure:
+
+```ts
+type AdapterResult =
+  | { ok: true; data: unknown }
+  | {
+      ok: false;
+      code:
+        | "PROVIDER_MALFORMED_OUTPUT"
+        | "PROVIDER_REFUSAL"
+        | "POLICY_BLOCKED"
+        | "PROVIDER_UNAVAILABLE"
+        | "BUDGET_EXHAUSTED";
+      retryable: boolean;
+    };
+```
+
+Prompt injection is not something to “follow” or interpret. It is merely invalid output unless it conforms exactly to the expected schema. Keep system instructions, credentials, tool definitions, and internal policy outside the provider-controlled content. Avoid giving the provider authority to choose endpoints, headers, tenants, identities, or permission scopes.
+
+Auth boundaries:
+
+- The provider receives only the minimum public booking context needed for its task.
+- The adapter authenticates to internal booking services with its own service identity; provider text never supplies credentials or access tokens.
+- Bind every tool execution to the authenticated end user and tenant on the server side.
+- Derive tenant, user, locale, and authorization scope from the session—not model output.
+- Enforce row/resource ownership within each read tool.
+- Redact secrets and sensitive booking details from prompts, logs, and provider error reports.
+- Use separate credentials and scopes for provider access versus booking-data access.
+
+Retries must be finite and classified:
+
+| Failure | Action |
+|---|---|
+| Invalid JSON / failed schema | No retry by default; return safe fallback |
+| Provider refusal | No retry; surface alternate user path |
+| 429 | Retry at most 1–2 times with capped exponential backoff and jitter, honoring `Retry-After` if present |
+| Timeout / transient 5xx | Retry at most 1–2 times |
+| Authentication / authorization failure | No retry; alert internally |
+| Policy-blocked write tool | No retry; record security event |
+| Budget exhausted | No provider call or retry |
+
+Use an absolute deadline for the whole request, not independent unlimited per-attempt timeouts. For example, stop when either the attempt cap, request deadline, or budget reservation is exhausted.
+
+Budget behavior should be configuration-driven because no provider or price evidence exists:
+
+- Before a call, reserve a configured maximum request budget and token/output cap.
+- Set a strict maximum response size and a small, task-specific output limit.
+- On retry, require remaining deadline and remaining budget.
+- Release unused reservation after completion; record actual usage only when supplied by the provider.
+- Apply per-user, per-tenant, and global circuit breakers/rate limits.
+- Fall back to deterministic search/filter UX when unavailable or over budget.
+
+Do not infer token prices, request prices, or rate-limit values without provider documentation and an approved configuration.
+
+Offline test matrix:
+
+| Scenario | Expected result |
+|---|---|
+| Valid allowlisted search request | Validated args reach only matching read handler |
+| Unknown tool name | `POLICY_BLOCKED`; no handler invoked |
+| Write tool request | `POLICY_BLOCKED`; security event recorded |
+| Malformed JSON | `PROVIDER_MALFORMED_OUTPUT`; no retry by default |
+| Valid JSON with extra fields | Validation failure; no handler invoked |
+| Prompt injection in prose | Validation failure; no tool execution |
+| Prompt injection embedded in valid argument | Treated as data; argument constraints applied |
+| Provider refusal | `PROVIDER_REFUSAL`; no retry |
+| 429 then success | At most configured retry count; capped delay |
+| Repeated 429 | `PROVIDER_UNAVAILABLE` after cap/deadline |
+| Timeout then success | Retry only within deadline/budget |
+| Repeated timeout | Safe failure; no unbounded retries |
+| Unauthorized venue ID | Tool-layer authorization denial |
+| Cross-tenant ID | Tool-layer authorization denial; no data leak |
+| Oversized response | Rejected before parse |
+| Budget exhausted before call | `BUDGET_EXHAUSTED`; provider not called |
+| Budget exhausted after first failure | No retry |
+| Provider returns fake usage data | Treated as telemetry only after provider-client verification |
+| Tool handler throws | Normalized internal failure; no provider-directed fallback |
+
+Verification status: **NOT RUN**. No repository, provider, API key, prices, test suite, network access, or execution evidence was inspected or used.

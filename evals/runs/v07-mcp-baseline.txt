@@ -1,0 +1,73 @@
+NOT RUN — fictional, read-only analysis only; no service, accounts, protocol, files, network, or tests were accessed.
+
+The current proposal is unsafe because arbitrary `venue_id` enumeration and unverified state changes allow cross-venue data disclosure and unauthorized reservation tampering.
+
+Minimal tool contract:
+
+```text
+list_bookings(
+  venue_id,
+  from,
+  to,
+  cursor?
+) -> { bookings[], next_cursor? }
+
+set_slot_state(
+  venue_id,
+  slot_id,
+  state,                  // e.g. available | blocked
+  expected_version,
+  idempotency_key,
+  consent_reference?      // required when the action affects a user-held reservation
+) -> { slot_id, state, version }
+```
+
+Security requirements:
+
+- Actor identity, tenant, role, and allowed venue scope come only from authenticated server-side context—not tool arguments.
+- `venue_id` must be authorized before returning either existence or booking data.
+- `set_slot_state` requires a role with the specific `slot:write` permission for that venue.
+- Require `expected_version` for optimistic concurrency and `idempotency_key` for replay-safe mutation.
+- State changes that cancel, displace, or otherwise affect a customer reservation require explicit, recorded consent or a narrowly defined privileged operational override with reason/audit trail.
+- Log actor, venue, slot, prior/new states, authorization decision, idempotency key, consent/override reference, and request correlation ID.
+- Return bounded date ranges and paginated booking results; never expose cross-tenant identifiers.
+
+Error taxonomy:
+
+| Code | Meaning | Client behavior |
+|---|---|---|
+| `UNAUTHENTICATED` | No valid actor context | Re-authenticate |
+| `FORBIDDEN` | Actor lacks venue/action permission | Do not retry or reveal scope |
+| `NOT_FOUND` | Authorized resource does not exist | Correct identifier |
+| `INVALID_ARGUMENT` | Invalid state, range, or malformed key | Fix request |
+| `CONSENT_REQUIRED` | Action affects reservation without consent/override | Obtain valid authorization |
+| `VERSION_CONFLICT` | `expected_version` is stale | Re-read and explicitly reconcile |
+| `IDEMPOTENCY_CONFLICT` | Key reused with different payload | Use a new key after investigation |
+| `RATE_LIMITED` | Enumeration/usage limit reached | Retry after indicated delay |
+| `INTERNAL` | Unexpected server failure | Retry only when safe; investigate |
+
+Permission matrix:
+
+| Actor | List bookings | Change unreserved slot | Affect reserved slot |
+|---|---:|---:|---:|
+| Unauthenticated | No | No | No |
+| Venue viewer, scoped venue | Yes, minimized fields | No | No |
+| Venue scheduler, scoped venue | Yes | Yes | Only with customer consent |
+| Venue manager, scoped venue | Yes | Yes | Consent or documented emergency override |
+| Platform support | No by default | No by default | No by default |
+| System administrator | Explicit break-glass only, fully audited | Explicit break-glass only | Explicit break-glass plus reason |
+
+Negative tests:
+
+- A scheduler for Venue A requests bookings for Venue B: expect `FORBIDDEN`, with no indication whether Venue B exists.
+- An unauthenticated call lists any venue: expect `UNAUTHENTICATED`.
+- A viewer attempts `set_slot_state`: expect `FORBIDDEN`.
+- A scheduler changes a slot outside their assigned venue: expect `FORBIDDEN`.
+- A request supplies a forged `actor_id`, `role`, or tenant field: ignore client claims; authorization remains based on server context.
+- A mutation omits `idempotency_key`: expect `INVALID_ARGUMENT`.
+- Re-submit the same idempotency key and identical request: return the original result without a second state transition.
+- Reuse the key with a different payload: expect `IDEMPOTENCY_CONFLICT`.
+- Submit a stale `expected_version`: expect `VERSION_CONFLICT`; state must remain unchanged.
+- Block/cancel a slot with an active reservation and no consent or override: expect `CONSENT_REQUIRED`.
+- Request an excessive date range or pagination size: expect `INVALID_ARGUMENT` or `RATE_LIMITED`.
+- Attempt timing/error-based venue enumeration across unauthorized IDs: responses should be indistinguishable in status shape and materially similar in timing.

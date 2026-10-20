@@ -1,0 +1,70 @@
+## Release decision: NO-GO
+
+Do not deploy. A successful build is insufficient: required authorization coverage was skipped, the UNIQUE migration is unproven against historical data, and neither staging smoke nor restore capability has evidence. Treat all absent evidence as **NOT RUN**, not passed.
+
+### Fail-closed release gates
+
+| Phase | Required evidence | Failure / missing evidence |
+|---|---|---|
+| Source | Immutable commit SHA, lockfile, artifact digest/provenance | Block |
+| Validation | Lint, type, unit, contract/integration, security scans | Block |
+| Authorization | Authorization test executes and passes; skipped is failure | Block |
+| Migration preflight | Duplicate query returns zero rows; lock/runtime estimate; mixed-version compatibility reviewed | Block |
+| Backup recovery | Recent backup verified and restore drill succeeds in isolated target | Block |
+| Staging | Deploy exact production artifact; smoke plus business-invariant checks pass | Block |
+| Production approval | Protected-environment manual approval by named release owner | Block |
+| Rollout | Canary health/error/latency thresholds remain healthy for defined interval | Abort and roll back |
+
+A skipped required job must cause the workflow to fail explicitly, e.g. a final policy gate validates that no required check has status `skipped`, `cancelled`, `neutral`, or `unknown`.
+
+### Permissions and deployment controls
+
+| Job | Token rights | Secrets | Environment | Trigger | Approval |
+|---|---|---|---|---|---|
+| Validate/build | Read repository contents only | None unless narrowly required | CI | PR/push | None |
+| Publish artifact | Scoped package/artifact write only | Registry publish credential | CI | Protected main SHA | None |
+| Staging deploy | Scoped staging deploy right | Staging-only credentials | Staging | Exact approved artifact digest | Deployment owner |
+| Production deploy | No broad repository token; only scoped deploy/OIDC identity | Production credentials available only at job start | Production protected environment | Manual dispatch from approved SHA | Release owner + operations/database owner |
+| Rollback | Scoped rollback/deploy right | Production rollout credential | Production | Manual or automatic canary abort | Release owner |
+
+Third-party actions should be immutable-SHA pinned. Fork/untrusted PR workflows receive no deployment secrets or write tokens.
+
+### Database migration and rollback
+
+Use an expand/backfill/contract approach:
+
+1. Run a read-only duplicate preflight for the proposed UNIQUE key and retain its result with the release record.
+2. Resolve or explicitly quarantine every historical duplicate before adding the constraint.
+3. Add the constraint only after preflight is clean and staging migration succeeds with production-representative data characteristics.
+4. Verify backup restoration in an isolated environment before production authorization.
+5. Keep the application compatible with both pre- and post-migration schemas during rollout.
+
+Rollback may be application/artifact rollback only. Do **not** promise a schema downgrade after enforcing or contracting a constraint unless separately tested and data-safe. If migration completes but canary fails, halt rollout, roll back application traffic/artifact where compatible, preserve the database, and escalate to the database owner.
+
+### Canary abort matrix
+
+| Condition | Decision |
+|---|---|
+| Authorization test skipped/unknown | Do not authorize production |
+| Duplicate preflight nonzero or not run | Do not migrate/deploy |
+| Restore drill absent/fails | Do not deploy |
+| Staging smoke absent/fails | Do not deploy |
+| Required approval missing/cancelled | Do not deploy |
+| Canary error, latency, or invariant breach | Stop rollout; execute approved rollback procedure |
+| Monitoring unavailable | Do not start or continue rollout |
+
+### Evidence register
+
+| Evidence | Status |
+|---|---|
+| Commit SHA and immutable artifact digest | **NOT RUN / not provided** |
+| Build result | Reported SUCCESS; underlying job evidence **not provided** |
+| Authorization test execution and pass result | **SKIPPED — blocking failure** |
+| Historical-duplicate preflight | **NOT RUN** |
+| Staging deploy and smoke/invariant checks | **NOT RUN** |
+| Backup restore drill | **NOT RUN** |
+| Production approval record | **NOT RUN** |
+| Canary monitoring and rollback exercise | **NOT RUN** |
+| Current broad production token scope | Reported broad; least-privilege remediation **NOT RUN** |
+
+Approval owner: named release owner, with database-owner approval for the migration and operations approval for production rollout. The project manager’s request does not replace these gates.

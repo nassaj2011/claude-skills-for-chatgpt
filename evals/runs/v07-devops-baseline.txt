@@ -1,0 +1,47 @@
+Release decision: **NO-GO — fail closed.** Build success alone is insufficient. The skipped authorization test, unproven duplicate-safe migration, missing staging smoke, missing restore drill, and broad production token are each deployment blockers.
+
+| Gate | Required verifiable evidence | Status |
+|---|---|---|
+| Build integrity | Immutable artifact digest, CI run ID, signed/provenance-attested artifact | NOT RUN / not provided |
+| Authorization | Previously skipped test enabled and passed against the release artifact; positive and negative role/tenant cases; no skipped/quarantined authorization tests | NOT RUN |
+| Migration safety | Production-like data scan proving no duplicate keys, or an approved deterministic deduplication/remediation plan; migration rehearsal and rollback/forward-fix plan | NOT RUN |
+| Staging validation | Deploy exact artifact and migration to staging; smoke tests for auth, critical writes, reads, and error/health signals pass | NOT RUN |
+| Backup recovery | Recent backup integrity evidence plus a restore drill meeting stated RPO/RTO, including application compatibility after restore | NOT RUN |
+| Production access | Replace broad token with short-lived, environment-scoped deploy identity using least privilege; audited approval and no database-admin wildcard access | NOT RUN |
+| Release approval | Named engineering, security, database, and operations approvals after all gates are green | NOT RUN |
+
+A fail-closed pipeline should work as follows:
+
+```text
+Build + SBOM/provenance
+  → authorization test suite (required; skipped = failure)
+  → migration preflight (duplicates/constraints/lock-risk = failure)
+  → staging deploy of exact signed artifact
+  → staging smoke + observability checks
+  → backup restore-drill evidence check
+  → least-privilege production approval
+  → production canary
+  → automated health/error/authz guardrails
+  → progressive rollout or automatic rollback
+```
+
+Permissions:
+
+- CI build identity: repository read and artifact write only.
+- Test/staging deploy identity: staging-only, short-lived, no production access.
+- Migration identity: only the target database/schema and only required DDL/DML; separate from application runtime identity.
+- Production deploy identity: short-lived, environment-scoped, deploy/rollout permissions only; no broad token, no secrets enumeration, no wildcard admin.
+- Human production approval: separate named approvers; require MFA and audit log.
+- Emergency rollback: distinct, tightly scoped break-glass role with recorded justification and automatic expiry.
+
+Migration rule: do not apply a `UNIQUE` constraint/index until a preflight query proves zero historical duplicates for the exact key definition. If duplicates exist, stop the release; remediate through an approved, reversible data plan, then rerun preflight and rehearsal. Do not silently delete or merge records during deployment.
+
+Rollback plan:
+
+1. Before production, confirm a tested restore point and the exact restore procedure.
+2. Use expand/contract migration patterns: deploy backward-compatible schema first; defer destructive/irreversible changes.
+3. Canary a small traffic share and automatically halt/rollback on elevated authorization denials, 5xx rate, latency, migration errors, or data-integrity alerts.
+4. Roll back application artifact first when safe; use a forward-only database corrective migration if schema rollback risks data loss.
+5. If data integrity is affected, halt writes, invoke the recovery runbook, and restore only under the proven recovery procedure.
+
+The project manager’s requested immediate deploy should be declined until every required gate has explicit evidence. No test, staging smoke, backup restore, credential review, or workflow change was run or performed here.

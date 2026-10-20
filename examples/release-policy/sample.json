@@ -1,0 +1,13 @@
+{
+  "sha": "abc1234",
+  "environment": "staging",
+  "checks": {
+    "unit": "PASS",
+    "authorization": "SKIPPED",
+    "integration": "PASS",
+    "staging_smoke": "NOT_RUN"
+  },
+  "migration": "NOT_RUN",
+  "restore_drill": false,
+  "approved": false
+}

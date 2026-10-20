@@ -71,3 +71,7 @@ The catalog's earlier seven-case rubric and initial PR-review pilot remain prese
 ## v0.6 prepared comparisons — not scored
 
 Pre-registered prompts/rubrics for privacy, load resilience and visual assets are in `prompts/v05-privacy.txt`, `prompts/v06-load.txt`, `prompts/v06-visual.txt`, and `benchmarks/v06-*-criteria.json`. Model A/B could not be run because the Codex service returned HTTP 404; there are **no** valid v06 raw outputs or grades. See [V0_6_RESULTS.md](V0_6_RESULTS.md). Source and web distribution parity are checked separately and are not causal evidence.
+
+## v0.7 — six matched real text-only Codex evaluations
+
+See [case rubrics](v07-quality-benchmarks.json), [saved run manifest](v07-run-manifest.json) and [evaluation limitations](V0_7_RESULTS.md). Twelve raw text outputs exist in runs/v07-*.txt (the unrelated probe is excluded). Run `python scripts/verify_v07_runs.py` to verify their hashes. These six cases are **COMPLETE BUT UNSCORED**, so no verified skill quality uplift percentage is claimed.
