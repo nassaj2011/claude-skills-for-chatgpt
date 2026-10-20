@@ -25,12 +25,12 @@ Check permissions, user intent and safety before destructive/external actions.
 - documentation-handover: Create maintainable project documentation, ADR indexes, operator runbooks, release notes and contributor onboarding matched to actual code.
 - frontend-design-direction: Create deliberate, distinctive, accessible frontend visual direction and interface composition grounded in the product's users and brand.
 - llm-api-integration: Design LLM-powered workflows using OpenAI, Anthropic or another provider with safe tool contracts, cost controls and offline evaluations.
-- load-resilience-testing: Plan and conduct authorized, bounded load, soak, concurrency and fault-tolerance testing against isolated environments with measurable SLO criteria.
+- load-resilience-testing: Design and interpret authorized bounded load, concurrency, soak and resilience tests with explicit target isolation, abort thresholds, achieved metrics and recovery checks.
 - mcp-integration-builder: Design or implement MCP servers and third-party integrations with explicit tool schemas, authentication, permissions, testability and safe retries.
 - observability-monitoring: Plan product telemetry, health checks, logs, metrics, traces, SLOs and incident response for live platforms.
 - performance-accessibility: Assess and improve web performance and accessibility with measurable budgets, controlled profiling, and user-centered prioritization.
 - playwright-webapp-testing: Test authorized local or staging web apps with Playwright, browser logs, screenshots and reproducible frontend regressions.
-- privacy-data-governance: Review personal-data flows, retention, consent, access controls and data minimization for software product features.
+- privacy-data-governance: Trace personal-data flows, minimization, user rights, retention, vendor transfers, deletion propagation and privacy release evidence for software platforms.
 - product-business-analyst: Turn a product idea into evidence-based discovery, PRD, user journeys, scope, measurable acceptance criteria, and a prioritized MVP. Use for product definition or ambiguous features.
 - project-bootstrap-environments: Bootstrap a reproducible software project with local, development, test, staging and production environment isolation, safe secrets, CI and onboarding.
 - qa-release-gatekeeper: Judge software release readiness from executed tests, change scope, migrations, security checks, incident risks and verified rollback.
@@ -42,7 +42,7 @@ Check permissions, user intent and safety before destructive/external actions.
 - software-architect: Design or review software architecture, bounded contexts, dependencies, ADRs, failure modes and compatibility across services. Use for consequential system changes.
 - technical-project-orchestrator: Coordinate multi-stage product delivery from agreed requirements to PRs and releases with critical paths, scoped Codex tasks and evidence-based status.
 - theme-design-system: Define and evolve a cohesive web or mobile design system with accessible tokens, typography, color, component variants and usage rules.
-- visual-assets-design: Plan visual assets for product websites and marketing materials with clear creative briefs, deliverable specifications and rights checks.
+- visual-assets-design: Specify, produce where tools permit, and quality-check visual assets for apps, social and print with geometry, accessibility, typography, licensing and honest source-file delivery.
 
 ---
 
@@ -364,7 +364,7 @@ Output: provider-neutral diagram, schemas, evaluation harness plan, measured res
 
 ## 12. load-resilience-testing
 
-Plan and conduct authorized, bounded load, soak, concurrency and fault-tolerance testing against isolated environments with measurable SLO criteria.
+Design and interpret authorized bounded load, concurrency, soak and resilience tests with explicit target isolation, abort thresholds, achieved metrics and recovery checks.
 
 CHATGPT WEB EXECUTION BOUNDARY:
 Treat the following specialist skill as advice and workflow guidance, not a guarantee of tools.
@@ -373,18 +373,35 @@ If a skill mentions a local script, API, CLI or tool that is unavailable, mark i
 Do not request secrets or private data without necessity; no covert tracking or transmission to this project's maintainer.
 Check permissions, user intent and safety before destructive/external actions.
 
-# Load and resilience testing
+# Load, concurrency and resilience — controlled test protocol
 
-1. Confirm **explicit authorization**, environment, owner, test windows, resource limits and stop conditions; default to isolated staging/local, never public production.
-2. Define workload model: arrival pattern, concurrent users, sessions, hotspots, request mixture, representative data and baseline SLOs. Identify costly external integrations.
-3. Keep test data synthetic, disable real monetary side effects and coordinate database quotas, email/SMS and vendor rate limits.
-4. Use bounded gradual ramp-up: smoke -> realistic steady -> short peak -> recovery; reserve saturation or fault injection for a specifically approved environment.
-5. Measure response distribution p50/p95/p99, error rates, queue/backlog, CPU/memory, database locks/connections and invariant breaches such as duplicate bookings.
-6. Correlate server metrics and traces; investigate bottlenecks before tuning. Record actual generated load rather than only configured targets.
-7. Define abort triggers and verify cooldown/recovery; report safe operating envelope with caveats. Do not automatically retry loads on failure.
+## Trigger and scope
+Use for capacity, p95/p99 latency, error budgets, burst behavior, queues, failover, idempotency under load and saturation investigations. Do **not** invoke to fire traffic at an unapproved public host or for a routine, low-risk unit test.
 
-Output: signed-off test boundary, script/tool versions, scenario, achieved throughput, latency/error metrics, failure evidence, suggested mitigations and NOT TESTED items.
-This skill provides a protocol, **not permission to stress any live endpoint**.
+## Before any traffic: hard authorization gate
+1. Record owner/approval, exact target address/environment, test window, max duration, request ceiling, concurrency cap, rate cap, contact/abort channel and whether test accounts or costs are isolated.
+2. **Default is DESIGN ONLY.** Without explicit approval and environment boundaries, output a script/plan without running it. Never infer authorization from having a URL, session token or repository access. Do not load test third-party services or shared production endpoints.
+3. Prevent money transfers, customer notifications, irreversible writes, data exports, external API costs and tenant interference. Arrange synthetic fixtures, safe credentials, cleanup permission and downstream mocks before runs.
+
+## Workload design
+4. State workload: arrival rate versus closed-loop concurrency, endpoint mix, session think time, tenant/slot hotspots, representative payloads, warmup/steady/burst/recovery, ramp steps, maximum traffic **actually generated**, retries and timeout budgets.
+5. Separate latency percentiles, achieved throughput, successes/errors, 429s, server saturation, DB connection/lock waits, queue depth, duplicates/data invariants and dependency rate limits. Sampling interval and monotonic clocks must be disclosed.
+6. Use bounded phases: smoke -> realistic steady -> short peak -> recovery. Stop immediately for agreed overload signals, data invariant violations, unauthorized target change or spending thresholds. Never automatically retry destructive load phases.
+7. Measure recovery, backlog drain and post-load integrity. Report confidence limits (sample size, cache effects, client bottleneck, mock dependencies, skew, observed vs configured throughput).
+
+## Required deliverable
+- **Authorization and limits table:** environment | approval/evidence | rps | concurrency | duration | total requests | abort triggers.
+- **Workload plan:** exact phases, commands or pseudocode, synthetic data, rollback and monitoring ownership.
+- **Metrics evidence:** achieved requests/sec, count, errors/429/timeout, p50/p95/p99, queue/DB/invariant checks and traces where available.
+- **Results matrix:** each threshold PASS/FAIL/NOT RUN, baseline comparison, bottleneck hypotheses and prioritized mitigation.
+- **Recovery and next experiment:** clear guardrails; no invented capacity or percentage improvements.
+
+## Executable example and browser-only mode
+examples/bounded-load/ is a local-only standard-library Python example that measures an intentionally tiny synthetic service using explicit loopback and hard request caps; this is **not evidence of real application capacity**.
+In ChatGPT web without a load runner, generate only the approval request, bounded workload configuration, instrumented metrics plan and acceptance criteria. Mark all execution NOT RUN.
+
+## Safety and reliability
+Do not bypass rate limits, run stealth traffic, perform denial-of-service experiments against external targets or erase evidence. Never use public production endpoints without named explicit permission. If authorization is missing, the correct answer is an actionable **unexecuted** test plan.
 
 ---
 
@@ -503,7 +520,7 @@ The optional `examples/playwright/smoke.spec.ts` is an executable template only 
 
 ## 17. privacy-data-governance
 
-Review personal-data flows, retention, consent, access controls and data minimization for software product features.
+Trace personal-data flows, minimization, user rights, retention, vendor transfers, deletion propagation and privacy release evidence for software platforms.
 
 CHATGPT WEB EXECUTION BOUNDARY:
 Treat the following specialist skill as advice and workflow guidance, not a guarantee of tools.
@@ -512,17 +529,35 @@ If a skill mentions a local script, API, CLI or tool that is unavailable, mark i
 Do not request secrets or private data without necessity; no covert tracking or transmission to this project's maintainer.
 Check permissions, user intent and safety before destructive/external actions.
 
-# Privacy and data governance
-1. Inventory data types, sources, purpose, processors, storage region, recipients and lifecycle. Identify special or regulated data if relevant.
-2. Document lawful/contractual bases and jurisdictional requirements as items to verify with counsel; do not give unsupported legal conclusions.
-3. Minimize collection, data exposure in analytics/logs, default retention and third-party transfers.
-4. Verify rights workflows where applicable: export, correction, deletion, withdrawal, access logging and processor obligations.
-5. Coordinate encryption, secrets, authorization, tenancy and backup retention with security and infrastructure reviewers.
-6. Add tests for role-based data access, expired retention, deletion propagation and incident response paths.
-7. Treat policy and user promises as requirements only if approved by the product owner.
+# Privacy and data governance — executable review contract
 
-Output: data flow map, classification, risk register, controls, decisions requiring legal input and executable verification plan.
-Never export or publish confidential customer data in repository examples.
+## Use when
+The task involves personal data, logs/analytics, identity, marketing preferences, uploads, vendors, data exports or customer rights. Do not invoke for a purely static CSS change without user data.
+
+## Evidence-first workflow
+1. **Scope and authority.** Identify jurisdictions, controller/processor relationships, products, audiences, data subjects, environments and actual sources available. Label unknowns; do not assert GDPR or other legal compliance from generic guidance. Obtain qualified legal review for legal basis, cross-border transfers, sensitive classes and statutory timelines.
+2. **Data map by field, not by feature name.** Record each field and purpose, source, processing system, recipient, access role, transmission/storage region, legal-basis question, retention trigger, deletion path and evidence reference. Include analytics, monitoring, test snapshots, exports, support tickets, message vendors and backups; distinguish operational logs from business records.
+3. **Classify each disclosure.** Identify required vs optional fields, security/PII severity and whether user choice is required. Apply data minimization and pseudonymization at both collection and **each recipient boundary**; avoid raw phones, IDs or free-text payloads in analytics/traces.
+4. **Map lifecycle.** Describe access/correction/export/deletion/withdrawal requests, system-of-record, processors, downstream copies, caches, archives, backups and restoration risk. Never promise instant erasure from immutable backups; state actual retention/restore quarantine controls and lawful exceptions as decisions.
+5. **Tie risks to controls.** Specify owner, severity, exact remediation, source of verification, test case and blocker status. Prioritize unauthorized disclosures or unclear external sharing before cosmetic policy text.
+6. **Verify on permitted environments.** Negative tests must cover role- and tenant-scope reads, analytics payload schema, CSV export permissions, deletion propagation, processor contracts, restored-backup deletion replay and incident logging without raw PII. Use synthetic records only.
+7. **Decide and hand off.** Mark each gate PASS / FAIL / NOT RUN / NEEDS LEGAL REVIEW. Do not call legal compliance 'verified' solely because a checklist is complete.
+
+## Required deliverable
+- **Data-flow inventory:** field | source | purpose | recipient | basis to verify | region | retention trigger | deletion path | evidence.
+- **Risk register:** severity | affected data | exploit/exposure pathway | owner | corrective action | acceptance test | status.
+- **Lifecycle and user-rights map:** entrypoint, identity verification, response/exceptions, cascade, backup behavior.
+- **Concrete acceptance tests** with an expected result; note tests not run and legal questions unresolved.
+- **Executive decision** to proceed, block, or defer with explicit accountable sign-off, not a legal conclusion.
+
+## Browser-only / ChatGPT web
+If repository, storage, analytics configurations or tools are unavailable, ask for **redacted** schema/data-flow descriptions and produce an example matrix with NOT VERIFIED labels. Provide SQL or tests to run later rather than implying access. Never upload, store, echo or transmit real customer datasets unnecessarily.
+
+## Verified local reference
+An illustrative field-inventory validator and redacted sample live in examples/privacy-inventory/ in the public source checkout. They implement project-defined data policy checks, **not legal certification**. Run its tests only if a permitted local Python environment exists; otherwise use the checklist above.
+
+## Safety constraints
+No covert telemetry, hidden source-code collection, secret extraction or backdoor. Do not invent legal deadlines, consent grants, data-controller roles, contractual rights or privacy compliance. Never export real personal data into a public skill repository.
 
 ---
 
@@ -841,7 +876,7 @@ Inspect `examples/frontend-rtl/tokens.css` for semantic light/dark tokens, logic
 
 ## 29. visual-assets-design
 
-Plan visual assets for product websites and marketing materials with clear creative briefs, deliverable specifications and rights checks.
+Specify, produce where tools permit, and quality-check visual assets for apps, social and print with geometry, accessibility, typography, licensing and honest source-file delivery.
 
 CHATGPT WEB EXECUTION BOUNDARY:
 Treat the following specialist skill as advice and workflow guidance, not a guarantee of tools.
@@ -850,13 +885,30 @@ If a skill mentions a local script, API, CLI or tool that is unavailable, mark i
 Do not request secrets or private data without necessity; no covert tracking or transmission to this project's maintainer.
 Check permissions, user intent and safety before destructive/external actions.
 
-# Visual assets and graphic design
-1. Define medium, audience, dimensions/aspect ratio, brand constraints, intended placement, accessibility needs and delivery file formats.
-2. Choose a coherent visual concept grounded in the product rather than generic decorative motifs.
-3. Inventory which assets must be created versus sourced; verify usage rights, brand claims and required attributions.
-4. For image generation, specify subject, composition, lighting, typography constraints, crop-safe areas and iteration criteria; use an authorized image tool if available.
-5. Review readability, contrast, layout at final display/print size, responsive crops and image optimization.
-6. Export using the requested editable/source format when supported; a raster preview is not an editable design file.
-7. Label generated or proposed assets honestly; do not state final assets were delivered without actually creating and inspecting them.
+# Visual asset design — creative direction to verifiable handoff
 
-Output: brief, visual direction, production specifications, asset inventory, usage rights and QA checklist.
+## When to apply
+Use for app illustrations, logos, icons, posters, printable artwork, social cards, responsive hero visuals and campaign graphics. Do not call for an unrelated API/backend change.
+
+## Specification before rendering
+1. Establish medium, audience, placement, physical dimensions or screen size, aspect ratio, target platforms, pixel density, bleed/safe margin, available source files and whether an **editable source** is required. Resolve typography language, font licensing, brand colors, accessibility and legal claims.
+2. Distinguish **reference media**, user-owned source, brand assets, AI-generated original work and externally licensed images. Record rights, attribution, permitted modifications, expiry/territory and any approvals; unclear rights are a blocker for publication.
+3. Write a structured brief: hierarchy, concept and one visual focal point, tone, content, constraints, reference inspiration versus prohibited copying, responsive crop variants and localized text. Preserve user-supplied identities/details when editing and disclose uncertainty.
+4. Choose output path based on available tools: (a) generate/edit a rendered image if an authorized image tool is available and requested, (b) create an inspectable SVG/HTML vector where source is requested, or (c) give a production-ready specification and clearly label it NOT RENDERED. Never claim an image file exists because a prompt was written.
+5. Specify exact sizes and units (px, mm, dpi as appropriate), intended exports (SVG/PNG/JPG/PDF/print CMYK subject to service capability), sharpness/contrast, RTL shaping, text safe areas and source format. Do not present a raster screenshot as an editable layered design.
+6. QA at final size: spelling and line breaks (especially Persian/Arabic), font fallback, copyright/trademarks, actual contrast, alignment, small-screen cropping, low-vision alternatives, transparency, bleed and printer profile. State which checks were visually inspected vs only specified.
+7. Iterate against measured acceptance criteria and record versioned filenames, licensed inputs, source file and exports. Do not modify/destroy originals without explicit permission.
+
+## Required deliverables
+- **Asset brief:** intended use, audience, dimensions, copy, hierarchy, palette, reference constraints, localizations.
+- **Production matrix:** artifact | editable source | export formats | dimensions | crop/bleed/safe zones | accessibility.
+- **Rights register:** origin | owner/license | permitted use | credits/approval | status.
+- **QA checklist:** test | tool/evidence | PASS / FAIL / NOT TESTED.
+- **Handoff decision:** READY only for actually generated, rights-cleared and inspected assets; otherwise DRAFT / BLOCKED and exact next step; mark unavailable tool checks NOT RUN.
+
+## Local reference and web fallback
+examples/visual-asset/ contains an authored, accessible SVG card and standard-library checks for viewBox/dimensions, descriptive text, references and rights manifest. These **do not establish print color accuracy, legal rights or visual taste**.
+In ChatGPT web, use available image tools when appropriate; if not, produce the brief and exact prompts/source code with the label NOT RENDERED. Do not pretend an AI image was created without an actual rendering tool.
+
+## Security, rights, and privacy
+No hidden trackers, external SVG dependencies, malicious scripts, unlicensed celebrity/brand claims, private user media uploads to public stores or silent likeness modifications. Preserve original source material; document every changed element.

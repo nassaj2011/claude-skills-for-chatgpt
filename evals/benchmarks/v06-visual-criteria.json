@@ -1,0 +1,35 @@
+{
+  "cases": [
+    {
+      "id": "v06-visual",
+      "skill": "visual-assets-design",
+      "criteria": [
+        {
+          "id": "geometry",
+          "weight": 3,
+          "description": "Separates 1200x630 web and 70x50cm print geometry and gives approximate 300dpi pixel dimensions."
+        },
+        {
+          "id": "rights",
+          "weight": 3,
+          "description": "Explicitly blocks publication on unlicensed celebrity photo/commercial font and calls for legitimate alternatives/permissions."
+        },
+        {
+          "id": "source",
+          "weight": 2,
+          "description": "Distinguishes editable layered/vector source from raster exports and says no asset was rendered."
+        },
+        {
+          "id": "layout",
+          "weight": 2,
+          "description": "Specifies practical responsive crop and print bleed/safe zone, typeface and Persian text QA."
+        },
+        {
+          "id": "qa",
+          "weight": 2,
+          "description": "Includes evidence-based final QA/handoff checklist and explicit DRAFT/BLOCKED status."
+        }
+      ]
+    }
+  ]
+}

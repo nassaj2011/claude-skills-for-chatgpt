@@ -1,0 +1,76 @@
+{
+  "fictional": true,
+  "fields": [
+    {
+      "field": "phone",
+      "classification": "personal",
+      "source": "booking_form",
+      "purpose": "booking_confirmation",
+      "access_roles": [
+        "venue_support"
+      ],
+      "recipients": [
+        {
+          "name": "primary_db"
+        },
+        {
+          "name": "messaging"
+        }
+      ],
+      "retention_trigger": "booking_completed_plus_approved_policy",
+      "deletion_path": "rights_workflow_with_backup_replay",
+      "legal_basis_review": "REVIEWED"
+    },
+    {
+      "field": "booking_id",
+      "classification": "linkable",
+      "source": "booking_service",
+      "purpose": "booking_integrity",
+      "access_roles": [
+        "venue_support"
+      ],
+      "recipients": [
+        {
+          "name": "primary_db"
+        }
+      ],
+      "retention_trigger": "booking_completed_plus_approved_policy",
+      "deletion_path": "rights_workflow_with_backup_replay",
+      "legal_basis_review": "REVIEWED"
+    },
+    {
+      "field": "anonymous_session",
+      "classification": "pseudonymous",
+      "source": "browser",
+      "purpose": "aggregate_usage",
+      "access_roles": [
+        "analytics_operator"
+      ],
+      "recipients": [
+        {
+          "name": "analytics"
+        }
+      ],
+      "retention_trigger": "end_of_approved_analytics_window",
+      "deletion_path": "analytics_purge_job",
+      "legal_basis_review": "REVIEWED"
+    },
+    {
+      "field": "message_template",
+      "classification": "operational",
+      "source": "booking_service",
+      "purpose": "confirmation_content",
+      "access_roles": [
+        "service"
+      ],
+      "recipients": [
+        {
+          "name": "messaging"
+        }
+      ],
+      "retention_trigger": "transmission_complete",
+      "deletion_path": "vendor_purge_on_retention_trigger",
+      "legal_basis_review": "REVIEWED"
+    }
+  ]
+}

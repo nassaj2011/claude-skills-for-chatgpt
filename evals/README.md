@@ -67,3 +67,7 @@ python scripts/evaluate_skills.py --cases evals/pilot_cases.json --baseline eval
 - [Executable test suites](../docs/V0_4_RELEASE.md) — transaction, UI state and offline SLO gates, all run without private data
 
 The catalog's earlier seven-case rubric and initial PR-review pilot remain preserved. To evaluate the remaining cases, repeat several genuine agent runs per case under matched conditions, score blind where possible and archive full outputs before making comparative claims.
+
+## v0.6 prepared comparisons — not scored
+
+Pre-registered prompts/rubrics for privacy, load resilience and visual assets are in `prompts/v05-privacy.txt`, `prompts/v06-load.txt`, `prompts/v06-visual.txt`, and `benchmarks/v06-*-criteria.json`. Model A/B could not be run because the Codex service returned HTTP 404; there are **no** valid v06 raw outputs or grades. See [V0_6_RESULTS.md](V0_6_RESULTS.md). Source and web distribution parity are checked separately and are not causal evidence.

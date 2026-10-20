@@ -2,7 +2,7 @@
   "schema": 1,
   "project": "Claude Skills for ChatGPT",
   "source": "https://github.com/nassaj2011/claude-skills-for-chatgpt",
-  "version": "v0.5.0",
+  "version": "v0.6.0",
   "hash_normalization": "CRLF-to-LF",
   "tracking": false,
   "contains_user_identity": false,
@@ -65,7 +65,7 @@
     {
       "name": "load-resilience-testing",
       "path": "skills/load-resilience-testing/SKILL.md",
-      "sha256": "770ec5c6536a14808197ea4e7f396db0df6c9351b577dc22ca643ae25385f92f"
+      "sha256": "97d055e2ad7a025215fcaae6877af334fcc0acf7a913adf2cca3afece4ce5e13"
     },
     {
       "name": "mcp-integration-builder",
@@ -90,7 +90,7 @@
     {
       "name": "privacy-data-governance",
       "path": "skills/privacy-data-governance/SKILL.md",
-      "sha256": "b8b1aae7326730e64ff7069ae17a0da377586a4bda5b1be79ae20e6e07a9c175"
+      "sha256": "07882a0dfef8ba744f56520f6441091bc335737a88c6358694d33fd3d79cc798"
     },
     {
       "name": "product-business-analyst",
@@ -150,7 +150,7 @@
     {
       "name": "visual-assets-design",
       "path": "skills/visual-assets-design/SKILL.md",
-      "sha256": "74403626e04d014c2649ec58013a43e2e288dce85d4f11e156b135ac78d27bea"
+      "sha256": "7d08b8e5704831a677dc998e5913841a02e87cf09fb68f66f0ddc990cc87300b"
     }
   ]
 }
