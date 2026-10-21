@@ -137,3 +137,7 @@ There are 12 complete Codex text-only A/B outputs (six matched cases), with pres
 Six expert skills have stronger operational contracts: LLM API Integration, MCP Integration Builder, DevOps CI/CD, Dependency Supply Chain, Backup & Disaster Recovery and Performance Accessibility. See [release notes](docs/V0_7_RELEASE.md).
 
 There are 12 complete read-only Codex A/B outputs (six matched cases), with preserved SHA-256 and independent session IDs in [evaluation records](evals/V0_7_RESULTS.md). Results are intentionally UNSCORED until independent blind review; no 8.5/10 average or general efficacy gain is claimed. The same skill content is supplied through the separate [ChatGPT Web Kit](web-kit/README.md).
+
+### v0.8 — Three-arm held-out benchmarking
+
+[87 fictional new prompts](evals/v08/heldout_87.json) cover 29 skills. The [three-code-case pilot](evals/v08/PILOT_REPORT.md) compared baseline, length-matched generic instructions, and actual specialist instructions: **29/32, 32/32 and 32/32** accepted fixtures respectively. No skill-specific benefit relative to the active control was observed in these three cases. The other 84 cases were not run. This evaluation infrastructure does not certify skill quality or alter installed skills.

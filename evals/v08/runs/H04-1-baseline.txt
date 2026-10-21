@@ -1,0 +1,37 @@
+def decide_reservation(existing, request):
+    required = ("slot_id", "owner", "request_key", "amount_minor")
+    if not isinstance(request, dict) or any(key not in request for key in required):
+        return {"status": "INVALID", "booking_id": None}
+
+    slot_id = request["slot_id"]
+    owner = request["owner"]
+    request_key = request["request_key"]
+    amount_minor = request["amount_minor"]
+
+    if (
+        any(not isinstance(value, str) or value == "" for value in (slot_id, owner, request_key))
+        or isinstance(amount_minor, bool)
+        or not isinstance(amount_minor, int)
+        or amount_minor <= 0
+    ):
+        return {"status": "INVALID", "booking_id": None}
+
+    if not isinstance(existing, dict):
+        return {"status": "INVALID", "booking_id": None}
+
+    if slot_id not in existing:
+        return {"status": "CREATED", "booking_id": slot_id + ":" + request_key}
+
+    reservation = existing[slot_id]
+    fields = ("owner", "request_key", "amount_minor", "booking_id")
+    if not isinstance(reservation, dict) or any(field not in reservation for field in fields):
+        return {"status": "INVALID", "booking_id": None}
+
+    if (
+        reservation["owner"] == owner
+        and reservation["request_key"] == request_key
+        and reservation["amount_minor"] == amount_minor
+    ):
+        return {"status": "REPLAY", "booking_id": reservation["booking_id"]}
+
+    return {"status": "CONFLICT", "booking_id": None}

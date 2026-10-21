@@ -1,0 +1,1589 @@
+{
+  "schema": 1,
+  "title": "Three-arm held-out benchmark bank v0.8.0",
+  "created_on": "2026-10-21",
+  "status": "DESIGNED_NOT_ALL_EXECUTED",
+  "study_design": "29 skills x 3 distinct fictional cases; 3 arms baseline, length-matched generic active control, domain skill; no user data.",
+  "notes": [
+    "New prompts relative to archived curated benchmark inputs, not provably unseen to foundation-model training",
+    "All scores null until actual model runs plus reviewed output",
+    "Text-length matching is not guaranteed token matching, checked separately"
+  ],
+  "cases": [
+    {
+      "id": "H01-1",
+      "skill": "product-business-analyst",
+      "task": "Draft an MVP PRD for an appointment booking service for low-bandwidth rural clinics, with offline conflict resolution and explicit unknown clinical rules.",
+      "kind": "design-review",
+      "code_contract": null,
+      "acceptance": [
+        "Address the scenario-specific risk and clearly separate facts, assumptions, and missing evidence",
+        "Supply testable acceptance criteria, negative/failure cases and scoped next actions",
+        "Respect user authority and data privacy; do not invent tool calls, test results or operational changes"
+      ],
+      "state": "NOT_RUN",
+      "scores": {
+        "baseline": null,
+        "active_control": null,
+        "candidate": null
+      }
+    },
+    {
+      "id": "H01-2",
+      "skill": "product-business-analyst",
+      "task": "Triangulate three contradictory stakeholder statements about whether a subscription can be refunded after partial usage; produce an assumption ledger and acceptance tests.",
+      "kind": "design-review",
+      "code_contract": null,
+      "acceptance": [
+        "Address the scenario-specific risk and clearly separate facts, assumptions, and missing evidence",
+        "Supply testable acceptance criteria, negative/failure cases and scoped next actions",
+        "Respect user authority and data privacy; do not invent tool calls, test results or operational changes"
+      ],
+      "state": "NOT_RUN",
+      "scores": {
+        "baseline": null,
+        "active_control": null,
+        "candidate": null
+      }
+    },
+    {
+      "id": "H01-3",
+      "skill": "product-business-analyst",
+      "task": "Prioritize eight features for a six-week B2B invoicing pilot under a fixed team capacity, identify hidden compliance dependencies and define an experiment metric.",
+      "kind": "design-review",
+      "code_contract": null,
+      "acceptance": [
+        "Address the scenario-specific risk and clearly separate facts, assumptions, and missing evidence",
+        "Supply testable acceptance criteria, negative/failure cases and scoped next actions",
+        "Respect user authority and data privacy; do not invent tool calls, test results or operational changes"
+      ],
+      "state": "NOT_RUN",
+      "scores": {
+        "baseline": null,
+        "active_control": null,
+        "candidate": null
+      }
+    },
+    {
+      "id": "H02-1",
+      "skill": "technical-project-orchestrator",
+      "task": "Plan dependency ordering and parallel work for an anonymous donation platform with two blocked interface changes and uncertain payment sandbox access.",
+      "kind": "design-review",
+      "code_contract": null,
+      "acceptance": [
+        "Address the scenario-specific risk and clearly separate facts, assumptions, and missing evidence",
+        "Supply testable acceptance criteria, negative/failure cases and scoped next actions",
+        "Respect user authority and data privacy; do not invent tool calls, test results or operational changes"
+      ],
+      "state": "NOT_RUN",
+      "scores": {
+        "baseline": null,
+        "active_control": null,
+        "candidate": null
+      }
+    },
+    {
+      "id": "H02-2",
+      "skill": "technical-project-orchestrator",
+      "task": "Rebuild a delivery milestone plan after a backend team slips by seven days and the testing team finds an untriaged vulnerability.",
+      "kind": "design-review",
+      "code_contract": null,
+      "acceptance": [
+        "Address the scenario-specific risk and clearly separate facts, assumptions, and missing evidence",
+        "Supply testable acceptance criteria, negative/failure cases and scoped next actions",
+        "Respect user authority and data privacy; do not invent tool calls, test results or operational changes"
+      ],
+      "state": "NOT_RUN",
+      "scores": {
+        "baseline": null,
+        "active_control": null,
+        "candidate": null
+      }
+    },
+    {
+      "id": "H02-3",
+      "skill": "technical-project-orchestrator",
+      "task": "Audit a proposed handoff between app and data teams with no shared definition of done; produce an owner matrix and escalation gates.",
+      "kind": "design-review",
+      "code_contract": null,
+      "acceptance": [
+        "Address the scenario-specific risk and clearly separate facts, assumptions, and missing evidence",
+        "Supply testable acceptance criteria, negative/failure cases and scoped next actions",
+        "Respect user authority and data privacy; do not invent tool calls, test results or operational changes"
+      ],
+      "state": "NOT_RUN",
+      "scores": {
+        "baseline": null,
+        "active_control": null,
+        "candidate": null
+      }
+    },
+    {
+      "id": "H03-1",
+      "skill": "software-architect",
+      "task": "Select a modular monolith vs split services for a volunteer scheduling platform expecting 500 users and unreliable email notifications; include two ADRs.",
+      "kind": "design-review",
+      "code_contract": null,
+      "acceptance": [
+        "Address the scenario-specific risk and clearly separate facts, assumptions, and missing evidence",
+        "Supply testable acceptance criteria, negative/failure cases and scoped next actions",
+        "Respect user authority and data privacy; do not invent tool calls, test results or operational changes"
+      ],
+      "state": "NOT_RUN",
+      "scores": {
+        "baseline": null,
+        "active_control": null,
+        "candidate": null
+      }
+    },
+    {
+      "id": "H03-2",
+      "skill": "software-architect",
+      "task": "Design an upgrade path from local SQLite to hosted PostgreSQL for a small library app without double-issuing loans or destructive migration.",
+      "kind": "design-review",
+      "code_contract": null,
+      "acceptance": [
+        "Address the scenario-specific risk and clearly separate facts, assumptions, and missing evidence",
+        "Supply testable acceptance criteria, negative/failure cases and scoped next actions",
+        "Respect user authority and data privacy; do not invent tool calls, test results or operational changes"
+      ],
+      "state": "NOT_RUN",
+      "scores": {
+        "baseline": null,
+        "active_control": null,
+        "candidate": null
+      }
+    },
+    {
+      "id": "H03-3",
+      "skill": "software-architect",
+      "task": "Review a design using a global singleton cache for per-tenant financial balances; draw trust boundaries and provide consistency tradeoffs.",
+      "kind": "design-review",
+      "code_contract": null,
+      "acceptance": [
+        "Address the scenario-specific risk and clearly separate facts, assumptions, and missing evidence",
+        "Supply testable acceptance criteria, negative/failure cases and scoped next actions",
+        "Respect user authority and data privacy; do not invent tool calls, test results or operational changes"
+      ],
+      "state": "NOT_RUN",
+      "scores": {
+        "baseline": null,
+        "active_control": null,
+        "candidate": null
+      }
+    },
+    {
+      "id": "H04-1",
+      "skill": "database-transaction-integrity",
+      "task": "IMPLEMENT PYTHON FUNCTION `decide_reservation(existing, request)` exactly as specified in the code evaluation contract; no imports or side effects.",
+      "kind": "code-python",
+      "code_contract": {
+        "signature": "decide_reservation(existing, request)",
+        "contract": "Return exactly one dictionary with keys \"status\" and \"booking_id\". Existing is a mapping from slot strings to dicts having owner (str), request_key (str), amount_minor (int >0), booking_id (str). Request is a dict with slot_id, owner, request_key, amount_minor. Return status \"INVALID\" with booking_id None if any required field missing, empty string, non-string identifier, amount not positive int or amount is bool. If slot is free, return {\"status\":\"CREATED\",\"booking_id\":slot_id+\":\"+request_key}. If existing slot matches ALL owner, request_key and amount_minor, return status \"REPLAY\" with original booking_id. Otherwise return \"CONFLICT\" with None. Never mutate input. Python stdlib only, no imports; output only code."
+      },
+      "acceptance": [
+        "Address the scenario-specific risk and clearly separate facts, assumptions, and missing evidence",
+        "Supply testable acceptance criteria, negative/failure cases and scoped next actions",
+        "Respect user authority and data privacy; do not invent tool calls, test results or operational changes"
+      ],
+      "state": "NOT_RUN",
+      "scores": {
+        "baseline": null,
+        "active_control": null,
+        "candidate": null
+      }
+    },
+    {
+      "id": "H04-2",
+      "skill": "database-transaction-integrity",
+      "task": "Propose PostgreSQL transaction boundaries for transferring store credit with retryable transaction failures, unique transfer IDs and no partial ledger postings.",
+      "kind": "design-review",
+      "code_contract": null,
+      "acceptance": [
+        "Address the scenario-specific risk and clearly separate facts, assumptions, and missing evidence",
+        "Supply testable acceptance criteria, negative/failure cases and scoped next actions",
+        "Respect user authority and data privacy; do not invent tool calls, test results or operational changes"
+      ],
+      "state": "NOT_RUN",
+      "scores": {
+        "baseline": null,
+        "active_control": null,
+        "candidate": null
+      }
+    },
+    {
+      "id": "H04-3",
+      "skill": "database-transaction-integrity",
+      "task": "Review an event outbox worker that acknowledges the message before business transaction commits; provide failure matrix and SQL-safe retry semantics.",
+      "kind": "design-review",
+      "code_contract": null,
+      "acceptance": [
+        "Address the scenario-specific risk and clearly separate facts, assumptions, and missing evidence",
+        "Supply testable acceptance criteria, negative/failure cases and scoped next actions",
+        "Respect user authority and data privacy; do not invent tool calls, test results or operational changes"
+      ],
+      "state": "NOT_RUN",
+      "scores": {
+        "baseline": null,
+        "active_control": null,
+        "candidate": null
+      }
+    },
+    {
+      "id": "H05-1",
+      "skill": "security-authorization-auditor",
+      "task": "Trace an object authorization flaw in a school portal where report_card_id is client-supplied; build student, parent and teacher access matrix.",
+      "kind": "design-review",
+      "code_contract": null,
+      "acceptance": [
+        "Address the scenario-specific risk and clearly separate facts, assumptions, and missing evidence",
+        "Supply testable acceptance criteria, negative/failure cases and scoped next actions",
+        "Respect user authority and data privacy; do not invent tool calls, test results or operational changes"
+      ],
+      "state": "NOT_RUN",
+      "scores": {
+        "baseline": null,
+        "active_control": null,
+        "candidate": null
+      }
+    },
+    {
+      "id": "H05-2",
+      "skill": "security-authorization-auditor",
+      "task": "Analyze an API where an editor can revoke the owner of their own tenant; produce a minimal negative test plan for role escalation.",
+      "kind": "design-review",
+      "code_contract": null,
+      "acceptance": [
+        "Address the scenario-specific risk and clearly separate facts, assumptions, and missing evidence",
+        "Supply testable acceptance criteria, negative/failure cases and scoped next actions",
+        "Respect user authority and data privacy; do not invent tool calls, test results or operational changes"
+      ],
+      "state": "NOT_RUN",
+      "scores": {
+        "baseline": null,
+        "active_control": null,
+        "candidate": null
+      }
+    },
+    {
+      "id": "H05-3",
+      "skill": "security-authorization-auditor",
+      "task": "Review a multi-tenant export job that runs as system identity and accepts a tenant_id from URL; identify capability scope and data leakage risks.",
+      "kind": "design-review",
+      "code_contract": null,
+      "acceptance": [
+        "Address the scenario-specific risk and clearly separate facts, assumptions, and missing evidence",
+        "Supply testable acceptance criteria, negative/failure cases and scoped next actions",
+        "Respect user authority and data privacy; do not invent tool calls, test results or operational changes"
+      ],
+      "state": "NOT_RUN",
+      "scores": {
+        "baseline": null,
+        "active_control": null,
+        "candidate": null
+      }
+    },
+    {
+      "id": "H06-1",
+      "skill": "privacy-data-governance",
+      "task": "Design a minimal privacy data inventory and deletion workflow for children's activity photos shared with parents; do not assume consent basis.",
+      "kind": "design-review",
+      "code_contract": null,
+      "acceptance": [
+        "Address the scenario-specific risk and clearly separate facts, assumptions, and missing evidence",
+        "Supply testable acceptance criteria, negative/failure cases and scoped next actions",
+        "Respect user authority and data privacy; do not invent tool calls, test results or operational changes"
+      ],
+      "state": "NOT_RUN",
+      "scores": {
+        "baseline": null,
+        "active_control": null,
+        "candidate": null
+      }
+    },
+    {
+      "id": "H06-2",
+      "skill": "privacy-data-governance",
+      "task": "Evaluate a marketing system retaining SMS unsubscribe data in three vendor backups; describe propagation evidence and lawful exception questions.",
+      "kind": "design-review",
+      "code_contract": null,
+      "acceptance": [
+        "Address the scenario-specific risk and clearly separate facts, assumptions, and missing evidence",
+        "Supply testable acceptance criteria, negative/failure cases and scoped next actions",
+        "Respect user authority and data privacy; do not invent tool calls, test results or operational changes"
+      ],
+      "state": "NOT_RUN",
+      "scores": {
+        "baseline": null,
+        "active_control": null,
+        "candidate": null
+      }
+    },
+    {
+      "id": "H06-3",
+      "skill": "privacy-data-governance",
+      "task": "Propose privacy-safe event analytics for a financial literacy course without raw emails or precise IP addresses; define a field allowlist and audits.",
+      "kind": "design-review",
+      "code_contract": null,
+      "acceptance": [
+        "Address the scenario-specific risk and clearly separate facts, assumptions, and missing evidence",
+        "Supply testable acceptance criteria, negative/failure cases and scoped next actions",
+        "Respect user authority and data privacy; do not invent tool calls, test results or operational changes"
+      ],
+      "state": "NOT_RUN",
+      "scores": {
+        "baseline": null,
+        "active_control": null,
+        "candidate": null
+      }
+    },
+    {
+      "id": "H07-1",
+      "skill": "frontend-design-direction",
+      "task": "Specify a right-to-left bilingual accessible donation form with currency, error states and low-vision mobile usability.",
+      "kind": "design-review",
+      "code_contract": null,
+      "acceptance": [
+        "Address the scenario-specific risk and clearly separate facts, assumptions, and missing evidence",
+        "Supply testable acceptance criteria, negative/failure cases and scoped next actions",
+        "Respect user authority and data privacy; do not invent tool calls, test results or operational changes"
+      ],
+      "state": "NOT_RUN",
+      "scores": {
+        "baseline": null,
+        "active_control": null,
+        "candidate": null
+      }
+    },
+    {
+      "id": "H07-2",
+      "skill": "frontend-design-direction",
+      "task": "Create a responsive UX brief for a warehouse scanner dashboard at 360px and a handheld landscape orientation.",
+      "kind": "design-review",
+      "code_contract": null,
+      "acceptance": [
+        "Address the scenario-specific risk and clearly separate facts, assumptions, and missing evidence",
+        "Supply testable acceptance criteria, negative/failure cases and scoped next actions",
+        "Respect user authority and data privacy; do not invent tool calls, test results or operational changes"
+      ],
+      "state": "NOT_RUN",
+      "scores": {
+        "baseline": null,
+        "active_control": null,
+        "candidate": null
+      }
+    },
+    {
+      "id": "H07-3",
+      "skill": "frontend-design-direction",
+      "task": "Diagnose confusing state cues in a meal booking calendar where a disabled slot looks selected and screen-reader announcements are missing.",
+      "kind": "design-review",
+      "code_contract": null,
+      "acceptance": [
+        "Address the scenario-specific risk and clearly separate facts, assumptions, and missing evidence",
+        "Supply testable acceptance criteria, negative/failure cases and scoped next actions",
+        "Respect user authority and data privacy; do not invent tool calls, test results or operational changes"
+      ],
+      "state": "NOT_RUN",
+      "scores": {
+        "baseline": null,
+        "active_control": null,
+        "candidate": null
+      }
+    },
+    {
+      "id": "H08-1",
+      "skill": "theme-design-system",
+      "task": "Build a semantic color/token strategy for a high-contrast attendance app supporting two schools and dark mode.",
+      "kind": "design-review",
+      "code_contract": null,
+      "acceptance": [
+        "Address the scenario-specific risk and clearly separate facts, assumptions, and missing evidence",
+        "Supply testable acceptance criteria, negative/failure cases and scoped next actions",
+        "Respect user authority and data privacy; do not invent tool calls, test results or operational changes"
+      ],
+      "state": "NOT_RUN",
+      "scores": {
+        "baseline": null,
+        "active_control": null,
+        "candidate": null
+      }
+    },
+    {
+      "id": "H08-2",
+      "skill": "theme-design-system",
+      "task": "Propose a component variation matrix for Arabic RTL input, English SKU code and mixed-number badge without layout regressions.",
+      "kind": "design-review",
+      "code_contract": null,
+      "acceptance": [
+        "Address the scenario-specific risk and clearly separate facts, assumptions, and missing evidence",
+        "Supply testable acceptance criteria, negative/failure cases and scoped next actions",
+        "Respect user authority and data privacy; do not invent tool calls, test results or operational changes"
+      ],
+      "state": "NOT_RUN",
+      "scores": {
+        "baseline": null,
+        "active_control": null,
+        "candidate": null
+      }
+    },
+    {
+      "id": "H08-3",
+      "skill": "theme-design-system",
+      "task": "Audit a design system whose alert and button use the same semantic danger colors without contrast/focus guarantees.",
+      "kind": "design-review",
+      "code_contract": null,
+      "acceptance": [
+        "Address the scenario-specific risk and clearly separate facts, assumptions, and missing evidence",
+        "Supply testable acceptance criteria, negative/failure cases and scoped next actions",
+        "Respect user authority and data privacy; do not invent tool calls, test results or operational changes"
+      ],
+      "state": "NOT_RUN",
+      "scores": {
+        "baseline": null,
+        "active_control": null,
+        "candidate": null
+      }
+    },
+    {
+      "id": "H09-1",
+      "skill": "visual-assets-design",
+      "task": "Create a rights-aware vector asset brief for a Persian festival flyer using original shapes, no stock imagery and two output sizes.",
+      "kind": "design-review",
+      "code_contract": null,
+      "acceptance": [
+        "Address the scenario-specific risk and clearly separate facts, assumptions, and missing evidence",
+        "Supply testable acceptance criteria, negative/failure cases and scoped next actions",
+        "Respect user authority and data privacy; do not invent tool calls, test results or operational changes"
+      ],
+      "state": "NOT_RUN",
+      "scores": {
+        "baseline": null,
+        "active_control": null,
+        "candidate": null
+      }
+    },
+    {
+      "id": "H09-2",
+      "skill": "visual-assets-design",
+      "task": "Review print handoff for a 40x60 cm portrait exhibition board with missing font rights, 3 mm bleed and target 300 DPI.",
+      "kind": "design-review",
+      "code_contract": null,
+      "acceptance": [
+        "Address the scenario-specific risk and clearly separate facts, assumptions, and missing evidence",
+        "Supply testable acceptance criteria, negative/failure cases and scoped next actions",
+        "Respect user authority and data privacy; do not invent tool calls, test results or operational changes"
+      ],
+      "state": "NOT_RUN",
+      "scores": {
+        "baseline": null,
+        "active_control": null,
+        "candidate": null
+      }
+    },
+    {
+      "id": "H09-3",
+      "skill": "visual-assets-design",
+      "task": "Specify responsive crop and accessible text alternatives for an editorial illustration in mobile/social/desktop placements; mark rendering unverified.",
+      "kind": "design-review",
+      "code_contract": null,
+      "acceptance": [
+        "Address the scenario-specific risk and clearly separate facts, assumptions, and missing evidence",
+        "Supply testable acceptance criteria, negative/failure cases and scoped next actions",
+        "Respect user authority and data privacy; do not invent tool calls, test results or operational changes"
+      ],
+      "state": "NOT_RUN",
+      "scores": {
+        "baseline": null,
+        "active_control": null,
+        "candidate": null
+      }
+    },
+    {
+      "id": "H10-1",
+      "skill": "performance-accessibility",
+      "task": "Prioritize fixes for an Arabic checkout page with a focus trap, expensive image loads and an undocumented 100 Lighthouse score.",
+      "kind": "design-review",
+      "code_contract": null,
+      "acceptance": [
+        "Address the scenario-specific risk and clearly separate facts, assumptions, and missing evidence",
+        "Supply testable acceptance criteria, negative/failure cases and scoped next actions",
+        "Respect user authority and data privacy; do not invent tool calls, test results or operational changes"
+      ],
+      "state": "NOT_RUN",
+      "scores": {
+        "baseline": null,
+        "active_control": null,
+        "candidate": null
+      }
+    },
+    {
+      "id": "H10-2",
+      "skill": "performance-accessibility",
+      "task": "Design measurable before/after tests for a 320px report page with a 200-column table and visible action loss.",
+      "kind": "design-review",
+      "code_contract": null,
+      "acceptance": [
+        "Address the scenario-specific risk and clearly separate facts, assumptions, and missing evidence",
+        "Supply testable acceptance criteria, negative/failure cases and scoped next actions",
+        "Respect user authority and data privacy; do not invent tool calls, test results or operational changes"
+      ],
+      "state": "NOT_RUN",
+      "scores": {
+        "baseline": null,
+        "active_control": null,
+        "candidate": null
+      }
+    },
+    {
+      "id": "H10-3",
+      "skill": "performance-accessibility",
+      "task": "Plan a screen-reader and keyboard acceptance test for a multi-step account recovery flow with timeouts and reduced-motion settings.",
+      "kind": "design-review",
+      "code_contract": null,
+      "acceptance": [
+        "Address the scenario-specific risk and clearly separate facts, assumptions, and missing evidence",
+        "Supply testable acceptance criteria, negative/failure cases and scoped next actions",
+        "Respect user authority and data privacy; do not invent tool calls, test results or operational changes"
+      ],
+      "state": "NOT_RUN",
+      "scores": {
+        "baseline": null,
+        "active_control": null,
+        "candidate": null
+      }
+    },
+    {
+      "id": "H11-1",
+      "skill": "react-artifacts-builder",
+      "task": "Sketch typed React state transitions for a receipt upload widget with retry/cancel, no file uploaded on invalid input.",
+      "kind": "design-review",
+      "code_contract": null,
+      "acceptance": [
+        "Address the scenario-specific risk and clearly separate facts, assumptions, and missing evidence",
+        "Supply testable acceptance criteria, negative/failure cases and scoped next actions",
+        "Respect user authority and data privacy; do not invent tool calls, test results or operational changes"
+      ],
+      "state": "NOT_RUN",
+      "scores": {
+        "baseline": null,
+        "active_control": null,
+        "candidate": null
+      }
+    },
+    {
+      "id": "H11-2",
+      "skill": "react-artifacts-builder",
+      "task": "Design a keyboard-safe async autocomplete for a local permit directory with empty/loading/error states and stale request protection.",
+      "kind": "design-review",
+      "code_contract": null,
+      "acceptance": [
+        "Address the scenario-specific risk and clearly separate facts, assumptions, and missing evidence",
+        "Supply testable acceptance criteria, negative/failure cases and scoped next actions",
+        "Respect user authority and data privacy; do not invent tool calls, test results or operational changes"
+      ],
+      "state": "NOT_RUN",
+      "scores": {
+        "baseline": null,
+        "active_control": null,
+        "candidate": null
+      }
+    },
+    {
+      "id": "H11-3",
+      "skill": "react-artifacts-builder",
+      "task": "Review an interactive pricing calculator React component that misuses `useEffect` to update state in loops; propose tested refactor.",
+      "kind": "design-review",
+      "code_contract": null,
+      "acceptance": [
+        "Address the scenario-specific risk and clearly separate facts, assumptions, and missing evidence",
+        "Supply testable acceptance criteria, negative/failure cases and scoped next actions",
+        "Respect user authority and data privacy; do not invent tool calls, test results or operational changes"
+      ],
+      "state": "NOT_RUN",
+      "scores": {
+        "baseline": null,
+        "active_control": null,
+        "candidate": null
+      }
+    },
+    {
+      "id": "H12-1",
+      "skill": "backend-api-engineer",
+      "task": "Design an HTTP contract for redeeming a one-time voucher with concurrent clients and consistent 400/401/403/409 semantics.",
+      "kind": "design-review",
+      "code_contract": null,
+      "acceptance": [
+        "Address the scenario-specific risk and clearly separate facts, assumptions, and missing evidence",
+        "Supply testable acceptance criteria, negative/failure cases and scoped next actions",
+        "Respect user authority and data privacy; do not invent tool calls, test results or operational changes"
+      ],
+      "state": "NOT_RUN",
+      "scores": {
+        "baseline": null,
+        "active_control": null,
+        "candidate": null
+      }
+    },
+    {
+      "id": "H12-2",
+      "skill": "backend-api-engineer",
+      "task": "Review file upload API limits for image dimensions, mime sniffing and signed download expiry, with missing-key negative tests.",
+      "kind": "design-review",
+      "code_contract": null,
+      "acceptance": [
+        "Address the scenario-specific risk and clearly separate facts, assumptions, and missing evidence",
+        "Supply testable acceptance criteria, negative/failure cases and scoped next actions",
+        "Respect user authority and data privacy; do not invent tool calls, test results or operational changes"
+      ],
+      "state": "NOT_RUN",
+      "scores": {
+        "baseline": null,
+        "active_control": null,
+        "candidate": null
+      }
+    },
+    {
+      "id": "H12-3",
+      "skill": "backend-api-engineer",
+      "task": "Specify pagination/filtering contract for tenant-scoped inventory records and a query audit that prevents SQL wildcard abuse.",
+      "kind": "design-review",
+      "code_contract": null,
+      "acceptance": [
+        "Address the scenario-specific risk and clearly separate facts, assumptions, and missing evidence",
+        "Supply testable acceptance criteria, negative/failure cases and scoped next actions",
+        "Respect user authority and data privacy; do not invent tool calls, test results or operational changes"
+      ],
+      "state": "NOT_RUN",
+      "scores": {
+        "baseline": null,
+        "active_control": null,
+        "candidate": null
+      }
+    },
+    {
+      "id": "H13-1",
+      "skill": "mcp-integration-builder",
+      "task": "Design a read-only MCP tool for retrieving sanitized order counts with role/tenant isolation and bounded cursor semantics.",
+      "kind": "design-review",
+      "code_contract": null,
+      "acceptance": [
+        "Address the scenario-specific risk and clearly separate facts, assumptions, and missing evidence",
+        "Supply testable acceptance criteria, negative/failure cases and scoped next actions",
+        "Respect user authority and data privacy; do not invent tool calls, test results or operational changes"
+      ],
+      "state": "NOT_RUN",
+      "scores": {
+        "baseline": null,
+        "active_control": null,
+        "candidate": null
+      }
+    },
+    {
+      "id": "H13-2",
+      "skill": "mcp-integration-builder",
+      "task": "Review an MCP tool accepting model-supplied `workspace_id` and confirmation JSON for a destructive archive operation; build adversarial tests.",
+      "kind": "design-review",
+      "code_contract": null,
+      "acceptance": [
+        "Address the scenario-specific risk and clearly separate facts, assumptions, and missing evidence",
+        "Supply testable acceptance criteria, negative/failure cases and scoped next actions",
+        "Respect user authority and data privacy; do not invent tool calls, test results or operational changes"
+      ],
+      "state": "NOT_RUN",
+      "scores": {
+        "baseline": null,
+        "active_control": null,
+        "candidate": null
+      }
+    },
+    {
+      "id": "H13-3",
+      "skill": "mcp-integration-builder",
+      "task": "Create a mock MCP tool catalog and error taxonomy for listing invoices with API 429, cursor misuse and cross-tenant denial.",
+      "kind": "design-review",
+      "code_contract": null,
+      "acceptance": [
+        "Address the scenario-specific risk and clearly separate facts, assumptions, and missing evidence",
+        "Supply testable acceptance criteria, negative/failure cases and scoped next actions",
+        "Respect user authority and data privacy; do not invent tool calls, test results or operational changes"
+      ],
+      "state": "NOT_RUN",
+      "scores": {
+        "baseline": null,
+        "active_control": null,
+        "candidate": null
+      }
+    },
+    {
+      "id": "H14-1",
+      "skill": "llm-api-integration",
+      "task": "IMPLEMENT PYTHON FUNCTION normalize_llm_payload(payload) exactly as specified in the code evaluation contract; no model calls or side effects.",
+      "kind": "code-python",
+      "code_contract": {
+        "signature": "normalize_llm_payload(payload)",
+        "contract": "Input is a Python object that represents an already-decoded provider response (NOT trusted). Return exactly {'ok': True, 'intent': value, 'error': None} for a dict with exactly keys decision, reason, tool, decision in {'answer','refuse','lookup'}, reason a str 0..120 chars, tool in {'none','lookup_venue'}, where lookup requires lookup_venue and all other decisions require none. For all other payloads return exactly {'ok': False, 'intent': None, 'error': 'INVALID'}. Reject bool pretending to be a string, unknown/missing keys, nested surprises; do not mutate the input, never invoke tools, no imports or network. Output only Python code."
+      },
+      "acceptance": [
+        "Address the scenario-specific risk and clearly separate facts, assumptions, and missing evidence",
+        "Supply testable acceptance criteria, negative/failure cases and scoped next actions",
+        "Respect user authority and data privacy; do not invent tool calls, test results or operational changes"
+      ],
+      "state": "NOT_RUN",
+      "scores": {
+        "baseline": null,
+        "active_control": null,
+        "candidate": null
+      }
+    },
+    {
+      "id": "H14-2",
+      "skill": "llm-api-integration",
+      "task": "Review a hallucinated retrieval answer that quotes nonexistent contracts; specify grounding, provenance and abstention acceptance tests.",
+      "kind": "design-review",
+      "code_contract": null,
+      "acceptance": [
+        "Address the scenario-specific risk and clearly separate facts, assumptions, and missing evidence",
+        "Supply testable acceptance criteria, negative/failure cases and scoped next actions",
+        "Respect user authority and data privacy; do not invent tool calls, test results or operational changes"
+      ],
+      "state": "NOT_RUN",
+      "scores": {
+        "baseline": null,
+        "active_control": null,
+        "candidate": null
+      }
+    },
+    {
+      "id": "H14-3",
+      "skill": "llm-api-integration",
+      "task": "Plan A/B quality and cost metrics when migrating a FAQ assistant between model providers, including offline fixtures and no token invention.",
+      "kind": "design-review",
+      "code_contract": null,
+      "acceptance": [
+        "Address the scenario-specific risk and clearly separate facts, assumptions, and missing evidence",
+        "Supply testable acceptance criteria, negative/failure cases and scoped next actions",
+        "Respect user authority and data privacy; do not invent tool calls, test results or operational changes"
+      ],
+      "state": "NOT_RUN",
+      "scores": {
+        "baseline": null,
+        "active_control": null,
+        "candidate": null
+      }
+    },
+    {
+      "id": "H15-1",
+      "skill": "backend-debugging",
+      "task": "Investigate a sporadic duplicate refund after callback replay with a controlled reproduction and deterministic regression plan.",
+      "kind": "design-review",
+      "code_contract": null,
+      "acceptance": [
+        "Address the scenario-specific risk and clearly separate facts, assumptions, and missing evidence",
+        "Supply testable acceptance criteria, negative/failure cases and scoped next actions",
+        "Respect user authority and data privacy; do not invent tool calls, test results or operational changes"
+      ],
+      "state": "NOT_RUN",
+      "scores": {
+        "baseline": null,
+        "active_control": null,
+        "candidate": null
+      }
+    },
+    {
+      "id": "H15-2",
+      "skill": "backend-debugging",
+      "task": "Diagnose a memory spike on document conversion jobs from logs only; separate measured root cause from hypotheses and rank inspections.",
+      "kind": "design-review",
+      "code_contract": null,
+      "acceptance": [
+        "Address the scenario-specific risk and clearly separate facts, assumptions, and missing evidence",
+        "Supply testable acceptance criteria, negative/failure cases and scoped next actions",
+        "Respect user authority and data privacy; do not invent tool calls, test results or operational changes"
+      ],
+      "state": "NOT_RUN",
+      "scores": {
+        "baseline": null,
+        "active_control": null,
+        "candidate": null
+      }
+    },
+    {
+      "id": "H15-3",
+      "skill": "backend-debugging",
+      "task": "Review an API that returns 500 for unique-conflict errors only during retries; propose minimum safe fix and test.",
+      "kind": "design-review",
+      "code_contract": null,
+      "acceptance": [
+        "Address the scenario-specific risk and clearly separate facts, assumptions, and missing evidence",
+        "Supply testable acceptance criteria, negative/failure cases and scoped next actions",
+        "Respect user authority and data privacy; do not invent tool calls, test results or operational changes"
+      ],
+      "state": "NOT_RUN",
+      "scores": {
+        "baseline": null,
+        "active_control": null,
+        "candidate": null
+      }
+    },
+    {
+      "id": "H16-1",
+      "skill": "playwright-webapp-testing",
+      "task": "Write a real browser test plan for a bilingual payment simulator with iframe transitions and no live money movement.",
+      "kind": "design-review",
+      "code_contract": null,
+      "acceptance": [
+        "Address the scenario-specific risk and clearly separate facts, assumptions, and missing evidence",
+        "Supply testable acceptance criteria, negative/failure cases and scoped next actions",
+        "Respect user authority and data privacy; do not invent tool calls, test results or operational changes"
+      ],
+      "state": "NOT_RUN",
+      "scores": {
+        "baseline": null,
+        "active_control": null,
+        "candidate": null
+      }
+    },
+    {
+      "id": "H16-2",
+      "skill": "playwright-webapp-testing",
+      "task": "Design selectors and negative tests for file upload cancel/retry with flaky network without brittle sleeps.",
+      "kind": "design-review",
+      "code_contract": null,
+      "acceptance": [
+        "Address the scenario-specific risk and clearly separate facts, assumptions, and missing evidence",
+        "Supply testable acceptance criteria, negative/failure cases and scoped next actions",
+        "Respect user authority and data privacy; do not invent tool calls, test results or operational changes"
+      ],
+      "state": "NOT_RUN",
+      "scores": {
+        "baseline": null,
+        "active_control": null,
+        "candidate": null
+      }
+    },
+    {
+      "id": "H16-3",
+      "skill": "playwright-webapp-testing",
+      "task": "Review a test suite that passes only because it stubs auth globally; add unauthorized and cross-tenant navigation tests.",
+      "kind": "design-review",
+      "code_contract": null,
+      "acceptance": [
+        "Address the scenario-specific risk and clearly separate facts, assumptions, and missing evidence",
+        "Supply testable acceptance criteria, negative/failure cases and scoped next actions",
+        "Respect user authority and data privacy; do not invent tool calls, test results or operational changes"
+      ],
+      "state": "NOT_RUN",
+      "scores": {
+        "baseline": null,
+        "active_control": null,
+        "candidate": null
+      }
+    },
+    {
+      "id": "H17-1",
+      "skill": "qa-test-strategy",
+      "task": "Allocate 120 CI minutes across risk-based tests for a mixed membership and payment feature without bypassing authorization checks.",
+      "kind": "design-review",
+      "code_contract": null,
+      "acceptance": [
+        "Address the scenario-specific risk and clearly separate facts, assumptions, and missing evidence",
+        "Supply testable acceptance criteria, negative/failure cases and scoped next actions",
+        "Respect user authority and data privacy; do not invent tool calls, test results or operational changes"
+      ],
+      "state": "NOT_RUN",
+      "scores": {
+        "baseline": null,
+        "active_control": null,
+        "candidate": null
+      }
+    },
+    {
+      "id": "H17-2",
+      "skill": "qa-test-strategy",
+      "task": "Construct a mutation-test matrix for idempotent webhook processing, outbox retry and late confirmation scenarios.",
+      "kind": "design-review",
+      "code_contract": null,
+      "acceptance": [
+        "Address the scenario-specific risk and clearly separate facts, assumptions, and missing evidence",
+        "Supply testable acceptance criteria, negative/failure cases and scoped next actions",
+        "Respect user authority and data privacy; do not invent tool calls, test results or operational changes"
+      ],
+      "state": "NOT_RUN",
+      "scores": {
+        "baseline": null,
+        "active_control": null,
+        "candidate": null
+      }
+    },
+    {
+      "id": "H17-3",
+      "skill": "qa-test-strategy",
+      "task": "Assess inadequate screenshot-only tests of a school management form and design an integrated pyramid with accessible form states.",
+      "kind": "design-review",
+      "code_contract": null,
+      "acceptance": [
+        "Address the scenario-specific risk and clearly separate facts, assumptions, and missing evidence",
+        "Supply testable acceptance criteria, negative/failure cases and scoped next actions",
+        "Respect user authority and data privacy; do not invent tool calls, test results or operational changes"
+      ],
+      "state": "NOT_RUN",
+      "scores": {
+        "baseline": null,
+        "active_control": null,
+        "candidate": null
+      }
+    },
+    {
+      "id": "H18-1",
+      "skill": "devops-ci-cd",
+      "task": "Plan fail-closed deployment for a multilingual checkout service where migration lock time exceeds approved maintenance window.",
+      "kind": "design-review",
+      "code_contract": null,
+      "acceptance": [
+        "Address the scenario-specific risk and clearly separate facts, assumptions, and missing evidence",
+        "Supply testable acceptance criteria, negative/failure cases and scoped next actions",
+        "Respect user authority and data privacy; do not invent tool calls, test results or operational changes"
+      ],
+      "state": "NOT_RUN",
+      "scores": {
+        "baseline": null,
+        "active_control": null,
+        "candidate": null
+      }
+    },
+    {
+      "id": "H18-2",
+      "skill": "devops-ci-cd",
+      "task": "Review a release that reuses a staging secret on fork PRs and allows unsigned container artifacts into production.",
+      "kind": "design-review",
+      "code_contract": null,
+      "acceptance": [
+        "Address the scenario-specific risk and clearly separate facts, assumptions, and missing evidence",
+        "Supply testable acceptance criteria, negative/failure cases and scoped next actions",
+        "Respect user authority and data privacy; do not invent tool calls, test results or operational changes"
+      ],
+      "state": "NOT_RUN",
+      "scores": {
+        "baseline": null,
+        "active_control": null,
+        "candidate": null
+      }
+    },
+    {
+      "id": "H18-3",
+      "skill": "devops-ci-cd",
+      "task": "Design a safe blue/green deployment approval and automatic abort using two independent health metrics, including mixed DB schema support.",
+      "kind": "design-review",
+      "code_contract": null,
+      "acceptance": [
+        "Address the scenario-specific risk and clearly separate facts, assumptions, and missing evidence",
+        "Supply testable acceptance criteria, negative/failure cases and scoped next actions",
+        "Respect user authority and data privacy; do not invent tool calls, test results or operational changes"
+      ],
+      "state": "NOT_RUN",
+      "scores": {
+        "baseline": null,
+        "active_control": null,
+        "candidate": null
+      }
+    },
+    {
+      "id": "H19-1",
+      "skill": "qa-release-gatekeeper",
+      "task": "Decide release status for an e-wallet change with all unit tests green but skipped fraud test and incomplete ledger reconciliation.",
+      "kind": "design-review",
+      "code_contract": null,
+      "acceptance": [
+        "Address the scenario-specific risk and clearly separate facts, assumptions, and missing evidence",
+        "Supply testable acceptance criteria, negative/failure cases and scoped next actions",
+        "Respect user authority and data privacy; do not invent tool calls, test results or operational changes"
+      ],
+      "state": "NOT_RUN",
+      "scores": {
+        "baseline": null,
+        "active_control": null,
+        "candidate": null
+      }
+    },
+    {
+      "id": "H19-2",
+      "skill": "qa-release-gatekeeper",
+      "task": "Build a release decision report from mixed pending/neutral/success statuses and one unresolved severity-1 regression.",
+      "kind": "design-review",
+      "code_contract": null,
+      "acceptance": [
+        "Address the scenario-specific risk and clearly separate facts, assumptions, and missing evidence",
+        "Supply testable acceptance criteria, negative/failure cases and scoped next actions",
+        "Respect user authority and data privacy; do not invent tool calls, test results or operational changes"
+      ],
+      "state": "NOT_RUN",
+      "scores": {
+        "baseline": null,
+        "active_control": null,
+        "candidate": null
+      }
+    },
+    {
+      "id": "H19-3",
+      "skill": "qa-release-gatekeeper",
+      "task": "Create a fail-closed hotfix matrix for an expired API certificate with restoration objective but missing rollback evidence.",
+      "kind": "design-review",
+      "code_contract": null,
+      "acceptance": [
+        "Address the scenario-specific risk and clearly separate facts, assumptions, and missing evidence",
+        "Supply testable acceptance criteria, negative/failure cases and scoped next actions",
+        "Respect user authority and data privacy; do not invent tool calls, test results or operational changes"
+      ],
+      "state": "NOT_RUN",
+      "scores": {
+        "baseline": null,
+        "active_control": null,
+        "candidate": null
+      }
+    },
+    {
+      "id": "H20-1",
+      "skill": "observability-monitoring",
+      "task": "Design low-cardinality traces and actionable alerts for unreliable school notification delivery without logging children’s identities.",
+      "kind": "design-review",
+      "code_contract": null,
+      "acceptance": [
+        "Address the scenario-specific risk and clearly separate facts, assumptions, and missing evidence",
+        "Supply testable acceptance criteria, negative/failure cases and scoped next actions",
+        "Respect user authority and data privacy; do not invent tool calls, test results or operational changes"
+      ],
+      "state": "NOT_RUN",
+      "scores": {
+        "baseline": null,
+        "active_control": null,
+        "candidate": null
+      }
+    },
+    {
+      "id": "H20-2",
+      "skill": "observability-monitoring",
+      "task": "Review a metric dashboard that averages away 99th-percentile latency spikes and invents incident frequency.",
+      "kind": "design-review",
+      "code_contract": null,
+      "acceptance": [
+        "Address the scenario-specific risk and clearly separate facts, assumptions, and missing evidence",
+        "Supply testable acceptance criteria, negative/failure cases and scoped next actions",
+        "Respect user authority and data privacy; do not invent tool calls, test results or operational changes"
+      ],
+      "state": "NOT_RUN",
+      "scores": {
+        "baseline": null,
+        "active_control": null,
+        "candidate": null
+      }
+    },
+    {
+      "id": "H20-3",
+      "skill": "observability-monitoring",
+      "task": "Specify instrumentation for end-to-end invoice reconciliation with retry/backlog and PII redaction, separating metric vs event.",
+      "kind": "design-review",
+      "code_contract": null,
+      "acceptance": [
+        "Address the scenario-specific risk and clearly separate facts, assumptions, and missing evidence",
+        "Supply testable acceptance criteria, negative/failure cases and scoped next actions",
+        "Respect user authority and data privacy; do not invent tool calls, test results or operational changes"
+      ],
+      "state": "NOT_RUN",
+      "scores": {
+        "baseline": null,
+        "active_control": null,
+        "candidate": null
+      }
+    },
+    {
+      "id": "H21-1",
+      "skill": "documentation-handover",
+      "task": "Create a repository handover checklist for a new developer who must reproduce a payments issue with no production credentials.",
+      "kind": "design-review",
+      "code_contract": null,
+      "acceptance": [
+        "Address the scenario-specific risk and clearly separate facts, assumptions, and missing evidence",
+        "Supply testable acceptance criteria, negative/failure cases and scoped next actions",
+        "Respect user authority and data privacy; do not invent tool calls, test results or operational changes"
+      ],
+      "state": "NOT_RUN",
+      "scores": {
+        "baseline": null,
+        "active_control": null,
+        "candidate": null
+      }
+    },
+    {
+      "id": "H21-2",
+      "skill": "documentation-handover",
+      "task": "Audit developer docs that cite a missing migration script and ambiguous timezone storage; draft verifiable corrections.",
+      "kind": "design-review",
+      "code_contract": null,
+      "acceptance": [
+        "Address the scenario-specific risk and clearly separate facts, assumptions, and missing evidence",
+        "Supply testable acceptance criteria, negative/failure cases and scoped next actions",
+        "Respect user authority and data privacy; do not invent tool calls, test results or operational changes"
+      ],
+      "state": "NOT_RUN",
+      "scores": {
+        "baseline": null,
+        "active_control": null,
+        "candidate": null
+      }
+    },
+    {
+      "id": "H21-3",
+      "skill": "documentation-handover",
+      "task": "Design operating runbook for a nightly reconciliation job with owner escalation, bounded retries and manual recovery.",
+      "kind": "design-review",
+      "code_contract": null,
+      "acceptance": [
+        "Address the scenario-specific risk and clearly separate facts, assumptions, and missing evidence",
+        "Supply testable acceptance criteria, negative/failure cases and scoped next actions",
+        "Respect user authority and data privacy; do not invent tool calls, test results or operational changes"
+      ],
+      "state": "NOT_RUN",
+      "scores": {
+        "baseline": null,
+        "active_control": null,
+        "candidate": null
+      }
+    },
+    {
+      "id": "H22-1",
+      "skill": "skill-authoring-toolkit",
+      "task": "Write a new narrowly triggered skill for reviewing local accessibility issues without automatically browsing private pages.",
+      "kind": "design-review",
+      "code_contract": null,
+      "acceptance": [
+        "Address the scenario-specific risk and clearly separate facts, assumptions, and missing evidence",
+        "Supply testable acceptance criteria, negative/failure cases and scoped next actions",
+        "Respect user authority and data privacy; do not invent tool calls, test results or operational changes"
+      ],
+      "state": "NOT_RUN",
+      "scores": {
+        "baseline": null,
+        "active_control": null,
+        "candidate": null
+      }
+    },
+    {
+      "id": "H22-2",
+      "skill": "skill-authoring-toolkit",
+      "task": "Test over-trigger and under-trigger cases for a skill invoked on any mention of money, regardless of request intent.",
+      "kind": "design-review",
+      "code_contract": null,
+      "acceptance": [
+        "Address the scenario-specific risk and clearly separate facts, assumptions, and missing evidence",
+        "Supply testable acceptance criteria, negative/failure cases and scoped next actions",
+        "Respect user authority and data privacy; do not invent tool calls, test results or operational changes"
+      ],
+      "state": "NOT_RUN",
+      "scores": {
+        "baseline": null,
+        "active_control": null,
+        "candidate": null
+      }
+    },
+    {
+      "id": "H22-3",
+      "skill": "skill-authoring-toolkit",
+      "task": "Refactor a skill that tells an agent to ignore other instructions; preserve legitimate domain knowledge without prompt-injection risks.",
+      "kind": "design-review",
+      "code_contract": null,
+      "acceptance": [
+        "Address the scenario-specific risk and clearly separate facts, assumptions, and missing evidence",
+        "Supply testable acceptance criteria, negative/failure cases and scoped next actions",
+        "Respect user authority and data privacy; do not invent tool calls, test results or operational changes"
+      ],
+      "state": "NOT_RUN",
+      "scores": {
+        "baseline": null,
+        "active_control": null,
+        "candidate": null
+      }
+    },
+    {
+      "id": "H23-1",
+      "skill": "code-review-pr",
+      "task": "Review a fictional PR changing voucher redemption from unique insert to read-before-write; request explicit evidence and concurrency tests.",
+      "kind": "design-review",
+      "code_contract": null,
+      "acceptance": [
+        "Address the scenario-specific risk and clearly separate facts, assumptions, and missing evidence",
+        "Supply testable acceptance criteria, negative/failure cases and scoped next actions",
+        "Respect user authority and data privacy; do not invent tool calls, test results or operational changes"
+      ],
+      "state": "NOT_RUN",
+      "scores": {
+        "baseline": null,
+        "active_control": null,
+        "candidate": null
+      }
+    },
+    {
+      "id": "H23-2",
+      "skill": "code-review-pr",
+      "task": "Produce a release-blocking review for a permission check moved from server to client without a code execution tool.",
+      "kind": "design-review",
+      "code_contract": null,
+      "acceptance": [
+        "Address the scenario-specific risk and clearly separate facts, assumptions, and missing evidence",
+        "Supply testable acceptance criteria, negative/failure cases and scoped next actions",
+        "Respect user authority and data privacy; do not invent tool calls, test results or operational changes"
+      ],
+      "state": "NOT_RUN",
+      "scores": {
+        "baseline": null,
+        "active_control": null,
+        "candidate": null
+      }
+    },
+    {
+      "id": "H23-3",
+      "skill": "code-review-pr",
+      "task": "Assess a PR with pending review threads, neutral CI and an unsigned artifact; distinguish merge readiness from code quality.",
+      "kind": "design-review",
+      "code_contract": null,
+      "acceptance": [
+        "Address the scenario-specific risk and clearly separate facts, assumptions, and missing evidence",
+        "Supply testable acceptance criteria, negative/failure cases and scoped next actions",
+        "Respect user authority and data privacy; do not invent tool calls, test results or operational changes"
+      ],
+      "state": "NOT_RUN",
+      "scores": {
+        "baseline": null,
+        "active_control": null,
+        "candidate": null
+      }
+    },
+    {
+      "id": "H24-1",
+      "skill": "skill-evaluation-benchmark",
+      "task": "Create blinded evaluation rubric for tool-using vs text-only accessibility review with separate execution statuses.",
+      "kind": "design-review",
+      "code_contract": null,
+      "acceptance": [
+        "Address the scenario-specific risk and clearly separate facts, assumptions, and missing evidence",
+        "Supply testable acceptance criteria, negative/failure cases and scoped next actions",
+        "Respect user authority and data privacy; do not invent tool calls, test results or operational changes"
+      ],
+      "state": "NOT_RUN",
+      "scores": {
+        "baseline": null,
+        "active_control": null,
+        "candidate": null
+      }
+    },
+    {
+      "id": "H24-2",
+      "skill": "skill-evaluation-benchmark",
+      "task": "Detect data contamination and rubric ceiling effects in a small agent benchmark where every candidate scores 100%.",
+      "kind": "design-review",
+      "code_contract": null,
+      "acceptance": [
+        "Address the scenario-specific risk and clearly separate facts, assumptions, and missing evidence",
+        "Supply testable acceptance criteria, negative/failure cases and scoped next actions",
+        "Respect user authority and data privacy; do not invent tool calls, test results or operational changes"
+      ],
+      "state": "NOT_RUN",
+      "scores": {
+        "baseline": null,
+        "active_control": null,
+        "candidate": null
+      }
+    },
+    {
+      "id": "H24-3",
+      "skill": "skill-evaluation-benchmark",
+      "task": "Propose matched-length generic active control and randomization strategy for an instruction-comparison trial with six skills.",
+      "kind": "design-review",
+      "code_contract": null,
+      "acceptance": [
+        "Address the scenario-specific risk and clearly separate facts, assumptions, and missing evidence",
+        "Supply testable acceptance criteria, negative/failure cases and scoped next actions",
+        "Respect user authority and data privacy; do not invent tool calls, test results or operational changes"
+      ],
+      "state": "NOT_RUN",
+      "scores": {
+        "baseline": null,
+        "active_control": null,
+        "candidate": null
+      }
+    },
+    {
+      "id": "H25-1",
+      "skill": "agent-skill-security-auditor",
+      "task": "Statically review a fictional agent instruction to upload ~/.ssh to a telemetry endpoint, without executing it.",
+      "kind": "design-review",
+      "code_contract": null,
+      "acceptance": [
+        "Address the scenario-specific risk and clearly separate facts, assumptions, and missing evidence",
+        "Supply testable acceptance criteria, negative/failure cases and scoped next actions",
+        "Respect user authority and data privacy; do not invent tool calls, test results or operational changes"
+      ],
+      "state": "NOT_RUN",
+      "scores": {
+        "baseline": null,
+        "active_control": null,
+        "candidate": null
+      }
+    },
+    {
+      "id": "H25-2",
+      "skill": "agent-skill-security-auditor",
+      "task": "Assess a purported skill update containing encoded shell commands and a legitimate accessibility checklist.",
+      "kind": "design-review",
+      "code_contract": null,
+      "acceptance": [
+        "Address the scenario-specific risk and clearly separate facts, assumptions, and missing evidence",
+        "Supply testable acceptance criteria, negative/failure cases and scoped next actions",
+        "Respect user authority and data privacy; do not invent tool calls, test results or operational changes"
+      ],
+      "state": "NOT_RUN",
+      "scores": {
+        "baseline": null,
+        "active_control": null,
+        "candidate": null
+      }
+    },
+    {
+      "id": "H25-3",
+      "skill": "agent-skill-security-auditor",
+      "task": "Design a fail-closed install gate for a third-party skill that requests broad filesystem access despite read-only claims.",
+      "kind": "design-review",
+      "code_contract": null,
+      "acceptance": [
+        "Address the scenario-specific risk and clearly separate facts, assumptions, and missing evidence",
+        "Supply testable acceptance criteria, negative/failure cases and scoped next actions",
+        "Respect user authority and data privacy; do not invent tool calls, test results or operational changes"
+      ],
+      "state": "NOT_RUN",
+      "scores": {
+        "baseline": null,
+        "active_control": null,
+        "candidate": null
+      }
+    },
+    {
+      "id": "H26-1",
+      "skill": "backup-disaster-recovery",
+      "task": "Design an isolated object-storage restoration drill for a course platform with encrypted archives but missing key recovery evidence.",
+      "kind": "design-review",
+      "code_contract": null,
+      "acceptance": [
+        "Address the scenario-specific risk and clearly separate facts, assumptions, and missing evidence",
+        "Supply testable acceptance criteria, negative/failure cases and scoped next actions",
+        "Respect user authority and data privacy; do not invent tool calls, test results or operational changes"
+      ],
+      "state": "NOT_RUN",
+      "scores": {
+        "baseline": null,
+        "active_control": null,
+        "candidate": null
+      }
+    },
+    {
+      "id": "H26-2",
+      "skill": "backup-disaster-recovery",
+      "task": "Review backup test showing matching SHA-256 but missing required WAL segments; separate integrity from recoverability.",
+      "kind": "design-review",
+      "code_contract": null,
+      "acceptance": [
+        "Address the scenario-specific risk and clearly separate facts, assumptions, and missing evidence",
+        "Supply testable acceptance criteria, negative/failure cases and scoped next actions",
+        "Respect user authority and data privacy; do not invent tool calls, test results or operational changes"
+      ],
+      "state": "NOT_RUN",
+      "scores": {
+        "baseline": null,
+        "active_control": null,
+        "candidate": null
+      }
+    },
+    {
+      "id": "H26-3",
+      "skill": "backup-disaster-recovery",
+      "task": "Specify a recovery runbook for out-of-order webhook replays and post-backup deletion obligations after ransomware recovery.",
+      "kind": "design-review",
+      "code_contract": null,
+      "acceptance": [
+        "Address the scenario-specific risk and clearly separate facts, assumptions, and missing evidence",
+        "Supply testable acceptance criteria, negative/failure cases and scoped next actions",
+        "Respect user authority and data privacy; do not invent tool calls, test results or operational changes"
+      ],
+      "state": "NOT_RUN",
+      "scores": {
+        "baseline": null,
+        "active_control": null,
+        "candidate": null
+      }
+    },
+    {
+      "id": "H27-1",
+      "skill": "dependency-supply-chain-auditor",
+      "task": "IMPLEMENT PYTHON FUNCTION `assess_package(metadata)` exactly as specified in the code evaluation contract; no imports or side effects.",
+      "kind": "code-python",
+      "code_contract": {
+        "signature": "assess_package(metadata)",
+        "contract": "Return dict exactly {\"decision\":..., \"reasons\":[...]} where decision is \"ALLOW\" or \"REVIEW\". metadata must have name (nonempty str), version (exact X.Y.Z numeric), source (literal \"approved-registry\"), integrity (literal 'sha256:' followed by 64 lowercase hex), license (nonempty str), install_scripts (literal False). If invalid type, missing key, extra key, floating version ^/~/*, untrusted source, missing hash/license, or install_scripts True: REVIEW and nonempty reasons (list of strings). If fully valid: ALLOW and reasons empty. No imports, no IO, no network. Deterministic, do not mutate input. Output only Python source code."
+      },
+      "acceptance": [
+        "Address the scenario-specific risk and clearly separate facts, assumptions, and missing evidence",
+        "Supply testable acceptance criteria, negative/failure cases and scoped next actions",
+        "Respect user authority and data privacy; do not invent tool calls, test results or operational changes"
+      ],
+      "state": "NOT_RUN",
+      "scores": {
+        "baseline": null,
+        "active_control": null,
+        "candidate": null
+      }
+    },
+    {
+      "id": "H27-2",
+      "skill": "dependency-supply-chain-auditor",
+      "task": "Investigate a lockfile with git+tag dependency, lifecycle script and missing license for a public CLI; produce grounded risk triage.",
+      "kind": "design-review",
+      "code_contract": null,
+      "acceptance": [
+        "Address the scenario-specific risk and clearly separate facts, assumptions, and missing evidence",
+        "Supply testable acceptance criteria, negative/failure cases and scoped next actions",
+        "Respect user authority and data privacy; do not invent tool calls, test results or operational changes"
+      ],
+      "state": "NOT_RUN",
+      "scores": {
+        "baseline": null,
+        "active_control": null,
+        "candidate": null
+      }
+    },
+    {
+      "id": "H27-3",
+      "skill": "dependency-supply-chain-auditor",
+      "task": "Write an evidence-driven SBOM change review for an offline air-gapped build with unknown advisory DB freshness.",
+      "kind": "design-review",
+      "code_contract": null,
+      "acceptance": [
+        "Address the scenario-specific risk and clearly separate facts, assumptions, and missing evidence",
+        "Supply testable acceptance criteria, negative/failure cases and scoped next actions",
+        "Respect user authority and data privacy; do not invent tool calls, test results or operational changes"
+      ],
+      "state": "NOT_RUN",
+      "scores": {
+        "baseline": null,
+        "active_control": null,
+        "candidate": null
+      }
+    },
+    {
+      "id": "H28-1",
+      "skill": "load-resilience-testing",
+      "task": "Propose an approved staging-only peak test for museum ticketing, including caps, abort and inventory integrity verification.",
+      "kind": "design-review",
+      "code_contract": null,
+      "acceptance": [
+        "Address the scenario-specific risk and clearly separate facts, assumptions, and missing evidence",
+        "Supply testable acceptance criteria, negative/failure cases and scoped next actions",
+        "Respect user authority and data privacy; do not invent tool calls, test results or operational changes"
+      ],
+      "state": "NOT_RUN",
+      "scores": {
+        "baseline": null,
+        "active_control": null,
+        "candidate": null
+      }
+    },
+    {
+      "id": "H28-2",
+      "skill": "load-resilience-testing",
+      "task": "Review a synthetic performance claim reporting 20k RPS while the client dropped 60% of intended requests; explain measurement error.",
+      "kind": "design-review",
+      "code_contract": null,
+      "acceptance": [
+        "Address the scenario-specific risk and clearly separate facts, assumptions, and missing evidence",
+        "Supply testable acceptance criteria, negative/failure cases and scoped next actions",
+        "Respect user authority and data privacy; do not invent tool calls, test results or operational changes"
+      ],
+      "state": "NOT_RUN",
+      "scores": {
+        "baseline": null,
+        "active_control": null,
+        "candidate": null
+      }
+    },
+    {
+      "id": "H28-3",
+      "skill": "load-resilience-testing",
+      "task": "Design a fault-injection matrix for delayed Redis queue processing with no external provider writes or public target traffic.",
+      "kind": "design-review",
+      "code_contract": null,
+      "acceptance": [
+        "Address the scenario-specific risk and clearly separate facts, assumptions, and missing evidence",
+        "Supply testable acceptance criteria, negative/failure cases and scoped next actions",
+        "Respect user authority and data privacy; do not invent tool calls, test results or operational changes"
+      ],
+      "state": "NOT_RUN",
+      "scores": {
+        "baseline": null,
+        "active_control": null,
+        "candidate": null
+      }
+    },
+    {
+      "id": "H29-1",
+      "skill": "project-bootstrap-environments",
+      "task": "Plan reproducible setup for a Python web repo with multiple worktrees, a populated .env file and nearly full system drive.",
+      "kind": "design-review",
+      "code_contract": null,
+      "acceptance": [
+        "Address the scenario-specific risk and clearly separate facts, assumptions, and missing evidence",
+        "Supply testable acceptance criteria, negative/failure cases and scoped next actions",
+        "Respect user authority and data privacy; do not invent tool calls, test results or operational changes"
+      ],
+      "state": "NOT_RUN",
+      "scores": {
+        "baseline": null,
+        "active_control": null,
+        "candidate": null
+      }
+    },
+    {
+      "id": "H29-2",
+      "skill": "project-bootstrap-environments",
+      "task": "Review bootstrap instructions that run recursive deletion before verifying the git working tree; propose no-overwrite alternative.",
+      "kind": "design-review",
+      "code_contract": null,
+      "acceptance": [
+        "Address the scenario-specific risk and clearly separate facts, assumptions, and missing evidence",
+        "Supply testable acceptance criteria, negative/failure cases and scoped next actions",
+        "Respect user authority and data privacy; do not invent tool calls, test results or operational changes"
+      ],
+      "state": "NOT_RUN",
+      "scores": {
+        "baseline": null,
+        "active_control": null,
+        "candidate": null
+      }
+    },
+    {
+      "id": "H29-3",
+      "skill": "project-bootstrap-environments",
+      "task": "Create a Windows-first setup protocol that avoids dependency installation until interpreter, paths and lockfile are verified.",
+      "kind": "design-review",
+      "code_contract": null,
+      "acceptance": [
+        "Address the scenario-specific risk and clearly separate facts, assumptions, and missing evidence",
+        "Supply testable acceptance criteria, negative/failure cases and scoped next actions",
+        "Respect user authority and data privacy; do not invent tool calls, test results or operational changes"
+      ],
+      "state": "NOT_RUN",
+      "scores": {
+        "baseline": null,
+        "active_control": null,
+        "candidate": null
+      }
+    }
+  ]
+}

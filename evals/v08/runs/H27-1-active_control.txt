@@ -1,0 +1,57 @@
+def assess_package(metadata):
+    reasons = []
+
+    if type(metadata) is not dict:
+        return {"decision": "REVIEW", "reasons": ["metadata must be a dictionary"]}
+
+    required_keys = {
+        "name",
+        "version",
+        "source",
+        "integrity",
+        "license",
+        "install_scripts",
+    }
+
+    if set(metadata.keys()) != required_keys:
+        reasons.append("metadata must contain exactly the required keys")
+
+    name = metadata.get("name")
+    if not isinstance(name, str) or name == "":
+        reasons.append("name must be a nonempty string")
+
+    version = metadata.get("version")
+    valid_version = isinstance(version, str)
+    if valid_version:
+        parts = version.split(".")
+        valid_version = len(parts) == 3 and all(
+            part != "" and all("0" <= char <= "9" for char in part)
+            for part in parts
+        )
+    if not valid_version:
+        reasons.append("version must be an exact numeric X.Y.Z string")
+
+    if metadata.get("source") != "approved-registry":
+        reasons.append("source must be approved-registry")
+
+    integrity = metadata.get("integrity")
+    valid_integrity = (
+        isinstance(integrity, str)
+        and integrity.startswith("sha256:")
+        and len(integrity) == 71
+        and all(char in "0123456789abcdef" for char in integrity[7:])
+    )
+    if not valid_integrity:
+        reasons.append("integrity must be a sha256 hash with 64 lowercase hex characters")
+
+    license_name = metadata.get("license")
+    if not isinstance(license_name, str) or license_name == "":
+        reasons.append("license must be a nonempty string")
+
+    if metadata.get("install_scripts") is not False:
+        reasons.append("install_scripts must be False")
+
+    return {
+        "decision": "ALLOW" if not reasons else "REVIEW",
+        "reasons": reasons,
+    }

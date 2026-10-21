@@ -1,0 +1,36 @@
+def decide_reservation(existing, request):
+    required_identifiers = ("slot_id", "owner", "request_key")
+
+    if not isinstance(request, dict):
+        return {"status": "INVALID", "booking_id": None}
+
+    for field in required_identifiers:
+        value = request.get(field)
+        if not isinstance(value, str) or value == "":
+            return {"status": "INVALID", "booking_id": None}
+
+    amount_minor = request.get("amount_minor")
+    if (
+        isinstance(amount_minor, bool)
+        or not isinstance(amount_minor, int)
+        or amount_minor <= 0
+    ):
+        return {"status": "INVALID", "booking_id": None}
+
+    slot_id = request["slot_id"]
+    current = existing.get(slot_id)
+
+    if current is None:
+        return {
+            "status": "CREATED",
+            "booking_id": slot_id + ":" + request["request_key"],
+        }
+
+    if (
+        current["owner"] == request["owner"]
+        and current["request_key"] == request["request_key"]
+        and current["amount_minor"] == amount_minor
+    ):
+        return {"status": "REPLAY", "booking_id": current["booking_id"]}
+
+    return {"status": "CONFLICT", "booking_id": None}
