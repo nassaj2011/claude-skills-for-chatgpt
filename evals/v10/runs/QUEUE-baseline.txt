@@ -1,0 +1,4 @@
+Blocked: the local command host cannot start (`codex-code-mode-host.exe` is missing), so I couldn’t inspect, edit, or test the project files.
+
+Files edited: none.  
+Checks run: none (runner failed before execution).

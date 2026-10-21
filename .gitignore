@@ -17,3 +17,7 @@ dist/
 
 # One-off Codex connectivity probe; not part of matched A/B evidence
 evals/runs/v07-probe-*.txt
+
+# Disposable v0.10 model workspaces; preserve source templates and raw result records
+evals/v10/workspaces/
+evals/v10/patch_workspaces/
