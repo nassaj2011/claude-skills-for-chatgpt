@@ -1,0 +1,4 @@
+Blocked: the local command/editing host failed to start (`codex-code-mode-host.exe` is missing), so I could not inspect or modify the notifier files.
+
+Files edited: none.  
+Checks run: none (local execution was unavailable).

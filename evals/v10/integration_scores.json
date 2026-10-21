@@ -1,0 +1,164 @@
+{
+  "schema": 1,
+  "status": "PARTIAL",
+  "testing_mode": "9 real isolated model workspaces, external held-out 3-project regression suite",
+  "os_isolation": "NOT a secure OS sandbox; fictional only",
+  "trust": "Workspace-write model sessions, no real providers or production data",
+  "by_arm": {
+    "baseline": {
+      "passed": 8,
+      "total": 21
+    },
+    "active_control": {
+      "passed": 8,
+      "total": 21
+    },
+    "candidate": {
+      "passed": 8,
+      "total": 21
+    }
+  },
+  "rows": [
+    {
+      "case": "BOOK",
+      "arm": "baseline",
+      "output_sha256": "b9c306563520403c00b5b9b6f4a68c77cbf9b49dc13715d43ae8a8065311c9f0",
+      "proxy_tokens": 449,
+      "state": "REJECTED_STATIC",
+      "passed": 0,
+      "total": 0,
+      "issues": [
+        "Unexpected import: booking/service.py ['data']"
+      ]
+    },
+    {
+      "case": "BOOK",
+      "arm": "active_control",
+      "output_sha256": "fa67e9c67ac939f787034fdb18e8b0ab7ba590a376d47383cc84939c0b6128d3",
+      "proxy_tokens": 842,
+      "state": "REJECTED_STATIC",
+      "passed": 0,
+      "total": 0,
+      "issues": [
+        "Unexpected import: booking/service.py ['data']"
+      ]
+    },
+    {
+      "case": "BOOK",
+      "arm": "candidate",
+      "output_sha256": "379b94c121a9b58fd4f5d74617d7bb651a479acde7199819026e2e89e576f5e6",
+      "proxy_tokens": 842,
+      "state": "REJECTED_STATIC",
+      "passed": 0,
+      "total": 0,
+      "issues": [
+        "Unexpected import: booking/service.py ['data']"
+      ]
+    },
+    {
+      "case": "AUTH",
+      "arm": "baseline",
+      "output_sha256": "68c18e6b457b6662a12798e9672ee4eacecc1038f4c8624a7f913a0a424e9041",
+      "proxy_tokens": 373,
+      "state": "REJECTED_STATIC",
+      "passed": 0,
+      "total": 0,
+      "issues": [
+        "Unexpected import: portal/handlers.py ['policy']"
+      ]
+    },
+    {
+      "case": "AUTH",
+      "arm": "active_control",
+      "output_sha256": "56142fecc895c07c9854bb71fe1efda8c1732005edc438c2f1b502633452ac1b",
+      "proxy_tokens": 724,
+      "state": "REJECTED_STATIC",
+      "passed": 0,
+      "total": 0,
+      "issues": [
+        "Unexpected import: portal/handlers.py ['policy']"
+      ]
+    },
+    {
+      "case": "AUTH",
+      "arm": "candidate",
+      "output_sha256": "01ab0d36ca0a947c95849bcd5f8024b0fbadaeac7395fbe45ba368a0c9294e9f",
+      "proxy_tokens": 724,
+      "state": "REJECTED_STATIC",
+      "passed": 0,
+      "total": 0,
+      "issues": [
+        "Unexpected import: portal/handlers.py ['policy']"
+      ]
+    },
+    {
+      "case": "QUEUE",
+      "arm": "baseline",
+      "output_sha256": "caa64e19bc6b1e0f531f8c52dc34ad3498861f78c5582255e32fd1c5d7fd7e75",
+      "proxy_tokens": 468,
+      "state": "TESTED",
+      "total": 21,
+      "passed": 8,
+      "failed": 8,
+      "errors": 5,
+      "skipped_other_projects": 39,
+      "failure_descriptions": [
+        "test_ack_conflicting_receipt (hidden_v10.QueueTests.test_ack_conflicting_receipt)",
+        "test_bad_lease (hidden_v10.QueueTests.test_bad_lease)",
+        "test_bad_worker (hidden_v10.QueueTests.test_bad_worker)",
+        "test_cannot_ack_unclaimed (hidden_v10.QueueTests.test_cannot_ack_unclaimed)",
+        "test_duplicate_receipt_other_job (hidden_v10.QueueTests.test_duplicate_receipt_other_job)",
+        "test_fail_wrong_worker (hidden_v10.QueueTests.test_fail_wrong_worker)",
+        "test_unverified_no_side_effect (hidden_v10.QueueTests.test_unverified_no_side_effect)",
+        "test_wrong_worker_ack (hidden_v10.QueueTests.test_wrong_worker_ack)"
+      ],
+      "details": "================================================\nFAIL: test_fail_wrong_worker (hidden_v10.QueueTests.test_fail_wrong_worker)\n----------------------------------------------------------------------\nTraceback (most recent call last):\n  File \"H:\\Projects\\Claude-Skills-for-ChatGPT\\evals\\v10\\hidden_integration.py\", line 225, in test_fail_wrong_worker\n    with self.assertRaises(PermissionError):self.fail(worker=\"other\")\n         ~~~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^\nAssertionError: PermissionError not raised\n\n======================================================================\nFAIL: test_unverified_no_side_effect (hidden_v10.QueueTests.test_unverified_no_side_effect)\n----------------------------------------------------------------------\nTraceback (most recent call last):\n  File \"H:\\Projects\\Claude-Skills-for-ChatGPT\\evals\\v10\\hidden_integration.py\", line 205, in test_unverified_no_side_effect\n    with self.assertRaises(ValueError):self.ack(verified=False)\n         ~~~~~~~~~~~~~~~~~^^^^^^^^^^^^\nAssertionError: ValueError not raised\n\n======================================================================\nFAIL: test_wrong_worker_ack (hidden_v10.QueueTests.test_wrong_worker_ack)\n----------------------------------------------------------------------\nTraceback (most recent call last):\n  File \"H:\\Projects\\Claude-Skills-for-ChatGPT\\evals\\v10\\hidden_integration.py\", line 209, in test_wrong_worker_ack\n    with self.assertRaises(PermissionError):self.ack(worker=\"other\")\n         ~~~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^\nAssertionError: PermissionError not raised\n\n----------------------------------------------------------------------\nRan 60 tests in 0.471s\n\nFAILED (failures=8, errors=5, skipped=39)\n"
+    },
+    {
+      "case": "QUEUE",
+      "arm": "active_control",
+      "output_sha256": "eea8f91356517666fbfc59740187258e982554c5c3d2c9567e9953bfef7d217e",
+      "proxy_tokens": 742,
+      "state": "TESTED",
+      "total": 21,
+      "passed": 8,
+      "failed": 8,
+      "errors": 5,
+      "skipped_other_projects": 39,
+      "failure_descriptions": [
+        "test_ack_conflicting_receipt (hidden_v10.QueueTests.test_ack_conflicting_receipt)",
+        "test_bad_lease (hidden_v10.QueueTests.test_bad_lease)",
+        "test_bad_worker (hidden_v10.QueueTests.test_bad_worker)",
+        "test_cannot_ack_unclaimed (hidden_v10.QueueTests.test_cannot_ack_unclaimed)",
+        "test_duplicate_receipt_other_job (hidden_v10.QueueTests.test_duplicate_receipt_other_job)",
+        "test_fail_wrong_worker (hidden_v10.QueueTests.test_fail_wrong_worker)",
+        "test_unverified_no_side_effect (hidden_v10.QueueTests.test_unverified_no_side_effect)",
+        "test_wrong_worker_ack (hidden_v10.QueueTests.test_wrong_worker_ack)"
+      ],
+      "details": "================================================\nFAIL: test_fail_wrong_worker (hidden_v10.QueueTests.test_fail_wrong_worker)\n----------------------------------------------------------------------\nTraceback (most recent call last):\n  File \"H:\\Projects\\Claude-Skills-for-ChatGPT\\evals\\v10\\hidden_integration.py\", line 225, in test_fail_wrong_worker\n    with self.assertRaises(PermissionError):self.fail(worker=\"other\")\n         ~~~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^\nAssertionError: PermissionError not raised\n\n======================================================================\nFAIL: test_unverified_no_side_effect (hidden_v10.QueueTests.test_unverified_no_side_effect)\n----------------------------------------------------------------------\nTraceback (most recent call last):\n  File \"H:\\Projects\\Claude-Skills-for-ChatGPT\\evals\\v10\\hidden_integration.py\", line 205, in test_unverified_no_side_effect\n    with self.assertRaises(ValueError):self.ack(verified=False)\n         ~~~~~~~~~~~~~~~~~^^^^^^^^^^^^\nAssertionError: ValueError not raised\n\n======================================================================\nFAIL: test_wrong_worker_ack (hidden_v10.QueueTests.test_wrong_worker_ack)\n----------------------------------------------------------------------\nTraceback (most recent call last):\n  File \"H:\\Projects\\Claude-Skills-for-ChatGPT\\evals\\v10\\hidden_integration.py\", line 209, in test_wrong_worker_ack\n    with self.assertRaises(PermissionError):self.ack(worker=\"other\")\n         ~~~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^\nAssertionError: PermissionError not raised\n\n----------------------------------------------------------------------\nRan 60 tests in 0.027s\n\nFAILED (failures=8, errors=5, skipped=39)\n"
+    },
+    {
+      "case": "QUEUE",
+      "arm": "candidate",
+      "output_sha256": "2ff6f1bddcf145bf7814919c50fdd423486ff1815fd967cc5484cfbf656c3f85",
+      "proxy_tokens": 742,
+      "state": "TESTED",
+      "total": 21,
+      "passed": 8,
+      "failed": 8,
+      "errors": 5,
+      "skipped_other_projects": 39,
+      "failure_descriptions": [
+        "test_ack_conflicting_receipt (hidden_v10.QueueTests.test_ack_conflicting_receipt)",
+        "test_bad_lease (hidden_v10.QueueTests.test_bad_lease)",
+        "test_bad_worker (hidden_v10.QueueTests.test_bad_worker)",
+        "test_cannot_ack_unclaimed (hidden_v10.QueueTests.test_cannot_ack_unclaimed)",
+        "test_duplicate_receipt_other_job (hidden_v10.QueueTests.test_duplicate_receipt_other_job)",
+        "test_fail_wrong_worker (hidden_v10.QueueTests.test_fail_wrong_worker)",
+        "test_unverified_no_side_effect (hidden_v10.QueueTests.test_unverified_no_side_effect)",
+        "test_wrong_worker_ack (hidden_v10.QueueTests.test_wrong_worker_ack)"
+      ],
+      "details": "================================================\nFAIL: test_fail_wrong_worker (hidden_v10.QueueTests.test_fail_wrong_worker)\n----------------------------------------------------------------------\nTraceback (most recent call last):\n  File \"H:\\Projects\\Claude-Skills-for-ChatGPT\\evals\\v10\\hidden_integration.py\", line 225, in test_fail_wrong_worker\n    with self.assertRaises(PermissionError):self.fail(worker=\"other\")\n         ~~~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^\nAssertionError: PermissionError not raised\n\n======================================================================\nFAIL: test_unverified_no_side_effect (hidden_v10.QueueTests.test_unverified_no_side_effect)\n----------------------------------------------------------------------\nTraceback (most recent call last):\n  File \"H:\\Projects\\Claude-Skills-for-ChatGPT\\evals\\v10\\hidden_integration.py\", line 205, in test_unverified_no_side_effect\n    with self.assertRaises(ValueError):self.ack(verified=False)\n         ~~~~~~~~~~~~~~~~~^^^^^^^^^^^^\nAssertionError: ValueError not raised\n\n======================================================================\nFAIL: test_wrong_worker_ack (hidden_v10.QueueTests.test_wrong_worker_ack)\n----------------------------------------------------------------------\nTraceback (most recent call last):\n  File \"H:\\Projects\\Claude-Skills-for-ChatGPT\\evals\\v10\\hidden_integration.py\", line 209, in test_wrong_worker_ack\n    with self.assertRaises(PermissionError):self.ack(worker=\"other\")\n         ~~~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^\nAssertionError: PermissionError not raised\n\n----------------------------------------------------------------------\nRan 60 tests in 0.061s\n\nFAILED (failures=8, errors=5, skipped=39)\n"
+    }
+  ]
+}

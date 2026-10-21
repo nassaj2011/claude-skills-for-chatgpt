@@ -1,0 +1,4 @@
+Blocked: the local command host is unavailable (`codex-code-mode-host.exe` missing), so I could not inspect or edit the workspace safely.
+
+Files edited: none.  
+Checks run: none (command execution failed before any project command ran).

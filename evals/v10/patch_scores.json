@@ -1,0 +1,153 @@
+{
+  "schema": 1,
+  "status": "ALL_NINE_GRADED",
+  "tool_host": "MISSING; model produced full JSON source, external applier wrote to isolated fixtures",
+  "grading_limit": "developer-maintained synthetic hidden tests; not OS hardened",
+  "by_arm": {
+    "baseline": {
+      "passed": 60,
+      "total": 60,
+      "valid_cases": 3
+    },
+    "active_control": {
+      "passed": 59,
+      "total": 60,
+      "valid_cases": 3
+    },
+    "candidate": {
+      "passed": 60,
+      "total": 60,
+      "valid_cases": 3
+    }
+  },
+  "rows": [
+    {
+      "case": "BOOK",
+      "arm": "baseline",
+      "response_sha256": "39f9d17a1c6bd442c15c752cc9752e27c3c00794b7ffc03b37939e2d35c97246",
+      "state": "TESTED",
+      "total": 18,
+      "passed": 18,
+      "failed": 0,
+      "errors": 0,
+      "skipped_other_projects": 42,
+      "failure_descriptions": [],
+      "details": "sssssssssssssssssssss..................sssssssssssssssssssss\n----------------------------------------------------------------------\nRan 60 tests in 0.052s\n\nOK (skipped=42)\n",
+      "applied_file_count": 2
+    },
+    {
+      "case": "BOOK",
+      "arm": "active_control",
+      "response_sha256": "1a643472040687259ddd00c735191c8474cbc58d12afde0a1c7c1c24325774fa",
+      "state": "TESTED",
+      "total": 18,
+      "passed": 18,
+      "failed": 0,
+      "errors": 0,
+      "skipped_other_projects": 42,
+      "failure_descriptions": [],
+      "details": "sssssssssssssssssssss..................sssssssssssssssssssss\n----------------------------------------------------------------------\nRan 60 tests in 0.039s\n\nOK (skipped=42)\n",
+      "applied_file_count": 2
+    },
+    {
+      "case": "BOOK",
+      "arm": "candidate",
+      "response_sha256": "e55f5de39e29ddce85d86348d66765d2ac3fc904a876ae867a1ec820d7eb4f0b",
+      "state": "TESTED",
+      "total": 18,
+      "passed": 18,
+      "failed": 0,
+      "errors": 0,
+      "skipped_other_projects": 42,
+      "failure_descriptions": [],
+      "details": "sssssssssssssssssssss..................sssssssssssssssssssss\n----------------------------------------------------------------------\nRan 60 tests in 0.025s\n\nOK (skipped=42)\n",
+      "applied_file_count": 2
+    },
+    {
+      "case": "AUTH",
+      "arm": "baseline",
+      "response_sha256": "1c3106fdd0aee498cee0665ac9eed44a47b44de2607f4556a15a971bf18cd612",
+      "state": "TESTED",
+      "total": 21,
+      "passed": 21,
+      "failed": 0,
+      "errors": 0,
+      "skipped_other_projects": 39,
+      "failure_descriptions": [],
+      "details": ".....................sssssssssssssssssssssssssssssssssssssss\n----------------------------------------------------------------------\nRan 60 tests in 0.043s\n\nOK (skipped=39)\n",
+      "applied_file_count": 2
+    },
+    {
+      "case": "AUTH",
+      "arm": "active_control",
+      "response_sha256": "05caa155a1ff4268d823dab3f439869b43e823b0bfdadd8385fd11d76c7d008c",
+      "state": "TESTED",
+      "total": 21,
+      "passed": 21,
+      "failed": 0,
+      "errors": 0,
+      "skipped_other_projects": 39,
+      "failure_descriptions": [],
+      "details": ".....................sssssssssssssssssssssssssssssssssssssss\n----------------------------------------------------------------------\nRan 60 tests in 0.011s\n\nOK (skipped=39)\n",
+      "applied_file_count": 2
+    },
+    {
+      "case": "AUTH",
+      "arm": "candidate",
+      "response_sha256": "436847fd0038407d11074b4d5eb38bd6f9113aadc45fc0c8552c40bf40d9926f",
+      "state": "TESTED",
+      "total": 21,
+      "passed": 21,
+      "failed": 0,
+      "errors": 0,
+      "skipped_other_projects": 39,
+      "failure_descriptions": [],
+      "details": ".....................sssssssssssssssssssssssssssssssssssssss\n----------------------------------------------------------------------\nRan 60 tests in 0.010s\n\nOK (skipped=39)\n",
+      "applied_file_count": 2
+    },
+    {
+      "case": "QUEUE",
+      "arm": "baseline",
+      "response_sha256": "bf204e28f734bc0da9e0c7b7c107d221b5ae415ee2b5a39bbf5c9a69a0f0e7c1",
+      "state": "TESTED",
+      "total": 21,
+      "passed": 21,
+      "failed": 0,
+      "errors": 0,
+      "skipped_other_projects": 39,
+      "failure_descriptions": [],
+      "details": "sssssssssssssssssssssssssssssssssssssss.....................\n----------------------------------------------------------------------\nRan 60 tests in 0.055s\n\nOK (skipped=39)\n",
+      "applied_file_count": 2
+    },
+    {
+      "case": "QUEUE",
+      "arm": "active_control",
+      "response_sha256": "04f87d537e6174b9dfdd448b8680c02528158d0f00c47700b00468f6fd6b4646",
+      "state": "TESTED",
+      "total": 21,
+      "passed": 20,
+      "failed": 0,
+      "errors": 1,
+      "skipped_other_projects": 39,
+      "failure_descriptions": [
+        "test_cannot_ack_unclaimed (hidden_v10.QueueTests.test_cannot_ack_unclaimed)"
+      ],
+      "details": "sssssssssssssssssssssssssssssssssssssss......E..............\n======================================================================\nERROR: test_cannot_ack_unclaimed (hidden_v10.QueueTests.test_cannot_ack_unclaimed)\n----------------------------------------------------------------------\nTraceback (most recent call last):\n  File \"H:\\Projects\\Claude-Skills-for-ChatGPT\\evals\\v10\\hidden_integration.py\", line 227, in test_cannot_ack_unclaimed\n    with self.assertRaises(ValueError):self.ack()\n                                       ~~~~~~~~^^\n  File \"H:\\Projects\\Claude-Skills-for-ChatGPT\\evals\\v10\\hidden_integration.py\", line 168, in ack\n    return ack(self.s,job,worker,receipt,verified)\n  File \"H:\\Projects\\Claude-Skills-for-ChatGPT\\evals\\v10\\patch_workspaces\\QUEUE-active_control\\notifier\\worker.py\", line 60, in ack\n    raise PermissionError(\"job is owned by another worker\")\nPermissionError: job is owned by another worker\n\n----------------------------------------------------------------------\nRan 60 tests in 0.026s\n\nFAILED (errors=1, skipped=39)\n",
+      "applied_file_count": 2
+    },
+    {
+      "case": "QUEUE",
+      "arm": "candidate",
+      "response_sha256": "b94a9a7b4308c94e06c8e47aff3d31e2e7bdbea4e19bff558625eff103854b29",
+      "state": "TESTED",
+      "total": 21,
+      "passed": 21,
+      "failed": 0,
+      "errors": 0,
+      "skipped_other_projects": 39,
+      "failure_descriptions": [],
+      "details": "sssssssssssssssssssssssssssssssssssssss.....................\n----------------------------------------------------------------------\nRan 60 tests in 0.022s\n\nOK (skipped=39)\n",
+      "applied_file_count": 2
+    }
+  ]
+}

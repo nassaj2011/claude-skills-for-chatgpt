@@ -1,0 +1,4 @@
+Blocked: the local command/editing host (`codex-code-mode-host.exe`) is unavailable, so I could not inspect or modify files.
+
+Files edited: none.  
+Checks run: none (tool host failed before execution).

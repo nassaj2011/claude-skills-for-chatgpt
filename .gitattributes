@@ -8,3 +8,7 @@ evals/v08/runs/*.txt -text
 
 # v0.9 archived model output bytes are SHA-256 verified
 evals/v09/runs/*.txt -text
+
+# Keep v0.10 original model response bytes unchanged for SHA-256 verification
+evals/v10/runs/*.txt -text
+evals/v10/runs_text_patch/*.txt -text

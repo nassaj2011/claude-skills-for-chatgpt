@@ -1,0 +1,4 @@
+Blocked: the local command host is unavailable, and this workspace is read-only, so I could not inspect or edit the project files.
+
+Files edited: none.  
+Checks run: none (command host failed before execution).
