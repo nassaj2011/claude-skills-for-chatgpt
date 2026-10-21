@@ -1,0 +1,117 @@
+{
+  "schema": 1,
+  "state": "EXPLORATORY_POST_HOC",
+  "total_distinct_test_methods": 12,
+  "original_v10_scores_unchanged": true,
+  "not_a_native_codex_skill_test": true,
+  "rows": [
+    {
+      "case": "BOOK",
+      "arm": "baseline",
+      "total": 4,
+      "passed": 4,
+      "failed": 0,
+      "errors": 0,
+      "skipped_other_projects": 8,
+      "failure_descriptions": [],
+      "details": "ssss....ssss\n----------------------------------------------------------------------\nRan 12 tests in 0.010s\n\nOK (skipped=8)\n",
+      "state": "TESTED"
+    },
+    {
+      "case": "BOOK",
+      "arm": "active_control",
+      "total": 4,
+      "passed": 4,
+      "failed": 0,
+      "errors": 0,
+      "skipped_other_projects": 8,
+      "failure_descriptions": [],
+      "details": "ssss....ssss\n----------------------------------------------------------------------\nRan 12 tests in 0.006s\n\nOK (skipped=8)\n",
+      "state": "TESTED"
+    },
+    {
+      "case": "BOOK",
+      "arm": "candidate",
+      "total": 4,
+      "passed": 4,
+      "failed": 0,
+      "errors": 0,
+      "skipped_other_projects": 8,
+      "failure_descriptions": [],
+      "details": "ssss....ssss\n----------------------------------------------------------------------\nRan 12 tests in 0.006s\n\nOK (skipped=8)\n",
+      "state": "TESTED"
+    },
+    {
+      "case": "AUTH",
+      "arm": "baseline",
+      "total": 4,
+      "passed": 4,
+      "failed": 0,
+      "errors": 0,
+      "skipped_other_projects": 8,
+      "failure_descriptions": [],
+      "details": "....ssssssss\n----------------------------------------------------------------------\nRan 12 tests in 0.005s\n\nOK (skipped=8)\n",
+      "state": "TESTED"
+    },
+    {
+      "case": "AUTH",
+      "arm": "active_control",
+      "total": 4,
+      "passed": 4,
+      "failed": 0,
+      "errors": 0,
+      "skipped_other_projects": 8,
+      "failure_descriptions": [],
+      "details": "....ssssssss\n----------------------------------------------------------------------\nRan 12 tests in 0.006s\n\nOK (skipped=8)\n",
+      "state": "TESTED"
+    },
+    {
+      "case": "AUTH",
+      "arm": "candidate",
+      "total": 4,
+      "passed": 4,
+      "failed": 0,
+      "errors": 0,
+      "skipped_other_projects": 8,
+      "failure_descriptions": [],
+      "details": "....ssssssss\n----------------------------------------------------------------------\nRan 12 tests in 0.005s\n\nOK (skipped=8)\n",
+      "state": "TESTED"
+    },
+    {
+      "case": "QUEUE",
+      "arm": "baseline",
+      "total": 4,
+      "passed": 4,
+      "failed": 0,
+      "errors": 0,
+      "skipped_other_projects": 8,
+      "failure_descriptions": [],
+      "details": "ssssssss....\n----------------------------------------------------------------------\nRan 12 tests in 0.007s\n\nOK (skipped=8)\n",
+      "state": "TESTED"
+    },
+    {
+      "case": "QUEUE",
+      "arm": "active_control",
+      "total": 4,
+      "passed": 4,
+      "failed": 0,
+      "errors": 0,
+      "skipped_other_projects": 8,
+      "failure_descriptions": [],
+      "details": "ssssssss....\n----------------------------------------------------------------------\nRan 12 tests in 0.007s\n\nOK (skipped=8)\n",
+      "state": "TESTED"
+    },
+    {
+      "case": "QUEUE",
+      "arm": "candidate",
+      "total": 4,
+      "passed": 4,
+      "failed": 0,
+      "errors": 0,
+      "skipped_other_projects": 8,
+      "failure_descriptions": [],
+      "details": "ssssssss....\n----------------------------------------------------------------------\nRan 12 tests in 0.011s\n\nOK (skipped=8)\n",
+      "state": "TESTED"
+    }
+  ]
+}
