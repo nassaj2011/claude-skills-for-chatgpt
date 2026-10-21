@@ -141,3 +141,7 @@ There are 12 complete read-only Codex A/B outputs (six matched cases), with pres
 ### v0.8 — Three-arm held-out benchmarking
 
 [87 fictional new prompts](evals/v08/heldout_87.json) cover 29 skills. The [three-code-case pilot](evals/v08/PILOT_REPORT.md) compared baseline, length-matched generic instructions, and actual specialist instructions: **29/32, 32/32 and 32/32** accepted fixtures respectively. No skill-specific benefit relative to the active control was observed in these three cases. The other 84 cases were not run. This evaluation infrastructure does not certify skill quality or alter installed skills.
+
+### v0.12 — Expanded post-hoc evaluation, isolated from concurrent work
+
+[An additional 34 diagnostic tests](evals/v12/RESULTS.md) per experimental arm were executed against nine previously archived synthetic multi-file results, requiring zero new model calls: 34/34 baseline, 34/34 generic, 34/34 specialist. These are explicitly post-hoc, not blindly preregistered, and demonstrate no specialist-specific lift. The changes were developed in a separate Git worktree to avoid conflict with concurrently merged v0.11 work.
