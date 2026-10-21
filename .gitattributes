@@ -2,3 +2,6 @@
 evals/runs/*.txt -text
 # Source prompts and normal text can use consistent LF in the Git repository.
 evals/prompts/*.txt text eol=lf
+
+# Preserve archived model outputs byte for byte for SHA-256 checks
+evals/v08/runs/*.txt -text

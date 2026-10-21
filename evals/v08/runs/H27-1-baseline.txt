@@ -1,0 +1,59 @@
+def assess_package(metadata):
+    required = {
+        "name",
+        "version",
+        "source",
+        "integrity",
+        "license",
+        "install_scripts",
+    }
+
+    if not isinstance(metadata, dict):
+        return {"decision": "REVIEW", "reasons": ["metadata must be a dict"]}
+
+    reasons = []
+
+    missing = required - set(metadata)
+    extra = set(metadata) - required
+    if missing:
+        reasons.append("missing required key")
+    if extra:
+        reasons.append("unexpected key")
+
+    name = metadata.get("name")
+    if not isinstance(name, str) or not name:
+        reasons.append("invalid name")
+
+    version = metadata.get("version")
+    if not isinstance(version, str):
+        reasons.append("invalid version")
+    else:
+        parts = version.split(".")
+        if (
+            len(parts) != 3
+            or any(not part or not part.isdigit() for part in parts)
+        ):
+            reasons.append("invalid version")
+
+    if metadata.get("source") != "approved-registry":
+        reasons.append("untrusted source")
+
+    integrity = metadata.get("integrity")
+    if (
+        not isinstance(integrity, str)
+        or not integrity.startswith("sha256:")
+        or len(integrity) != 71
+        or any(c not in "0123456789abcdef" for c in integrity[7:])
+    ):
+        reasons.append("invalid integrity hash")
+
+    license_name = metadata.get("license")
+    if not isinstance(license_name, str) or not license_name:
+        reasons.append("missing or invalid license")
+
+    if metadata.get("install_scripts") is not False:
+        reasons.append("install_scripts must be false")
+
+    if reasons:
+        return {"decision": "REVIEW", "reasons": reasons}
+    return {"decision": "ALLOW", "reasons": []}

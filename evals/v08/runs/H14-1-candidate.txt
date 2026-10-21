@@ -1,0 +1,21 @@
+def normalize_llm_payload(payload):
+    if type(payload) is not dict or set(payload) != {"decision", "reason", "tool"}:
+        return {"ok": False, "intent": None, "error": "INVALID"}
+
+    decision = payload["decision"]
+    reason = payload["reason"]
+    tool = payload["tool"]
+
+    if (
+        type(decision) is not str
+        or decision not in {"answer", "refuse", "lookup"}
+        or type(reason) is not str
+        or len(reason) > 120
+        or type(tool) is not str
+        or tool not in {"none", "lookup_venue"}
+        or (decision == "lookup" and tool != "lookup_venue")
+        or (decision != "lookup" and tool != "none")
+    ):
+        return {"ok": False, "intent": None, "error": "INVALID"}
+
+    return {"ok": True, "intent": decision, "error": None}
