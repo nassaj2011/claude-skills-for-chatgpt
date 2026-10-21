@@ -1,0 +1,2120 @@
+{
+  "schema": 1,
+  "cases": [
+    {
+      "case": "P01",
+      "function": "finalize_payment",
+      "tests": [
+        {
+          "args": [
+            {
+              "booking_id": "B1",
+              "tenant_id": "T1",
+              "amount_minor": 2500,
+              "currency": "IRT",
+              "state": "PENDING",
+              "receipt_id": null
+            },
+            {
+              "booking_id": "B1",
+              "tenant_id": "T1",
+              "amount_minor": 2500,
+              "currency": "IRT",
+              "provider_verified": true,
+              "result": "SUCCESS",
+              "receipt_id": "RX100"
+            }
+          ],
+          "expected": {
+            "decision": "APPLY",
+            "state": "PAID",
+            "receipt_id": "RX100"
+          }
+        },
+        {
+          "args": [
+            {
+              "booking_id": "B1",
+              "tenant_id": "T1",
+              "amount_minor": 2500,
+              "currency": "IRT",
+              "state": "PAID",
+              "receipt_id": "RX100"
+            },
+            {
+              "booking_id": "B1",
+              "tenant_id": "T1",
+              "amount_minor": 2500,
+              "currency": "IRT",
+              "provider_verified": true,
+              "result": "SUCCESS",
+              "receipt_id": "RX100"
+            }
+          ],
+          "expected": {
+            "decision": "REPLAY",
+            "state": "PAID",
+            "receipt_id": "RX100"
+          }
+        },
+        {
+          "args": [
+            {
+              "booking_id": "B1",
+              "tenant_id": "T1",
+              "amount_minor": 2500,
+              "currency": "IRT",
+              "state": "PAID",
+              "receipt_id": "RX100"
+            },
+            {
+              "booking_id": "B1",
+              "tenant_id": "T1",
+              "amount_minor": 2500,
+              "currency": "IRT",
+              "provider_verified": true,
+              "result": "SUCCESS",
+              "receipt_id": "OTHER"
+            }
+          ],
+          "expected": {
+            "decision": "REJECT",
+            "state": "PAID",
+            "receipt_id": "RX100"
+          }
+        },
+        {
+          "args": [
+            {
+              "booking_id": "B1",
+              "tenant_id": "T1",
+              "amount_minor": 2500,
+              "currency": "IRT",
+              "state": "PENDING",
+              "receipt_id": null
+            },
+            {
+              "booking_id": "B1",
+              "tenant_id": "T2",
+              "amount_minor": 2500,
+              "currency": "IRT",
+              "provider_verified": true,
+              "result": "SUCCESS",
+              "receipt_id": "RX100"
+            }
+          ],
+          "expected": {
+            "decision": "REJECT",
+            "state": "PENDING",
+            "receipt_id": null
+          }
+        },
+        {
+          "args": [
+            {
+              "booking_id": "B1",
+              "tenant_id": "T1",
+              "amount_minor": 2500,
+              "currency": "IRT",
+              "state": "PENDING",
+              "receipt_id": null
+            },
+            {
+              "booking_id": "B2",
+              "tenant_id": "T1",
+              "amount_minor": 2500,
+              "currency": "IRT",
+              "provider_verified": true,
+              "result": "SUCCESS",
+              "receipt_id": "RX100"
+            }
+          ],
+          "expected": {
+            "decision": "REJECT",
+            "state": "PENDING",
+            "receipt_id": null
+          }
+        },
+        {
+          "args": [
+            {
+              "booking_id": "B1",
+              "tenant_id": "T1",
+              "amount_minor": 2500,
+              "currency": "IRT",
+              "state": "PENDING",
+              "receipt_id": null
+            },
+            {
+              "booking_id": "B1",
+              "tenant_id": "T1",
+              "amount_minor": 2501,
+              "currency": "IRT",
+              "provider_verified": true,
+              "result": "SUCCESS",
+              "receipt_id": "RX100"
+            }
+          ],
+          "expected": {
+            "decision": "REJECT",
+            "state": "PENDING",
+            "receipt_id": null
+          }
+        },
+        {
+          "args": [
+            {
+              "booking_id": "B1",
+              "tenant_id": "T1",
+              "amount_minor": 2500,
+              "currency": "IRT",
+              "state": "PENDING",
+              "receipt_id": null
+            },
+            {
+              "booking_id": "B1",
+              "tenant_id": "T1",
+              "amount_minor": 2500,
+              "currency": "USD",
+              "provider_verified": true,
+              "result": "SUCCESS",
+              "receipt_id": "RX100"
+            }
+          ],
+          "expected": {
+            "decision": "REJECT",
+            "state": "PENDING",
+            "receipt_id": null
+          }
+        },
+        {
+          "args": [
+            {
+              "booking_id": "B1",
+              "tenant_id": "T1",
+              "amount_minor": 2500,
+              "currency": "IRT",
+              "state": "PENDING",
+              "receipt_id": null
+            },
+            {
+              "booking_id": "B1",
+              "tenant_id": "T1",
+              "amount_minor": 2500,
+              "currency": "IRT",
+              "provider_verified": false,
+              "result": "SUCCESS",
+              "receipt_id": "RX100"
+            }
+          ],
+          "expected": {
+            "decision": "REJECT",
+            "state": "PENDING",
+            "receipt_id": null
+          }
+        },
+        {
+          "args": [
+            {
+              "booking_id": "B1",
+              "tenant_id": "T1",
+              "amount_minor": 2500,
+              "currency": "IRT",
+              "state": "PENDING",
+              "receipt_id": null
+            },
+            {
+              "booking_id": "B1",
+              "tenant_id": "T1",
+              "amount_minor": 2500,
+              "currency": "IRT",
+              "provider_verified": 1,
+              "result": "SUCCESS",
+              "receipt_id": "RX100"
+            }
+          ],
+          "expected": {
+            "decision": "REJECT",
+            "state": "PENDING",
+            "receipt_id": null
+          }
+        },
+        {
+          "args": [
+            {
+              "booking_id": "B1",
+              "tenant_id": "T1",
+              "amount_minor": 2500,
+              "currency": "IRT",
+              "state": "PENDING",
+              "receipt_id": null
+            },
+            {
+              "booking_id": "B1",
+              "tenant_id": "T1",
+              "amount_minor": 2500,
+              "currency": "IRT",
+              "provider_verified": true,
+              "result": "PENDING",
+              "receipt_id": "RX100"
+            }
+          ],
+          "expected": {
+            "decision": "REJECT",
+            "state": "PENDING",
+            "receipt_id": null
+          }
+        },
+        {
+          "args": [
+            {
+              "booking_id": "B1",
+              "tenant_id": "T1",
+              "amount_minor": 2500,
+              "currency": "IRT",
+              "state": "PENDING",
+              "receipt_id": null
+            },
+            {
+              "booking_id": "B1",
+              "tenant_id": "T1",
+              "amount_minor": 2500,
+              "currency": "IRT",
+              "provider_verified": true,
+              "result": "SUCCESS",
+              "receipt_id": ""
+            }
+          ],
+          "expected": {
+            "decision": "REJECT",
+            "state": "PENDING",
+            "receipt_id": null
+          }
+        },
+        {
+          "args": [
+            {
+              "booking_id": "B1",
+              "tenant_id": "T1",
+              "amount_minor": 2500,
+              "currency": "IRT",
+              "state": "PENDING",
+              "receipt_id": null
+            },
+            {
+              "booking_id": "B1",
+              "tenant_id": "T1",
+              "amount_minor": true,
+              "currency": "IRT",
+              "provider_verified": true,
+              "result": "SUCCESS",
+              "receipt_id": "RX100"
+            }
+          ],
+          "expected": {
+            "decision": "REJECT",
+            "state": "PENDING",
+            "receipt_id": null
+          }
+        },
+        {
+          "args": [
+            {
+              "booking_id": "B1",
+              "tenant_id": "T1",
+              "amount_minor": 2500,
+              "currency": "IRT",
+              "state": "PENDING",
+              "receipt_id": null
+            },
+            {
+              "booking_id": "B1",
+              "tenant_id": "T1",
+              "amount_minor": 2500,
+              "currency": "IRT",
+              "provider_verified": true,
+              "result": "SUCCESS",
+              "receipt_id": "RX100",
+              "extra": "x"
+            }
+          ],
+          "expected": {
+            "decision": "REJECT",
+            "state": "PENDING",
+            "receipt_id": null
+          }
+        },
+        {
+          "args": [
+            {
+              "booking_id": "B1",
+              "tenant_id": "T1",
+              "amount_minor": 2500,
+              "currency": "IRT",
+              "state": "PENDING",
+              "receipt_id": null
+            },
+            {
+              "booking_id": "B1",
+              "tenant_id": "T1",
+              "amount_minor": 2500,
+              "currency": "IRT",
+              "provider_verified": true,
+              "result": "SUCCESS",
+              "receipt_id": 123
+            }
+          ],
+          "expected": {
+            "decision": "REJECT",
+            "state": "PENDING",
+            "receipt_id": null
+          }
+        },
+        {
+          "args": [
+            {
+              "booking_id": "B1",
+              "tenant_id": "T1",
+              "amount_minor": true,
+              "currency": "IRT",
+              "state": "PENDING",
+              "receipt_id": null
+            },
+            {
+              "booking_id": "B1",
+              "tenant_id": "T1",
+              "amount_minor": 2500,
+              "currency": "IRT",
+              "provider_verified": true,
+              "result": "SUCCESS",
+              "receipt_id": "RX100"
+            }
+          ],
+          "expected": {
+            "decision": "REJECT",
+            "state": null,
+            "receipt_id": null
+          }
+        },
+        {
+          "args": [
+            {
+              "booking_id": "B1",
+              "tenant_id": "T1",
+              "amount_minor": 2500,
+              "currency": "IRT",
+              "state": "PAID",
+              "receipt_id": null
+            },
+            {
+              "booking_id": "B1",
+              "tenant_id": "T1",
+              "amount_minor": 2500,
+              "currency": "IRT",
+              "provider_verified": true,
+              "result": "SUCCESS",
+              "receipt_id": "RX100"
+            }
+          ],
+          "expected": {
+            "decision": "REJECT",
+            "state": null,
+            "receipt_id": null
+          }
+        },
+        {
+          "args": [
+            {
+              "booking_id": "B1",
+              "tenant_id": "T1",
+              "amount_minor": 2500,
+              "currency": "IRT",
+              "state": "PENDING",
+              "receipt_id": "R"
+            },
+            {
+              "booking_id": "B1",
+              "tenant_id": "T1",
+              "amount_minor": 2500,
+              "currency": "IRT",
+              "provider_verified": true,
+              "result": "SUCCESS",
+              "receipt_id": "RX100"
+            }
+          ],
+          "expected": {
+            "decision": "REJECT",
+            "state": null,
+            "receipt_id": null
+          }
+        },
+        {
+          "args": [
+            {
+              "booking_id": "B1",
+              "tenant_id": "T1",
+              "amount_minor": 0,
+              "currency": "IRT",
+              "state": "PENDING",
+              "receipt_id": null
+            },
+            {
+              "booking_id": "B1",
+              "tenant_id": "T1",
+              "amount_minor": 2500,
+              "currency": "IRT",
+              "provider_verified": true,
+              "result": "SUCCESS",
+              "receipt_id": "RX100"
+            }
+          ],
+          "expected": {
+            "decision": "REJECT",
+            "state": null,
+            "receipt_id": null
+          }
+        },
+        {
+          "args": [
+            {
+              "booking_id": "B1",
+              "tenant_id": "",
+              "amount_minor": 2500,
+              "currency": "IRT",
+              "state": "PENDING",
+              "receipt_id": null
+            },
+            {
+              "booking_id": "B1",
+              "tenant_id": "T1",
+              "amount_minor": 2500,
+              "currency": "IRT",
+              "provider_verified": true,
+              "result": "SUCCESS",
+              "receipt_id": "RX100"
+            }
+          ],
+          "expected": {
+            "decision": "REJECT",
+            "state": null,
+            "receipt_id": null
+          }
+        },
+        {
+          "args": [
+            {
+              "booking_id": "B1",
+              "tenant_id": "T1",
+              "amount_minor": 2500,
+              "currency": "IRT",
+              "state": "PENDING",
+              "receipt_id": null,
+              "extra": "x"
+            },
+            {
+              "booking_id": "B1",
+              "tenant_id": "T1",
+              "amount_minor": 2500,
+              "currency": "IRT",
+              "provider_verified": true,
+              "result": "SUCCESS",
+              "receipt_id": "RX100"
+            }
+          ],
+          "expected": {
+            "decision": "REJECT",
+            "state": null,
+            "receipt_id": null
+          }
+        },
+        {
+          "args": [
+            null,
+            {
+              "booking_id": "B1",
+              "tenant_id": "T1",
+              "amount_minor": 2500,
+              "currency": "IRT",
+              "provider_verified": true,
+              "result": "SUCCESS",
+              "receipt_id": "RX100"
+            }
+          ],
+          "expected": {
+            "decision": "REJECT",
+            "state": null,
+            "receipt_id": null
+          }
+        },
+        {
+          "args": [
+            {
+              "booking_id": "B1",
+              "tenant_id": "T1",
+              "amount_minor": 2500,
+              "currency": "IRT",
+              "state": "PENDING",
+              "receipt_id": null
+            },
+            null
+          ],
+          "expected": {
+            "decision": "REJECT",
+            "state": "PENDING",
+            "receipt_id": null
+          }
+        },
+        {
+          "args": [
+            {
+              "booking_id": "B1",
+              "tenant_id": "T1",
+              "amount_minor": 2500,
+              "currency": "IRT",
+              "state": "PENDING",
+              "receipt_id": null
+            },
+            {
+              "booking_id": "B1",
+              "tenant_id": "T1",
+              "amount_minor": 2500,
+              "currency": "IRT",
+              "provider_verified": true,
+              "result": "SUCCESS",
+              "receipt_id": "RX100"
+            }
+          ],
+          "expected": {
+            "decision": "APPLY",
+            "state": "PAID",
+            "receipt_id": "RX100"
+          }
+        }
+      ]
+    },
+    {
+      "case": "P02",
+      "function": "authorize_tool",
+      "tests": [
+        {
+          "args": [
+            {
+              "actor_id": "U1",
+              "tenant_id": "T1",
+              "role": "editor"
+            },
+            {
+              "tool": "read_venue",
+              "tenant_id": "T1",
+              "resource_id": "V1",
+              "approved": false,
+              "request_key": "K1"
+            },
+            {}
+          ],
+          "expected": {
+            "decision": "READ",
+            "audit_key": null
+          }
+        },
+        {
+          "args": [
+            {
+              "actor_id": "U1",
+              "tenant_id": "T1",
+              "role": "viewer"
+            },
+            {
+              "tool": "read_venue",
+              "tenant_id": "T1",
+              "resource_id": "V1",
+              "approved": false,
+              "request_key": "K1"
+            },
+            {}
+          ],
+          "expected": {
+            "decision": "READ",
+            "audit_key": null
+          }
+        },
+        {
+          "args": [
+            {
+              "actor_id": "U1",
+              "tenant_id": "T1",
+              "role": "editor"
+            },
+            {
+              "tool": "close_slot",
+              "tenant_id": "T1",
+              "resource_id": "V1",
+              "approved": true,
+              "request_key": "K1"
+            },
+            {}
+          ],
+          "expected": {
+            "decision": "WRITE",
+            "audit_key": "T1:K1"
+          }
+        },
+        {
+          "args": [
+            {
+              "actor_id": "U1",
+              "tenant_id": "T1",
+              "role": "editor"
+            },
+            {
+              "tool": "close_slot",
+              "tenant_id": "T1",
+              "resource_id": "V1",
+              "approved": true,
+              "request_key": "K1"
+            },
+            {
+              "T1:K1": "close_slot|V1"
+            }
+          ],
+          "expected": {
+            "decision": "REPLAY",
+            "audit_key": "T1:K1"
+          }
+        },
+        {
+          "args": [
+            {
+              "actor_id": "U1",
+              "tenant_id": "T1",
+              "role": "editor"
+            },
+            {
+              "tool": "close_slot",
+              "tenant_id": "T1",
+              "resource_id": "V1",
+              "approved": true,
+              "request_key": "K1"
+            },
+            {
+              "T1:K1": "close_slot|V2"
+            }
+          ],
+          "expected": {
+            "decision": "DENY",
+            "audit_key": null
+          }
+        },
+        {
+          "args": [
+            {
+              "actor_id": "U1",
+              "tenant_id": "T1",
+              "role": "viewer"
+            },
+            {
+              "tool": "close_slot",
+              "tenant_id": "T1",
+              "resource_id": "V1",
+              "approved": true,
+              "request_key": "K1"
+            },
+            {}
+          ],
+          "expected": {
+            "decision": "DENY",
+            "audit_key": null
+          }
+        },
+        {
+          "args": [
+            {
+              "actor_id": "U1",
+              "tenant_id": "T1",
+              "role": "editor"
+            },
+            {
+              "tool": "close_slot",
+              "tenant_id": "T1",
+              "resource_id": "V1",
+              "approved": false,
+              "request_key": "K1"
+            },
+            {}
+          ],
+          "expected": {
+            "decision": "DENY",
+            "audit_key": null
+          }
+        },
+        {
+          "args": [
+            {
+              "actor_id": "U1",
+              "tenant_id": "T1",
+              "role": "editor"
+            },
+            {
+              "tool": "close_slot",
+              "tenant_id": "T1",
+              "resource_id": "V1",
+              "approved": 1,
+              "request_key": "K1"
+            },
+            {}
+          ],
+          "expected": {
+            "decision": "DENY",
+            "audit_key": null
+          }
+        },
+        {
+          "args": [
+            {
+              "actor_id": "U1",
+              "tenant_id": "T1",
+              "role": "editor"
+            },
+            {
+              "tool": "close_slot",
+              "tenant_id": "T2",
+              "resource_id": "V1",
+              "approved": true,
+              "request_key": "K1"
+            },
+            {}
+          ],
+          "expected": {
+            "decision": "DENY",
+            "audit_key": null
+          }
+        },
+        {
+          "args": [
+            {
+              "actor_id": "U1",
+              "tenant_id": "T1",
+              "role": "editor"
+            },
+            {
+              "tool": "delete_venue",
+              "tenant_id": "T1",
+              "resource_id": "V1",
+              "approved": true,
+              "request_key": "K1"
+            },
+            {}
+          ],
+          "expected": {
+            "decision": "DENY",
+            "audit_key": null
+          }
+        },
+        {
+          "args": [
+            {
+              "actor_id": "U1",
+              "tenant_id": "T2",
+              "role": "editor"
+            },
+            {
+              "tool": "close_slot",
+              "tenant_id": "T1",
+              "resource_id": "V1",
+              "approved": true,
+              "request_key": "K1"
+            },
+            {}
+          ],
+          "expected": {
+            "decision": "DENY",
+            "audit_key": null
+          }
+        },
+        {
+          "args": [
+            {
+              "actor_id": "U1",
+              "tenant_id": "T1",
+              "role": "admin"
+            },
+            {
+              "tool": "close_slot",
+              "tenant_id": "T1",
+              "resource_id": "V1",
+              "approved": true,
+              "request_key": "K1"
+            },
+            {}
+          ],
+          "expected": {
+            "decision": "DENY",
+            "audit_key": null
+          }
+        },
+        {
+          "args": [
+            {
+              "actor_id": "",
+              "tenant_id": "T1",
+              "role": "editor"
+            },
+            {
+              "tool": "close_slot",
+              "tenant_id": "T1",
+              "resource_id": "V1",
+              "approved": true,
+              "request_key": "K1"
+            },
+            {}
+          ],
+          "expected": {
+            "decision": "DENY",
+            "audit_key": null
+          }
+        },
+        {
+          "args": [
+            {
+              "actor_id": "U1",
+              "tenant_id": "T1",
+              "role": "editor",
+              "extra": "x"
+            },
+            {
+              "tool": "close_slot",
+              "tenant_id": "T1",
+              "resource_id": "V1",
+              "approved": true,
+              "request_key": "K1"
+            },
+            {}
+          ],
+          "expected": {
+            "decision": "DENY",
+            "audit_key": null
+          }
+        },
+        {
+          "args": [
+            {
+              "actor_id": "U1",
+              "tenant_id": "T1",
+              "role": "editor"
+            },
+            {
+              "tool": "close_slot",
+              "tenant_id": "T1",
+              "resource_id": "",
+              "approved": true,
+              "request_key": "K1"
+            },
+            {}
+          ],
+          "expected": {
+            "decision": "DENY",
+            "audit_key": null
+          }
+        },
+        {
+          "args": [
+            {
+              "actor_id": "U1",
+              "tenant_id": "T1",
+              "role": "editor"
+            },
+            {
+              "tool": "close_slot",
+              "tenant_id": "T1",
+              "resource_id": "V1",
+              "approved": true,
+              "request_key": ""
+            },
+            {}
+          ],
+          "expected": {
+            "decision": "DENY",
+            "audit_key": null
+          }
+        },
+        {
+          "args": [
+            {
+              "actor_id": "U1",
+              "tenant_id": "T1",
+              "role": "editor"
+            },
+            {
+              "tool": "close_slot",
+              "tenant_id": "T1",
+              "resource_id": "V1",
+              "approved": true,
+              "request_key": "K1",
+              "extra": 1
+            },
+            {}
+          ],
+          "expected": {
+            "decision": "DENY",
+            "audit_key": null
+          }
+        },
+        {
+          "args": [
+            {
+              "actor_id": "U1",
+              "tenant_id": "T1",
+              "role": "editor"
+            },
+            {
+              "tool": "close_slot",
+              "tenant_id": "T1",
+              "resource_id": "V1",
+              "approved": true,
+              "request_key": 4
+            },
+            {}
+          ],
+          "expected": {
+            "decision": "DENY",
+            "audit_key": null
+          }
+        },
+        {
+          "args": [
+            null,
+            {
+              "tool": "close_slot",
+              "tenant_id": "T1",
+              "resource_id": "V1",
+              "approved": true,
+              "request_key": "K1"
+            },
+            {}
+          ],
+          "expected": {
+            "decision": "DENY",
+            "audit_key": null
+          }
+        },
+        {
+          "args": [
+            {
+              "actor_id": "U1",
+              "tenant_id": "T1",
+              "role": "editor"
+            },
+            null,
+            {}
+          ],
+          "expected": {
+            "decision": "DENY",
+            "audit_key": null
+          }
+        },
+        {
+          "args": [
+            {
+              "actor_id": "U1",
+              "tenant_id": "T1",
+              "role": "editor"
+            },
+            {
+              "tool": "close_slot",
+              "tenant_id": "T1",
+              "resource_id": "V1",
+              "approved": true,
+              "request_key": "K1"
+            },
+            []
+          ],
+          "expected": {
+            "decision": "DENY",
+            "audit_key": null
+          }
+        },
+        {
+          "args": [
+            {
+              "actor_id": "U1",
+              "tenant_id": "T1",
+              "role": "editor"
+            },
+            {
+              "tool": "read_venue",
+              "tenant_id": "T1",
+              "resource_id": "V1",
+              "approved": false,
+              "request_key": "K1"
+            },
+            {
+              "T1:K1": "close_slot|V2"
+            }
+          ],
+          "expected": {
+            "decision": "READ",
+            "audit_key": null
+          }
+        },
+        {
+          "args": [
+            {
+              "actor_id": "U1",
+              "tenant_id": "T1",
+              "role": "editor"
+            },
+            {
+              "tool": "read_venue",
+              "tenant_id": "T1",
+              "resource_id": "V1",
+              "approved": true,
+              "request_key": "K1"
+            },
+            {}
+          ],
+          "expected": {
+            "decision": "READ",
+            "audit_key": null
+          }
+        },
+        {
+          "args": [
+            {
+              "actor_id": "U1",
+              "tenant_id": "T1",
+              "role": "editor"
+            },
+            {
+              "tool": "read_venue",
+              "tenant_id": "T1",
+              "resource_id": "V1",
+              "approved": 1,
+              "request_key": "K1"
+            },
+            {}
+          ],
+          "expected": {
+            "decision": "DENY",
+            "audit_key": null
+          }
+        },
+        {
+          "args": [
+            {
+              "actor_id": "U1",
+              "tenant_id": "T1",
+              "role": "editor"
+            },
+            {
+              "tool": "close_slot",
+              "tenant_id": "T1",
+              "resource_id": "V1",
+              "approved": true,
+              "request_key": "K1"
+            },
+            {
+              "T1:K1": "read_venue|V1"
+            }
+          ],
+          "expected": {
+            "decision": "DENY",
+            "audit_key": null
+          }
+        }
+      ]
+    },
+    {
+      "case": "P03",
+      "function": "assess_transitive",
+      "tests": [
+        {
+          "args": [
+            {
+              "name": "safe",
+              "version": "1.2.3",
+              "source": {
+                "kind": "registry",
+                "registry": "npm"
+              },
+              "digest": "sha256:aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa",
+              "license": "MIT",
+              "install_script": false,
+              "dependencies": [
+                {
+                  "name": "libA",
+                  "version": "2.1.0"
+                }
+              ]
+            },
+            {
+              "approved_registries": [
+                "npm"
+              ],
+              "licenses": [
+                "MIT",
+                "Apache-2.0"
+              ],
+              "max_dependencies": 3
+            }
+          ],
+          "expected": {
+            "decision": "ALLOW",
+            "reasons": []
+          }
+        },
+        {
+          "args": [
+            {
+              "name": "",
+              "version": "1.2.3",
+              "source": {
+                "kind": "registry",
+                "registry": "npm"
+              },
+              "digest": "sha256:aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa",
+              "license": "MIT",
+              "install_script": false,
+              "dependencies": [
+                {
+                  "name": "libA",
+                  "version": "2.1.0"
+                }
+              ]
+            },
+            {
+              "approved_registries": [
+                "npm"
+              ],
+              "licenses": [
+                "MIT",
+                "Apache-2.0"
+              ],
+              "max_dependencies": 3
+            }
+          ],
+          "expected": {
+            "decision": "REVIEW",
+            "reasons": [
+              "INVALID_INPUT"
+            ]
+          }
+        },
+        {
+          "args": [
+            {
+              "name": "safe",
+              "version": "^1.2.3",
+              "source": {
+                "kind": "registry",
+                "registry": "npm"
+              },
+              "digest": "sha256:aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa",
+              "license": "MIT",
+              "install_script": false,
+              "dependencies": [
+                {
+                  "name": "libA",
+                  "version": "2.1.0"
+                }
+              ]
+            },
+            {
+              "approved_registries": [
+                "npm"
+              ],
+              "licenses": [
+                "MIT",
+                "Apache-2.0"
+              ],
+              "max_dependencies": 3
+            }
+          ],
+          "expected": {
+            "decision": "REVIEW",
+            "reasons": [
+              "FLOATING_VERSION"
+            ]
+          }
+        },
+        {
+          "args": [
+            {
+              "name": "safe",
+              "version": "1.2",
+              "source": {
+                "kind": "registry",
+                "registry": "npm"
+              },
+              "digest": "sha256:aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa",
+              "license": "MIT",
+              "install_script": false,
+              "dependencies": [
+                {
+                  "name": "libA",
+                  "version": "2.1.0"
+                }
+              ]
+            },
+            {
+              "approved_registries": [
+                "npm"
+              ],
+              "licenses": [
+                "MIT",
+                "Apache-2.0"
+              ],
+              "max_dependencies": 3
+            }
+          ],
+          "expected": {
+            "decision": "REVIEW",
+            "reasons": [
+              "FLOATING_VERSION"
+            ]
+          }
+        },
+        {
+          "args": [
+            {
+              "name": "safe",
+              "version": 123,
+              "source": {
+                "kind": "registry",
+                "registry": "npm"
+              },
+              "digest": "sha256:aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa",
+              "license": "MIT",
+              "install_script": false,
+              "dependencies": [
+                {
+                  "name": "libA",
+                  "version": "2.1.0"
+                }
+              ]
+            },
+            {
+              "approved_registries": [
+                "npm"
+              ],
+              "licenses": [
+                "MIT",
+                "Apache-2.0"
+              ],
+              "max_dependencies": 3
+            }
+          ],
+          "expected": {
+            "decision": "REVIEW",
+            "reasons": [
+              "FLOATING_VERSION"
+            ]
+          }
+        },
+        {
+          "args": [
+            {
+              "name": "safe",
+              "version": "1.2.3",
+              "source": {
+                "kind": "git",
+                "registry": "npm"
+              },
+              "digest": "sha256:aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa",
+              "license": "MIT",
+              "install_script": false,
+              "dependencies": [
+                {
+                  "name": "libA",
+                  "version": "2.1.0"
+                }
+              ]
+            },
+            {
+              "approved_registries": [
+                "npm"
+              ],
+              "licenses": [
+                "MIT",
+                "Apache-2.0"
+              ],
+              "max_dependencies": 3
+            }
+          ],
+          "expected": {
+            "decision": "REVIEW",
+            "reasons": [
+              "UNAPPROVED_SOURCE"
+            ]
+          }
+        },
+        {
+          "args": [
+            {
+              "name": "safe",
+              "version": "1.2.3",
+              "source": {
+                "kind": "registry",
+                "registry": "bad"
+              },
+              "digest": "sha256:aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa",
+              "license": "MIT",
+              "install_script": false,
+              "dependencies": [
+                {
+                  "name": "libA",
+                  "version": "2.1.0"
+                }
+              ]
+            },
+            {
+              "approved_registries": [
+                "npm"
+              ],
+              "licenses": [
+                "MIT",
+                "Apache-2.0"
+              ],
+              "max_dependencies": 3
+            }
+          ],
+          "expected": {
+            "decision": "REVIEW",
+            "reasons": [
+              "UNAPPROVED_SOURCE"
+            ]
+          }
+        },
+        {
+          "args": [
+            {
+              "name": "safe",
+              "version": "1.2.3",
+              "source": {
+                "kind": "registry",
+                "registry": "npm",
+                "extra": 1
+              },
+              "digest": "sha256:aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa",
+              "license": "MIT",
+              "install_script": false,
+              "dependencies": [
+                {
+                  "name": "libA",
+                  "version": "2.1.0"
+                }
+              ]
+            },
+            {
+              "approved_registries": [
+                "npm"
+              ],
+              "licenses": [
+                "MIT",
+                "Apache-2.0"
+              ],
+              "max_dependencies": 3
+            }
+          ],
+          "expected": {
+            "decision": "REVIEW",
+            "reasons": [
+              "UNAPPROVED_SOURCE"
+            ]
+          }
+        },
+        {
+          "args": [
+            {
+              "name": "safe",
+              "version": "1.2.3",
+              "source": {
+                "kind": "registry",
+                "registry": "npm"
+              },
+              "digest": "sha256:AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
+              "license": "MIT",
+              "install_script": false,
+              "dependencies": [
+                {
+                  "name": "libA",
+                  "version": "2.1.0"
+                }
+              ]
+            },
+            {
+              "approved_registries": [
+                "npm"
+              ],
+              "licenses": [
+                "MIT",
+                "Apache-2.0"
+              ],
+              "max_dependencies": 3
+            }
+          ],
+          "expected": {
+            "decision": "REVIEW",
+            "reasons": [
+              "BAD_DIGEST"
+            ]
+          }
+        },
+        {
+          "args": [
+            {
+              "name": "safe",
+              "version": "1.2.3",
+              "source": {
+                "kind": "registry",
+                "registry": "npm"
+              },
+              "digest": "sha256:fffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffff",
+              "license": "MIT",
+              "install_script": false,
+              "dependencies": [
+                {
+                  "name": "libA",
+                  "version": "2.1.0"
+                }
+              ]
+            },
+            {
+              "approved_registries": [
+                "npm"
+              ],
+              "licenses": [
+                "MIT",
+                "Apache-2.0"
+              ],
+              "max_dependencies": 3
+            }
+          ],
+          "expected": {
+            "decision": "REVIEW",
+            "reasons": [
+              "BAD_DIGEST"
+            ]
+          }
+        },
+        {
+          "args": [
+            {
+              "name": "safe",
+              "version": "1.2.3",
+              "source": {
+                "kind": "registry",
+                "registry": "npm"
+              },
+              "digest": null,
+              "license": "MIT",
+              "install_script": false,
+              "dependencies": [
+                {
+                  "name": "libA",
+                  "version": "2.1.0"
+                }
+              ]
+            },
+            {
+              "approved_registries": [
+                "npm"
+              ],
+              "licenses": [
+                "MIT",
+                "Apache-2.0"
+              ],
+              "max_dependencies": 3
+            }
+          ],
+          "expected": {
+            "decision": "REVIEW",
+            "reasons": [
+              "BAD_DIGEST"
+            ]
+          }
+        },
+        {
+          "args": [
+            {
+              "name": "safe",
+              "version": "1.2.3",
+              "source": {
+                "kind": "registry",
+                "registry": "npm"
+              },
+              "digest": "sha256:aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa",
+              "license": "GPL-3.0",
+              "install_script": false,
+              "dependencies": [
+                {
+                  "name": "libA",
+                  "version": "2.1.0"
+                }
+              ]
+            },
+            {
+              "approved_registries": [
+                "npm"
+              ],
+              "licenses": [
+                "MIT",
+                "Apache-2.0"
+              ],
+              "max_dependencies": 3
+            }
+          ],
+          "expected": {
+            "decision": "REVIEW",
+            "reasons": [
+              "UNKNOWN_LICENSE"
+            ]
+          }
+        },
+        {
+          "args": [
+            {
+              "name": "safe",
+              "version": "1.2.3",
+              "source": {
+                "kind": "registry",
+                "registry": "npm"
+              },
+              "digest": "sha256:aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa",
+              "license": "MIT",
+              "install_script": true,
+              "dependencies": [
+                {
+                  "name": "libA",
+                  "version": "2.1.0"
+                }
+              ]
+            },
+            {
+              "approved_registries": [
+                "npm"
+              ],
+              "licenses": [
+                "MIT",
+                "Apache-2.0"
+              ],
+              "max_dependencies": 3
+            }
+          ],
+          "expected": {
+            "decision": "REVIEW",
+            "reasons": [
+              "INSTALL_SCRIPT"
+            ]
+          }
+        },
+        {
+          "args": [
+            {
+              "name": "safe",
+              "version": "1.2.3",
+              "source": {
+                "kind": "registry",
+                "registry": "npm"
+              },
+              "digest": "sha256:aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa",
+              "license": "MIT",
+              "install_script": 0,
+              "dependencies": [
+                {
+                  "name": "libA",
+                  "version": "2.1.0"
+                }
+              ]
+            },
+            {
+              "approved_registries": [
+                "npm"
+              ],
+              "licenses": [
+                "MIT",
+                "Apache-2.0"
+              ],
+              "max_dependencies": 3
+            }
+          ],
+          "expected": {
+            "decision": "REVIEW",
+            "reasons": [
+              "INSTALL_SCRIPT"
+            ]
+          }
+        },
+        {
+          "args": [
+            {
+              "name": "safe",
+              "version": "1.2.3",
+              "source": {
+                "kind": "registry",
+                "registry": "npm"
+              },
+              "digest": "sha256:aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa",
+              "license": "MIT",
+              "install_script": false,
+              "dependencies": [
+                {
+                  "name": "libA",
+                  "version": "2.1.0"
+                },
+                {
+                  "name": "libA",
+                  "version": "2.1.0"
+                }
+              ]
+            },
+            {
+              "approved_registries": [
+                "npm"
+              ],
+              "licenses": [
+                "MIT",
+                "Apache-2.0"
+              ],
+              "max_dependencies": 3
+            }
+          ],
+          "expected": {
+            "decision": "REVIEW",
+            "reasons": [
+              "DUPLICATE_DEPENDENCY"
+            ]
+          }
+        },
+        {
+          "args": [
+            {
+              "name": "safe",
+              "version": "1.2.3",
+              "source": {
+                "kind": "registry",
+                "registry": "npm"
+              },
+              "digest": "sha256:aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa",
+              "license": "MIT",
+              "install_script": false,
+              "dependencies": [
+                {
+                  "name": "libA",
+                  "version": "^2.1.0"
+                }
+              ]
+            },
+            {
+              "approved_registries": [
+                "npm"
+              ],
+              "licenses": [
+                "MIT",
+                "Apache-2.0"
+              ],
+              "max_dependencies": 3
+            }
+          ],
+          "expected": {
+            "decision": "REVIEW",
+            "reasons": [
+              "INVALID_DEPENDENCY"
+            ]
+          }
+        },
+        {
+          "args": [
+            {
+              "name": "safe",
+              "version": "1.2.3",
+              "source": {
+                "kind": "registry",
+                "registry": "npm"
+              },
+              "digest": "sha256:aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa",
+              "license": "MIT",
+              "install_script": false,
+              "dependencies": [
+                {
+                  "name": "",
+                  "version": "2.1.0"
+                }
+              ]
+            },
+            {
+              "approved_registries": [
+                "npm"
+              ],
+              "licenses": [
+                "MIT",
+                "Apache-2.0"
+              ],
+              "max_dependencies": 3
+            }
+          ],
+          "expected": {
+            "decision": "REVIEW",
+            "reasons": [
+              "INVALID_DEPENDENCY"
+            ]
+          }
+        },
+        {
+          "args": [
+            {
+              "name": "safe",
+              "version": "1.2.3",
+              "source": {
+                "kind": "registry",
+                "registry": "npm"
+              },
+              "digest": "sha256:aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa",
+              "license": "MIT",
+              "install_script": false,
+              "dependencies": [
+                {
+                  "name": "libA",
+                  "version": "2.1.0"
+                },
+                {
+                  "name": "libB",
+                  "version": "1.0.0"
+                },
+                {
+                  "name": "libC",
+                  "version": "1.0.0"
+                },
+                {
+                  "name": "libD",
+                  "version": "1.0.0"
+                }
+              ]
+            },
+            {
+              "approved_registries": [
+                "npm"
+              ],
+              "licenses": [
+                "MIT",
+                "Apache-2.0"
+              ],
+              "max_dependencies": 3
+            }
+          ],
+          "expected": {
+            "decision": "REVIEW",
+            "reasons": [
+              "TOO_MANY_DEPS"
+            ]
+          }
+        },
+        {
+          "args": [
+            {
+              "name": "safe",
+              "version": "1.2.3",
+              "source": {
+                "kind": "registry",
+                "registry": "npm"
+              },
+              "digest": "sha256:aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa",
+              "license": "MIT",
+              "install_script": false,
+              "dependencies": "bad"
+            },
+            {
+              "approved_registries": [
+                "npm"
+              ],
+              "licenses": [
+                "MIT",
+                "Apache-2.0"
+              ],
+              "max_dependencies": 3
+            }
+          ],
+          "expected": {
+            "decision": "REVIEW",
+            "reasons": [
+              "INVALID_DEPENDENCY"
+            ]
+          }
+        },
+        {
+          "args": [
+            {
+              "name": "safe",
+              "version": "1.2.3",
+              "source": {
+                "kind": "registry",
+                "registry": "npm"
+              },
+              "digest": "sha256:aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa",
+              "license": "MIT",
+              "install_script": false,
+              "dependencies": [
+                null
+              ]
+            },
+            {
+              "approved_registries": [
+                "npm"
+              ],
+              "licenses": [
+                "MIT",
+                "Apache-2.0"
+              ],
+              "max_dependencies": 3
+            }
+          ],
+          "expected": {
+            "decision": "REVIEW",
+            "reasons": [
+              "INVALID_DEPENDENCY"
+            ]
+          }
+        },
+        {
+          "args": [
+            {
+              "name": "safe",
+              "version": "1.2.3",
+              "source": {
+                "kind": "registry",
+                "registry": "npm"
+              },
+              "digest": "sha256:aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa",
+              "license": "MIT",
+              "install_script": false,
+              "dependencies": [
+                {
+                  "name": "libA",
+                  "version": "2.1.0"
+                }
+              ],
+              "extra": 1
+            },
+            {
+              "approved_registries": [
+                "npm"
+              ],
+              "licenses": [
+                "MIT",
+                "Apache-2.0"
+              ],
+              "max_dependencies": 3
+            }
+          ],
+          "expected": {
+            "decision": "REVIEW",
+            "reasons": [
+              "INVALID_INPUT"
+            ]
+          }
+        },
+        {
+          "args": [
+            {
+              "name": "safe",
+              "version": "1.2.3",
+              "source": {
+                "kind": "registry",
+                "registry": "npm"
+              },
+              "digest": "sha256:aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa",
+              "license": "MIT",
+              "install_script": false,
+              "dependencies": [
+                {
+                  "name": "libA",
+                  "version": "2.1.0"
+                }
+              ]
+            },
+            {
+              "approved_registries": [
+                "npm"
+              ],
+              "licenses": [
+                "MIT",
+                "Apache-2.0"
+              ],
+              "max_dependencies": true
+            }
+          ],
+          "expected": {
+            "decision": "REVIEW",
+            "reasons": [
+              "INVALID_INPUT"
+            ]
+          }
+        },
+        {
+          "args": [
+            {
+              "name": "safe",
+              "version": "1.2.3",
+              "source": {
+                "kind": "registry",
+                "registry": "npm"
+              },
+              "digest": "sha256:aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa",
+              "license": "MIT",
+              "install_script": false,
+              "dependencies": [
+                {
+                  "name": "libA",
+                  "version": "2.1.0"
+                }
+              ]
+            },
+            {
+              "approved_registries": [
+                "npm"
+              ],
+              "licenses": "MIT",
+              "max_dependencies": 3
+            }
+          ],
+          "expected": {
+            "decision": "REVIEW",
+            "reasons": [
+              "INVALID_INPUT"
+            ]
+          }
+        },
+        {
+          "args": [
+            {
+              "name": "safe",
+              "version": "0.0.0",
+              "source": {
+                "kind": "registry",
+                "registry": "npm"
+              },
+              "digest": "oops",
+              "license": "OTHER",
+              "install_script": true,
+              "dependencies": [
+                {
+                  "name": "libA",
+                  "version": "2.1.0"
+                }
+              ]
+            },
+            {
+              "approved_registries": [
+                "npm"
+              ],
+              "licenses": [
+                "MIT",
+                "Apache-2.0"
+              ],
+              "max_dependencies": 3
+            }
+          ],
+          "expected": {
+            "decision": "REVIEW",
+            "reasons": [
+              "BAD_DIGEST",
+              "INSTALL_SCRIPT",
+              "UNKNOWN_LICENSE"
+            ]
+          }
+        },
+        {
+          "args": [
+            null,
+            {
+              "approved_registries": [
+                "npm"
+              ],
+              "licenses": [
+                "MIT",
+                "Apache-2.0"
+              ],
+              "max_dependencies": 3
+            }
+          ],
+          "expected": {
+            "decision": "REVIEW",
+            "reasons": [
+              "INVALID_INPUT"
+            ]
+          }
+        },
+        {
+          "args": [
+            {
+              "name": "safe",
+              "version": "1.2.3",
+              "source": {
+                "kind": "registry",
+                "registry": "npm"
+              },
+              "digest": "sha256:aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa",
+              "license": "MIT",
+              "install_script": false,
+              "dependencies": [
+                {
+                  "name": "libA",
+                  "version": "2.1.0"
+                }
+              ]
+            },
+            null
+          ],
+          "expected": {
+            "decision": "REVIEW",
+            "reasons": [
+              "INVALID_INPUT"
+            ]
+          }
+        },
+        {
+          "args": [
+            {
+              "name": "safe",
+              "version": "1.2.3",
+              "source": {
+                "kind": "registry",
+                "registry": "npm"
+              },
+              "digest": "sha256:aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa",
+              "license": "MIT",
+              "install_script": false,
+              "dependencies": [
+                {
+                  "name": "libA",
+                  "version": "bad"
+                },
+                {
+                  "name": "libA",
+                  "version": "1.0.0"
+                }
+              ]
+            },
+            {
+              "approved_registries": [
+                "npm"
+              ],
+              "licenses": [
+                "MIT",
+                "Apache-2.0"
+              ],
+              "max_dependencies": 3
+            }
+          ],
+          "expected": {
+            "decision": "REVIEW",
+            "reasons": [
+              "DUPLICATE_DEPENDENCY",
+              "INVALID_DEPENDENCY"
+            ]
+          }
+        }
+      ]
+    }
+  ],
+  "disclaimer": "Synthetic contract oracle; tests created before grading any model output; nonproduction"
+}

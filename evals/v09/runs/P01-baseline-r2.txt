@@ -1,0 +1,75 @@
+def finalize_payment(booking, event):
+    reject_state = None
+    reject_receipt_id = None
+
+    booking_keys = {
+        "booking_id", "tenant_id", "amount_minor",
+        "currency", "state", "receipt_id"
+    }
+    event_keys = {
+        "booking_id", "tenant_id", "amount_minor", "currency",
+        "provider_verified", "result", "receipt_id"
+    }
+
+    booking_valid = (
+        type(booking) is dict
+        and set(booking.keys()) == booking_keys
+        and type(booking["booking_id"]) is str and booking["booking_id"] != ""
+        and type(booking["tenant_id"]) is str and booking["tenant_id"] != ""
+        and type(booking["amount_minor"]) is int and booking["amount_minor"] > 0
+        and type(booking["currency"]) is str and booking["currency"] != ""
+        and booking["state"] in ("PENDING", "PAID")
+        and (
+            (booking["state"] == "PENDING" and booking["receipt_id"] is None)
+            or (
+                booking["state"] == "PAID"
+                and type(booking["receipt_id"]) is str
+                and booking["receipt_id"] != ""
+            )
+        )
+    )
+
+    if not booking_valid:
+        return {"decision": "REJECT", "state": None, "receipt_id": None}
+
+    reject_state = booking["state"]
+    reject_receipt_id = booking["receipt_id"]
+
+    event_valid = (
+        type(event) is dict
+        and set(event.keys()) == event_keys
+        and type(event["booking_id"]) is str and event["booking_id"] != ""
+        and type(event["tenant_id"]) is str and event["tenant_id"] != ""
+        and type(event["amount_minor"]) is int and event["amount_minor"] > 0
+        and type(event["currency"]) is str and event["currency"] != ""
+        and event["provider_verified"] is True
+        and event["result"] == "SUCCESS"
+        and type(event["receipt_id"]) is str and event["receipt_id"] != ""
+        and event["booking_id"] == booking["booking_id"]
+        and event["tenant_id"] == booking["tenant_id"]
+        and event["amount_minor"] == booking["amount_minor"]
+        and event["currency"] == booking["currency"]
+    )
+
+    if not event_valid:
+        return {
+            "decision": "REJECT",
+            "state": reject_state,
+            "receipt_id": reject_receipt_id,
+        }
+
+    if booking["state"] == "PENDING":
+        return {"decision": "APPLY", "state": "PAID", "receipt_id": event["receipt_id"]}
+
+    if event["receipt_id"] == booking["receipt_id"]:
+        return {
+            "decision": "REPLAY",
+            "state": "PAID",
+            "receipt_id": booking["receipt_id"],
+        }
+
+    return {
+        "decision": "REJECT",
+        "state": reject_state,
+        "receipt_id": reject_receipt_id,
+    }

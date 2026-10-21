@@ -5,3 +5,6 @@ evals/prompts/*.txt text eol=lf
 
 # Preserve archived model outputs byte for byte for SHA-256 checks
 evals/v08/runs/*.txt -text
+
+# v0.9 archived model output bytes are SHA-256 verified
+evals/v09/runs/*.txt -text

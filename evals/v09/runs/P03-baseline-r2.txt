@@ -1,0 +1,92 @@
+def assess_transitive(package, policy):
+    package_keys = {"name", "version", "source", "digest", "license", "install_script", "dependencies"}
+    policy_keys = {"approved_registries", "licenses", "max_dependencies"}
+
+    if (
+        not isinstance(package, dict)
+        or set(package.keys()) != package_keys
+        or not isinstance(policy, dict)
+        or set(policy.keys()) != policy_keys
+        or not isinstance(policy["approved_registries"], list)
+        or not all(isinstance(x, str) and x for x in policy["approved_registries"])
+        or not isinstance(policy["licenses"], list)
+        or not all(isinstance(x, str) and x for x in policy["licenses"])
+        or not isinstance(policy["max_dependencies"], int)
+        or isinstance(policy["max_dependencies"], bool)
+        or policy["max_dependencies"] < 0
+    ):
+        return {"decision": "REVIEW", "reasons": ["INVALID_INPUT"]}
+
+    reasons = set()
+
+    if not isinstance(package["name"], str) or not package["name"]:
+        reasons.add("INVALID_INPUT")
+
+    version_parts = package["version"].split(".") if isinstance(package["version"], str) else []
+    if len(version_parts) != 3 or not all(part and part.isdigit() for part in version_parts):
+        reasons.add("FLOATING_VERSION")
+
+    source = package["source"]
+    if (
+        not isinstance(source, dict)
+        or set(source.keys()) != {"kind", "registry"}
+        or source.get("kind") != "registry"
+        or not isinstance(source.get("registry"), str)
+        or not source.get("registry")
+        or source.get("registry") not in policy["approved_registries"]
+    ):
+        reasons.add("UNAPPROVED_SOURCE")
+
+    digest = package["digest"]
+    if (
+        not isinstance(digest, str)
+        or len(digest) != 71
+        or not digest.startswith("sha256:")
+        or any(char not in "0123456789abcdef" for char in digest[7:])
+    ):
+        reasons.add("BAD_DIGEST")
+
+    if (
+        not isinstance(package["license"], str)
+        or not package["license"]
+        or package["license"] not in policy["licenses"]
+    ):
+        reasons.add("UNKNOWN_LICENSE")
+
+    if package["install_script"] is not False:
+        reasons.add("INSTALL_SCRIPT")
+
+    dependencies = package["dependencies"]
+    if not isinstance(dependencies, list):
+        reasons.add("INVALID_DEPENDENCY")
+    else:
+        if len(dependencies) > policy["max_dependencies"]:
+            reasons.add("TOO_MANY_DEPS")
+
+        names = []
+        for dependency in dependencies:
+            if not isinstance(dependency, dict) or set(dependency.keys()) != {"name", "version"}:
+                reasons.add("INVALID_DEPENDENCY")
+                continue
+
+            dep_name = dependency["name"]
+            dep_version = dependency["version"]
+            dep_parts = dep_version.split(".") if isinstance(dep_version, str) else []
+            if (
+                not isinstance(dep_name, str)
+                or not dep_name
+                or len(dep_parts) != 3
+                or not all(part and part.isdigit() for part in dep_parts)
+            ):
+                reasons.add("INVALID_DEPENDENCY")
+            else:
+                names.append(dep_name)
+
+        if len(names) != len(set(names)):
+            reasons.add("DUPLICATE_DEPENDENCY")
+
+    sorted_reasons = sorted(reasons)
+    return {
+        "decision": "ALLOW" if not sorted_reasons else "REVIEW",
+        "reasons": sorted_reasons,
+    }

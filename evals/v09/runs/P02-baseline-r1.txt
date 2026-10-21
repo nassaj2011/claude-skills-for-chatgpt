@@ -1,0 +1,33 @@
+def authorize_tool(actor, request, seen_keys):
+    if type(actor) is not dict or type(request) is not dict or type(seen_keys) is not dict:
+        return {"decision": "DENY", "audit_key": None}
+    if set(actor) != {"actor_id", "tenant_id", "role"}:
+        return {"decision": "DENY", "audit_key": None}
+    if set(request) != {"tool", "tenant_id", "resource_id", "approved", "request_key"}:
+        return {"decision": "DENY", "audit_key": None}
+    if (type(actor["actor_id"]) is not str or not actor["actor_id"] or
+            type(actor["tenant_id"]) is not str or not actor["tenant_id"] or
+            type(actor["role"]) is not str or actor["role"] not in {"viewer", "editor"}):
+        return {"decision": "DENY", "audit_key": None}
+    if (type(request["tool"]) is not str or request["tool"] not in {"read_venue", "close_slot"} or
+            type(request["tenant_id"]) is not str or not request["tenant_id"] or
+            type(request["resource_id"]) is not str or not request["resource_id"] or
+            type(request["approved"]) is not bool or
+            type(request["request_key"]) is not str or not request["request_key"]):
+        return {"decision": "DENY", "audit_key": None}
+    for key, signature in seen_keys.items():
+        if type(key) is not str or type(signature) is not str:
+            return {"decision": "DENY", "audit_key": None}
+    if actor["tenant_id"] != request["tenant_id"]:
+        return {"decision": "DENY", "audit_key": None}
+    if request["tool"] == "read_venue":
+        return {"decision": "READ", "audit_key": None}
+    if actor["role"] != "editor" or request["approved"] is not True:
+        return {"decision": "DENY", "audit_key": None}
+    audit_key = request["tenant_id"] + ":" + request["request_key"]
+    signature = "close_slot|" + request["resource_id"]
+    if audit_key in seen_keys:
+        if seen_keys[audit_key] == signature:
+            return {"decision": "REPLAY", "audit_key": audit_key}
+        return {"decision": "DENY", "audit_key": None}
+    return {"decision": "WRITE", "audit_key": audit_key}

@@ -1,0 +1,40 @@
+def authorize_tool(actor, request, seen_keys):
+    denied = {"decision": "DENY", "audit_key": None}
+
+    if not isinstance(actor, dict) or set(actor) != {"actor_id", "tenant_id", "role"}:
+        return denied
+    if not isinstance(request, dict) or set(request) != {
+        "tool", "tenant_id", "resource_id", "approved", "request_key"
+    }:
+        return denied
+    if not isinstance(seen_keys, dict):
+        return denied
+
+    if (
+        not all(isinstance(actor[key], str) and actor[key] for key in actor)
+        or actor["role"] not in {"viewer", "editor"}
+        or not all(
+            isinstance(request[key], str) and request[key]
+            for key in {"tool", "tenant_id", "resource_id", "request_key"}
+        )
+        or type(request["approved"]) is not bool
+        or request["tool"] not in {"read_venue", "close_slot"}
+        or actor["tenant_id"] != request["tenant_id"]
+    ):
+        return denied
+
+    if request["tool"] == "read_venue":
+        return {"decision": "READ", "audit_key": None}
+
+    if actor["role"] != "editor" or request["approved"] is not True:
+        return denied
+
+    audit_key = request["tenant_id"] + ":" + request["request_key"]
+    signature = "close_slot|" + request["resource_id"]
+
+    if audit_key in seen_keys:
+        if seen_keys[audit_key] == signature:
+            return {"decision": "REPLAY", "audit_key": audit_key}
+        return denied
+
+    return {"decision": "WRITE", "audit_key": audit_key}

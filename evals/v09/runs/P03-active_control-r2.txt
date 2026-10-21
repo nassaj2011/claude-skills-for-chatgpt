@@ -1,0 +1,108 @@
+def assess_transitive(package, policy):
+    required_package_keys = {
+        "name", "version", "source", "digest",
+        "license", "install_script", "dependencies"
+    }
+    required_policy_keys = {
+        "approved_registries", "licenses", "max_dependencies"
+    }
+
+    if (
+        type(package) is not dict
+        or set(package) != required_package_keys
+        or type(policy) is not dict
+        or set(policy) != required_policy_keys
+        or type(policy["approved_registries"]) is not list
+        or type(policy["licenses"]) is not list
+        or type(policy["max_dependencies"]) is not int
+        or isinstance(policy["max_dependencies"], bool)
+        or policy["max_dependencies"] < 0
+        or any(
+            type(value) is not str or not value
+            for value in policy["approved_registries"]
+        )
+        or any(
+            type(value) is not str or not value
+            for value in policy["licenses"]
+        )
+    ):
+        return {"decision": "REVIEW", "reasons": ["INVALID_INPUT"]}
+
+    def is_pinned_version(value):
+        if type(value) is not str:
+            return False
+        parts = value.split(".")
+        return (
+            len(parts) == 3
+            and all(
+                part and all("0" <= character <= "9" for character in part)
+                for part in parts
+            )
+        )
+
+    reasons = set()
+
+    if type(package["name"]) is not str or not package["name"]:
+        reasons.add("INVALID_INPUT")
+
+    if not is_pinned_version(package["version"]):
+        reasons.add("FLOATING_VERSION")
+
+    source = package["source"]
+    if (
+        type(source) is not dict
+        or set(source) != {"kind", "registry"}
+        or source.get("kind") != "registry"
+        or type(source.get("registry")) is not str
+        or not source.get("registry")
+        or source.get("registry") not in policy["approved_registries"]
+    ):
+        reasons.add("UNAPPROVED_SOURCE")
+
+    digest = package["digest"]
+    if (
+        type(digest) is not str
+        or len(digest) != 71
+        or not digest.startswith("sha256:")
+        or any(character not in "0123456789abcdef" for character in digest[7:])
+    ):
+        reasons.add("BAD_DIGEST")
+
+    if (
+        type(package["license"]) is not str
+        or not package["license"]
+        or package["license"] not in policy["licenses"]
+    ):
+        reasons.add("UNKNOWN_LICENSE")
+
+    if package["install_script"] is not False:
+        reasons.add("INSTALL_SCRIPT")
+
+    dependencies = package["dependencies"]
+    if type(dependencies) is not list:
+        reasons.add("INVALID_DEPENDENCY")
+    else:
+        if len(dependencies) > policy["max_dependencies"]:
+            reasons.add("TOO_MANY_DEPS")
+
+        names = set()
+        for dependency in dependencies:
+            if (
+                type(dependency) is not dict
+                or set(dependency) != {"name", "version"}
+                or type(dependency.get("name")) is not str
+                or not dependency.get("name")
+                or not is_pinned_version(dependency.get("version"))
+            ):
+                reasons.add("INVALID_DEPENDENCY")
+                continue
+
+            if dependency["name"] in names:
+                reasons.add("DUPLICATE_DEPENDENCY")
+            names.add(dependency["name"])
+
+    sorted_reasons = sorted(reasons)
+    return {
+        "decision": "ALLOW" if not sorted_reasons else "REVIEW",
+        "reasons": sorted_reasons,
+    }

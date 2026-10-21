@@ -1,0 +1,29 @@
+{
+  "schema": 1,
+  "status": "DESIGNED_UNSCORED",
+  "method": "3 hard fictional tasks x 3 arms x 2 independent repeats",
+  "tokenizer": "tiktoken o200k_base proxy",
+  "cases": [
+    {
+      "id": "P01",
+      "skill": "database-transaction-integrity",
+      "function": "finalize_payment",
+      "task": "Implement a pure function finalize_payment(booking, event), returning only Python source code (one function, no imports). The function must validate the entire event before any state transition, must never mutate either argument, and must preserve the current record on rejection. Inputs are untrusted.",
+      "contract": "booking must be a dict with EXACT keys booking_id, tenant_id, amount_minor, currency, state, receipt_id. Identifiers/currency: nonempty str. amount_minor: positive int excluding bool. state: PENDING or PAID. receipt_id: None exactly for PENDING; nonempty str exactly for PAID. event must be a dict with EXACT keys booking_id, tenant_id, amount_minor, currency, provider_verified, result, receipt_id. Its identifiers/currency/receipt_id are nonempty str, amount_minor positive int excluding bool, provider_verified must be literal True, result literal SUCCESS. All IDs, tenant, amount and currency MUST exactly match booking. Output EXACTLY one dict with keys decision, state, receipt_id. For valid PENDING and valid matching event: {\"decision\":\"APPLY\",\"state\":\"PAID\",\"receipt_id\":event receipt}. For valid PAID and valid matching event with SAME receipt: {\"decision\":\"REPLAY\",\"state\":\"PAID\",\"receipt_id\":booking receipt}. In all other cases: {\"decision\":\"REJECT\",\"state\":booking's original state if booking itself is valid, else None,\"receipt_id\":booking's original receipt_id if booking itself is valid, else None}. Must reject extra keys, bool amounts, mismatched tenant, replay with a different receipt, and false provider verification. Absolutely no imports, printing, filesystem, environment variables, or side effects."
+    },
+    {
+      "id": "P02",
+      "skill": "llm-api-integration",
+      "function": "authorize_tool",
+      "task": "Implement a pure authorization boundary authorize_tool(actor, request, seen_keys) for untrusted LLM tool proposals. Output only a single Python function, no imports. A model-proposed \"approved\" flag must not authorize a viewer; actor role and tenant boundaries are authoritative.",
+      "contract": "actor is dict with EXACT keys actor_id, tenant_id, role; nonempty str IDs; role viewer or editor. request is dict with EXACT keys tool, tenant_id, resource_id, approved, request_key; all strings nonempty except approved must be bool. seen_keys is dict mapping idempotency key \"tenant_id:request_key\" (str) to signature \"tool|resource_id\" (str); DO NOT MUTATE it. If any input is malformed/extra keys/tenant mismatch or tool not in {read_venue,close_slot}: return EXACTLY {\"decision\":\"DENY\",\"audit_key\":None}. For read_venue, viewer/editor may READ regardless of approved, with {\"decision\":\"READ\",\"audit_key\":None}; idempotency state irrelevant. For close_slot, ONLY editor with approved literally True may write. Audit key is tenant_id+\":\"+request_key. If audit key exists in seen_keys and its signature equals \"close_slot|\"+resource_id, return {\"decision\":\"REPLAY\",\"audit_key\":audit key}. If it exists but signature differs, DENY. Otherwise {\"decision\":\"WRITE\",\"audit_key\":audit key}. No imports, side effects, network, globals or changes to passed inputs."
+    },
+    {
+      "id": "P03",
+      "skill": "dependency-supply-chain-auditor",
+      "function": "assess_transitive",
+      "task": "Implement exactly one pure Python function assess_transitive(package, policy). Return only code, no imports. It audits nested, untrusted package metadata with strict validation and machine-readable reasons, not live registry/CVE lookups.",
+      "contract": "Return EXACTLY {\"decision\":\"ALLOW\" or \"REVIEW\",\"reasons\":list of unique reason strings sorted alphabetically}. package must be dict with EXACT keys name, version, source, digest, license, install_script, dependencies. policy must be dict with EXACT keys approved_registries, licenses, max_dependencies. policy approved_registries and licenses: lists of nonempty strings; max_dependencies is nonnegative int NOT bool. If bad/missing/extra top-level keys or policy field types: REVIEW with exactly [\"INVALID_INPUT\"]. Otherwise: name must nonempty str else add INVALID_INPUT; version must be digits.digits.digits (three nonempty digit-only sections) else FLOATING_VERSION; source must be dict with EXACT keys kind and registry, kind literal registry, registry nonempty str and in policy approved_registries else UNAPPROVED_SOURCE; digest exactly \"sha256:\"+64 lowercase characters from 0-9 a-f else BAD_DIGEST; license must be nonempty str present in policy licenses else UNKNOWN_LICENSE; install_script must be literal False else INSTALL_SCRIPT; dependencies must be list else INVALID_DEPENDENCY. If list length exceeds max_dependencies, add TOO_MANY_DEPS. Every dependency must be dict with EXACT keys name, version; nonempty str name and pinned numeric X.Y.Z version, else INVALID_DEPENDENCY. Repeated dependency names add DUPLICATE_DEPENDENCY. For every failed property add its applicable reason, sorted unique (for combined failures). If no reasons ALLOW and []; otherwise REVIEW with sorted reasons. Never mutate inputs or access external systems."
+    }
+  ]
+}
