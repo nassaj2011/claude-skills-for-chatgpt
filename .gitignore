@@ -21,3 +21,6 @@ evals/runs/v07-probe-*.txt
 # Disposable v0.10 model workspaces; preserve source templates and raw result records
 evals/v10/workspaces/
 evals/v10/patch_workspaces/
+
+# Optional local regrade of v0.12 archived results (tracked authoritative score remains v2)
+evals/v12/posthoc_scores_rerun.json

@@ -1,0 +1,145 @@
+{
+  "schema": 1,
+  "study": "POST_HOC_DIAGNOSTIC_NOT_BLINDED",
+  "original_v10_model_calls": 9,
+  "new_model_calls": 0,
+  "warnings": [
+    "Tests written after model responses and cannot be claimed pre-registered",
+    "Static AST guard and subprocess are NOT hardened sandbox",
+    "No independent holdout scorer; no broad causal efficacy claim"
+  ],
+  "status": "ALL_9_SCORED",
+  "by_arm": {
+    "baseline": {
+      "passed": 34,
+      "total": 34
+    },
+    "active_control": {
+      "passed": 34,
+      "total": 34
+    },
+    "candidate": {
+      "passed": 34,
+      "total": 34
+    }
+  },
+  "rows": [
+    {
+      "task": "BOOK",
+      "arm": "baseline",
+      "response_sha256": "39f9d17a1c6bd442c15c752cc9752e27c3c00794b7ffc03b37939e2d35c97246",
+      "state": "TESTED",
+      "total": 11,
+      "passed": 11,
+      "failed": 0,
+      "errors": 0,
+      "skipped_other_projects": 23,
+      "failure_descriptions": [],
+      "details": "...........sssssssssssssssssssssss\n----------------------------------------------------------------------\nRan 34 tests in 0.023s\n\nOK (skipped=23)\n"
+    },
+    {
+      "task": "BOOK",
+      "arm": "active_control",
+      "response_sha256": "1a643472040687259ddd00c735191c8474cbc58d12afde0a1c7c1c24325774fa",
+      "state": "TESTED",
+      "total": 11,
+      "passed": 11,
+      "failed": 0,
+      "errors": 0,
+      "skipped_other_projects": 23,
+      "failure_descriptions": [],
+      "details": "...........sssssssssssssssssssssss\n----------------------------------------------------------------------\nRan 34 tests in 0.025s\n\nOK (skipped=23)\n"
+    },
+    {
+      "task": "BOOK",
+      "arm": "candidate",
+      "response_sha256": "e55f5de39e29ddce85d86348d66765d2ac3fc904a876ae867a1ec820d7eb4f0b",
+      "state": "TESTED",
+      "total": 11,
+      "passed": 11,
+      "failed": 0,
+      "errors": 0,
+      "skipped_other_projects": 23,
+      "failure_descriptions": [],
+      "details": "...........sssssssssssssssssssssss\n----------------------------------------------------------------------\nRan 34 tests in 0.022s\n\nOK (skipped=23)\n"
+    },
+    {
+      "task": "AUTH",
+      "arm": "baseline",
+      "response_sha256": "1c3106fdd0aee498cee0665ac9eed44a47b44de2607f4556a15a971bf18cd612",
+      "state": "TESTED",
+      "total": 12,
+      "passed": 12,
+      "failed": 0,
+      "errors": 0,
+      "skipped_other_projects": 22,
+      "failure_descriptions": [],
+      "details": "sssssssssss............sssssssssss\n----------------------------------------------------------------------\nRan 34 tests in 0.008s\n\nOK (skipped=22)\n"
+    },
+    {
+      "task": "AUTH",
+      "arm": "active_control",
+      "response_sha256": "05caa155a1ff4268d823dab3f439869b43e823b0bfdadd8385fd11d76c7d008c",
+      "state": "TESTED",
+      "total": 12,
+      "passed": 12,
+      "failed": 0,
+      "errors": 0,
+      "skipped_other_projects": 22,
+      "failure_descriptions": [],
+      "details": "sssssssssss............sssssssssss\n----------------------------------------------------------------------\nRan 34 tests in 0.007s\n\nOK (skipped=22)\n"
+    },
+    {
+      "task": "AUTH",
+      "arm": "candidate",
+      "response_sha256": "436847fd0038407d11074b4d5eb38bd6f9113aadc45fc0c8552c40bf40d9926f",
+      "state": "TESTED",
+      "total": 12,
+      "passed": 12,
+      "failed": 0,
+      "errors": 0,
+      "skipped_other_projects": 22,
+      "failure_descriptions": [],
+      "details": "sssssssssss............sssssssssss\n----------------------------------------------------------------------\nRan 34 tests in 0.009s\n\nOK (skipped=22)\n"
+    },
+    {
+      "task": "QUEUE",
+      "arm": "baseline",
+      "response_sha256": "bf204e28f734bc0da9e0c7b7c107d221b5ae415ee2b5a39bbf5c9a69a0f0e7c1",
+      "state": "TESTED",
+      "total": 11,
+      "passed": 11,
+      "failed": 0,
+      "errors": 0,
+      "skipped_other_projects": 23,
+      "failure_descriptions": [],
+      "details": "sssssssssssssssssssssss...........\n----------------------------------------------------------------------\nRan 34 tests in 0.020s\n\nOK (skipped=23)\n"
+    },
+    {
+      "task": "QUEUE",
+      "arm": "active_control",
+      "response_sha256": "04f87d537e6174b9dfdd448b8680c02528158d0f00c47700b00468f6fd6b4646",
+      "state": "TESTED",
+      "total": 11,
+      "passed": 11,
+      "failed": 0,
+      "errors": 0,
+      "skipped_other_projects": 23,
+      "failure_descriptions": [],
+      "details": "sssssssssssssssssssssss...........\n----------------------------------------------------------------------\nRan 34 tests in 0.025s\n\nOK (skipped=23)\n"
+    },
+    {
+      "task": "QUEUE",
+      "arm": "candidate",
+      "response_sha256": "b94a9a7b4308c94e06c8e47aff3d31e2e7bdbea4e19bff558625eff103854b29",
+      "state": "TESTED",
+      "total": 11,
+      "passed": 11,
+      "failed": 0,
+      "errors": 0,
+      "skipped_other_projects": 23,
+      "failure_descriptions": [],
+      "details": "sssssssssssssssssssssss...........\n----------------------------------------------------------------------\nRan 34 tests in 0.023s\n\nOK (skipped=23)\n"
+    }
+  ]
+}
