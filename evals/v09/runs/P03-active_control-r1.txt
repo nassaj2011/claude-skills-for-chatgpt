@@ -1,0 +1,119 @@
+def assess_transitive(package, policy):
+    required_package_keys = {
+        "name", "version", "source", "digest",
+        "license", "install_script", "dependencies"
+    }
+    required_policy_keys = {
+        "approved_registries", "licenses", "max_dependencies"
+    }
+
+    if (
+        not isinstance(package, dict)
+        or not isinstance(policy, dict)
+        or set(package) != required_package_keys
+        or set(policy) != required_policy_keys
+    ):
+        return {"decision": "REVIEW", "reasons": ["INVALID_INPUT"]}
+
+    registries = policy["approved_registries"]
+    licenses = policy["licenses"]
+    max_dependencies = policy["max_dependencies"]
+
+    if (
+        not isinstance(registries, list)
+        or not isinstance(licenses, list)
+        or not isinstance(max_dependencies, int)
+        or isinstance(max_dependencies, bool)
+        or any(not isinstance(value, str) or not value for value in registries)
+        or any(not isinstance(value, str) or not value for value in licenses)
+    ):
+        return {"decision": "REVIEW", "reasons": ["INVALID_INPUT"]}
+
+    reasons = set()
+
+    if not isinstance(package["name"], str) or not package["name"]:
+        reasons.add("INVALID_INPUT")
+
+    version = package["version"]
+    version_parts = version.split(".") if isinstance(version, str) else []
+    if (
+        len(version_parts) != 3
+        or any(not part or not part.isdigit() for part in version_parts)
+    ):
+        reasons.add("FLOATING_VERSION")
+
+    source = package["source"]
+    if (
+        not isinstance(source, dict)
+        or set(source) != {"kind", "registry"}
+        or source.get("kind") != "registry"
+        or not isinstance(source.get("registry"), str)
+        or not source.get("registry")
+        or source.get("registry") not in registries
+    ):
+        reasons.add("UNAPPROVED_SOURCE")
+
+    digest = package["digest"]
+    if (
+        not isinstance(digest, str)
+        or len(digest) != 71
+        or not digest.startswith("sha256:")
+        or any(character not in "0123456789abcdef" for character in digest[7:])
+    ):
+        reasons.add("BAD_DIGEST")
+
+    license_name = package["license"]
+    if (
+        not isinstance(license_name, str)
+        or not license_name
+        or license_name not in licenses
+    ):
+        reasons.add("UNKNOWN_LICENSE")
+
+    if package["install_script"] is not False:
+        reasons.add("INSTALL_SCRIPT")
+
+    dependencies = package["dependencies"]
+    if not isinstance(dependencies, list):
+        reasons.add("INVALID_DEPENDENCY")
+    else:
+        if len(dependencies) > max_dependencies:
+            reasons.add("TOO_MANY_DEPS")
+
+        dependency_names = set()
+        for dependency in dependencies:
+            valid_dependency = (
+                isinstance(dependency, dict)
+                and set(dependency) == {"name", "version"}
+                and isinstance(dependency.get("name"), str)
+                and bool(dependency.get("name"))
+            )
+
+            dependency_version = (
+                dependency.get("version")
+                if isinstance(dependency, dict)
+                else None
+            )
+            dependency_parts = (
+                dependency_version.split(".")
+                if isinstance(dependency_version, str)
+                else []
+            )
+            valid_version = (
+                len(dependency_parts) == 3
+                and all(part and part.isdigit() for part in dependency_parts)
+            )
+
+            if not valid_dependency or not valid_version:
+                reasons.add("INVALID_DEPENDENCY")
+
+            if isinstance(dependency, dict) and isinstance(dependency.get("name"), str) and dependency.get("name"):
+                if dependency["name"] in dependency_names:
+                    reasons.add("DUPLICATE_DEPENDENCY")
+                dependency_names.add(dependency["name"])
+
+    sorted_reasons = sorted(reasons)
+    return {
+        "decision": "ALLOW" if not sorted_reasons else "REVIEW",
+        "reasons": sorted_reasons,
+    }

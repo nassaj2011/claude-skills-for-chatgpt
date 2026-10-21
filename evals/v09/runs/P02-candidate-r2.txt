@@ -1,0 +1,47 @@
+def authorize_tool(actor, request, seen_keys):
+    deny = {"decision": "DENY", "audit_key": None}
+
+    if type(actor) is not dict or type(request) is not dict or type(seen_keys) is not dict:
+        return deny
+
+    if set(actor) != {"actor_id", "tenant_id", "role"}:
+        return deny
+    if set(request) != {"tool", "tenant_id", "resource_id", "approved", "request_key"}:
+        return deny
+
+    for key in ("actor_id", "tenant_id"):
+        if type(actor[key]) is not str or not actor[key]:
+            return deny
+    if actor["role"] not in {"viewer", "editor"}:
+        return deny
+
+    for key in ("tool", "tenant_id", "resource_id", "request_key"):
+        if type(request[key]) is not str or not request[key]:
+            return deny
+    if type(request["approved"]) is not bool:
+        return deny
+
+    for key, signature in seen_keys.items():
+        if type(key) is not str or type(signature) is not str:
+            return deny
+
+    if actor["tenant_id"] != request["tenant_id"]:
+        return deny
+    if request["tool"] not in {"read_venue", "close_slot"}:
+        return deny
+
+    if request["tool"] == "read_venue":
+        return {"decision": "READ", "audit_key": None}
+
+    if actor["role"] != "editor" or request["approved"] is not True:
+        return deny
+
+    audit_key = request["tenant_id"] + ":" + request["request_key"]
+    signature = "close_slot|" + request["resource_id"]
+
+    if audit_key in seen_keys:
+        if seen_keys[audit_key] == signature:
+            return {"decision": "REPLAY", "audit_key": audit_key}
+        return deny
+
+    return {"decision": "WRITE", "audit_key": audit_key}
